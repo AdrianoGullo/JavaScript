@@ -10,7 +10,6 @@ menuBtn.addEventListener("click", function() {
   }
 });
 
-
 /////////////////////////////////////////////////////////////
 
 {//CRONÔMETRO:
@@ -82,6 +81,8 @@ imagem1.addEventListener('click', function() {
 
   });
 }
+
+
 
 ///////////////////////////////////////
 

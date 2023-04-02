@@ -15,6 +15,7 @@ body.style.backgroundImage = "url('Imagens/quasemanha.gif')";
 }
 
 
+
 //SUBLISTA NÃO VISIVEL INICIALMENTE
 var menubox = document.getElementById("menu-box")
 var menu1 = document.getElementById("Menu1");
@@ -24,6 +25,7 @@ menu1.addEventListener("click", function() {
     sublista.classList.toggle("visivel");
     menuBox.classList.toggle('expandido');
 });
+
 
 //TROCA DE BACKGROUND PELO USUÁRIO//
 // Obtém uma referência à lista de imagens na sublista
