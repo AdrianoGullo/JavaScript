@@ -25,8 +25,6 @@ menu1.addEventListener("click", function() {
     menuBox.classList.toggle('expandido');
 });
 
-
-
 //TROCA DE BACKGROUND PELO USUÁRIO//
 // Obtém uma referência à lista de imagens na sublista
 const imgList = document.querySelectorAll('#SublistaMenu1 img');

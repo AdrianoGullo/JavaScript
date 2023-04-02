@@ -10,6 +10,7 @@ menuBtn.addEventListener("click", function() {
   }
 });
 
+
 /////////////////////////////////////////////////////////////
 
 {//CRONÔMETRO:
