@@ -67,9 +67,10 @@ main {
   margin-left: 1%;
   margin-top: 3%;
 }
-.element {
+.elemento {
   width: 33%;
-  height: 200px;
+  height: 250px;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   margin-right: 10px;
@@ -84,7 +85,7 @@ main {
   border-radius: 8px;
   transition: transform 1s cubic-bezier(0.42, 0, 0.58, 1);
 }
-.element h2{
+.elemento h2{
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.8);
   box-decoration-break: clone; /* divide a borda em várias caixas */
@@ -97,7 +98,7 @@ main {
   left: 6px; /* Define uma margem de 6px à esquerda */
   right: 6px; /* Define uma margem de 6px à direita */
 }
-.element p{
+.elemento p{
   font-size: 14px;
   justify-content:left;
   background-color: rgba(0, 0, 0, 0.9);
@@ -108,7 +109,7 @@ main {
 }
 
 /*SETA PARA ROTAÇÃO NO PAINEL*/
-.arrow {
+.seta {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -121,23 +122,23 @@ main {
   cursor: pointer;
   margin: 0 auto;
 }
-.arrow-left:before {
+.seta-esquerda:before {
   margin-right: 5px;
   transform: rotate(225deg);
 }
-.arrow-right:before {
+.seta-direita:before {
   margin-left: 5px;
   transform: rotate(45deg);
 }
-.arrow:hover {
+.seta:hover {
   color: #999; /* Altere a cor de acordo com a preferência */
 }
-.arrow-left {
+.seta-esquerda {
   left: 0;
   padding: 8px;
   z-index: 2;
 }
-.arrow-right {
+.seta-direita {
   position: absolute;
   top: 50%;
   right: 10px; /* valor ajustável */

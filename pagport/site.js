@@ -52,6 +52,7 @@ imagem1.addEventListener('click', function() {
   }
 
   function iniciaRelogio(){
+    clearInterval(timer);
     timer = setInterval(function(){
         segundos++;
         relogio.innerHTML = criaHoraSegundos(segundos); // atualizando o conteúdo do parágrafo       
@@ -114,63 +115,63 @@ IMC.addEventListener('click', function() {
 ///////////////////////////////////////////
 /*ROTAÇÃO DOS GAMES NO PAINEL PRINCIPAL POR CLICK NA SETA*/
 const container = document.querySelector('.container');
-const elements = document.querySelectorAll('.element');
-const arrowLeft = document.querySelector('.arrow-left');
-const arrowRight = document.querySelector('.arrow-right');
+const elemento = document.querySelectorAll('.elemento');
+const SetaEsquerda = document.querySelector('.seta-esquerda');
+const SetaDireita = document.querySelector('.seta-direita');
 
-let currentIndex = 0;
+let Index = 0;
 
-function rotateElements() {
+function rotateElemento() {
   const containerWidth = container.clientWidth;
-  const elementWidth = elements.clientWidth;
-  const spaceBetweenElements = 10;
-  const totalWidth = elements.length * (elementWidth + spaceBetweenElements);
+  const elementoWidth = elemento.clientWidth;
+  const spaceBetweenElemento = 10;
+  const totalWidth = elemento.length * (elementoWidth + spaceBetweenElemento);
   const marginLeft = (containerWidth - totalWidth) / 2;
   
-  elements.forEach((element, index) => {
-    element.style.transform = `translateX(-${currentIndex * (elementWidth + spaceBetweenElements) + marginLeft}px)`;
+  elemento.forEach((elemento) => {
+    elemento.style.transform = `translateX(-${Index * (elementoWidth + spaceBetweenElemento) + marginLeft}px)`;
   });
 }
 
-function updateVisibleElements() {
+function updateVisibleElemento() {
   // oculta todos os elementos
-  elements.forEach((element) => {
-    element.style.display = 'none';
+  elemento.forEach((elemento) => {
+    elemento.style.display = 'none';
   });
 
   // mostra os três elementos ativos
-  for (let i = currentIndex; i < currentIndex + 3; i++) {
-    elements[i].style.display = 'flex';
+  for (let i=Index; i<Index+3; i++) {
+    elemento[i].style.display = 'flex';
   }
   
   // oculta o elemento mais à esquerda
-  elements[currentIndex - 1].style.display = 'none';
+  elemento[Index-1].style.display = 'none';
 }
 
-arrowLeft.addEventListener('click', () => {
-  currentIndex = Math.max(currentIndex - 1, 0);
-  rotateElements();
-  updateVisibleElements();
+SetaEsquerda.addEventListener('click', () => {
+  Index = Math.max(Index-1, 0);
+  rotateElemento();
+  updateVisibleElemento();
 });
 
-arrowRight.addEventListener('click', () => {
-  if (currentIndex === elements.length - 3) {
+SetaDireita.addEventListener('click', () => {
+  if (Index === elemento.length-3) {
     return;
   } else {
-    currentIndex = Math.min(currentIndex + 1, elements.length - 2);
-    rotateElements();
-    updateVisibleElements();
-    elements[currentIndex + 2].style.display = 'flex';
+    Index = Math.min(Index+1, elemento.length-2);
+    rotateElemento();
+    updateVisibleElemento();
+    elemento[Index+2].style.display = 'flex';
   }
 });
 
-for (let i = 0; i < currentIndex; i++) {
-  elements[i].style.display = 'none';
+for (let i = 0; i < Index; i++) {
+  elemento[i].style.display = 'none';
 }
 
 // oculta os dois elementos adicionais
-elements[3].style.display = 'none';
-elements[4].style.display = 'none';
+elemento[3].style.display = 'none';
+elemento[4].style.display = 'none';
 
 // inicia mostrando os três primeiros elementos
-updateVisibleElements();
+updateVisibleElemento();
