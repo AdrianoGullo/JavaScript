@@ -113,8 +113,8 @@ main {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color:#fff;
-  font-size: 35px;
+  color:rgba(255, 255, 255, 0.7);
+  font-size: 70px;
   margin: 0 auto;
   font-weight: bold;
   border: none;
@@ -143,8 +143,8 @@ main {
   top: 50%;
   right: 10px; /* valor ajustável */
   transform: translateY(-50%);
-  font-size: 35px;
-  color: #fff;
+  font-size: 70px;
+  color:rgba(255, 255, 255, 0.7);
   font-weight: bold;
   border: none;
   background-color: transparent;
