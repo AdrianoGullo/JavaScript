@@ -1,3 +1,0 @@
-﻿# JavaScript
-# JavaScript
-# JavaScript
