@@ -5,7 +5,7 @@ let hora = new Date().getHours();
 if (hora >= 5 && hora < 7) {
 body.style.backgroundImage = "url('Imagens/quasemanha.gif')";
 }else if (hora >= 7 && hora < 11) {
-  body.style.backgroundImage = "url('Imagens/quasedia.gif')";
+  body.style.backgroundImage = "url('Imagens/manhazinha.gif')";
 } else if (hora >= 11 && hora < 17) {
   body.style.backgroundImage = "url('Imagens/dia.gif')";
 } else if (hora >= 17 && hora < 19){
@@ -44,7 +44,7 @@ imgList.forEach(img => {
             menuBox.classList.toggle('expandido');
             break;
         case 'ImgQuaseDia':
-            body.style.backgroundImage = 'url("Imagens/quasedia.gif")';
+            body.style.backgroundImage = 'url("Imagens/manhazinha.gif")';
             sublista.classList.toggle("visivel");
             menuBox.classList.toggle('expandido');
             break;

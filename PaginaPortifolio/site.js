@@ -109,3 +109,68 @@ IMC.addEventListener('click', function() {
   box1.innerHTML += "Mais do que 40: Obesidade de Grau 3";
   
 });
+
+
+///////////////////////////////////////////
+/*ROTAÇÃO DOS GAMES NO PAINEL PRINCIPAL POR CLICK NA SETA*/
+const container = document.querySelector('.container');
+const elements = document.querySelectorAll('.element');
+const arrowLeft = document.querySelector('.arrow-left');
+const arrowRight = document.querySelector('.arrow-right');
+
+let currentIndex = 0;
+
+function rotateElements() {
+  const containerWidth = container.clientWidth;
+  const elementWidth = elements.clientWidth;
+  const spaceBetweenElements = 10;
+  const totalWidth = elements.length * (elementWidth + spaceBetweenElements);
+  const marginLeft = (containerWidth - totalWidth) / 2;
+  
+  elements.forEach((element, index) => {
+    element.style.transform = `translateX(-${currentIndex * (elementWidth + spaceBetweenElements) + marginLeft}px)`;
+  });
+}
+
+function updateVisibleElements() {
+  // oculta todos os elementos
+  elements.forEach((element) => {
+    element.style.display = 'none';
+  });
+
+  // mostra os três elementos ativos
+  for (let i = currentIndex; i < currentIndex + 3; i++) {
+    elements[i].style.display = 'flex';
+  }
+  
+  // oculta o elemento mais à esquerda
+  elements[currentIndex - 1].style.display = 'none';
+}
+
+arrowLeft.addEventListener('click', () => {
+  currentIndex = Math.max(currentIndex - 1, 0);
+  rotateElements();
+  updateVisibleElements();
+});
+
+arrowRight.addEventListener('click', () => {
+  if (currentIndex === elements.length - 3) {
+    return;
+  } else {
+    currentIndex = Math.min(currentIndex + 1, elements.length - 2);
+    rotateElements();
+    updateVisibleElements();
+    elements[currentIndex + 2].style.display = 'flex';
+  }
+});
+
+for (let i = 0; i < currentIndex; i++) {
+  elements[i].style.display = 'none';
+}
+
+// oculta os dois elementos adicionais
+elements[3].style.display = 'none';
+elements[4].style.display = 'none';
+
+// inicia mostrando os três primeiros elementos
+updateVisibleElements();
