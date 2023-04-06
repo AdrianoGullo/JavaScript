@@ -57,7 +57,7 @@
       <img src="pagport/Imagens/imagem1.jpg" id="imagem1" class="image">
       <img src="pagport/Imagens/imc.jpg" id="ImgIMC" class="image">
       <img src="pagport/Imagens/temperatura.jpg" id="imagem" class="image">
-      <img src="pagport/Imagens/calculadora.png" id="Imagem 4" class="image">
+      <img src="pagport/Imagens/calculadora.png" id="ImgCalculadora" class="image">
       <img src="pagport/Imagens/interrogaçao" alt="?" class="image">
       <img src="pagport/Imagens/interrogaçao" alt="?" class="image">
       <img src="pagport/Imagens/interrogaçao" alt="?" class="image">
@@ -71,14 +71,54 @@
     <div id="box1" class="box" style="display: none;">
     </div>
 
+    <div id="boxCalculadora" class="calculadora" style="display: none;">
+      <h2>Calculadora</h2>
+      <table class="calculadora">
+          <tr>
+          <td colspan="4">
+            <input type="text" class="displayCalculadora">
+          </td> 
+        </tr> 
+        <tr>
+          <td><button class="botao botao-limpa">C</button></td> 
+          <td><button class="botao botao-parent1">(</button></td>
+          <td><button class="botao botao-parent2">)</button></td>
+          <td><button class="botao botao-barra1">/</button></td>
+        </tr> 
+        <tr>
+          <td><button class="botao botao-numero">7</button></td> 
+          <td><button class="botao botao-numero">8</button></td>
+          <td><button class="botao botao-numero">9</button></td>
+          <td><button class="botao botao-vezes">*</button></td>
+        </tr> 
+        <tr>
+          <td><button class="botao botao-numero">4</button></td> 
+          <td><button class="botao botao-numero">5</button></td>
+          <td><button class="botao botao-numero">6</button></td>
+          <td><button class="botao botao-mais">+</button></td>
+        </tr>
+        <tr>
+          <td><button class="botao botao-numero">1</button></td> 
+          <td><button class="botao botao-numero">2</button></td>
+          <td><button class="botao botao-numero">3</button></td>
+          <td><button class="botao botao-menos">-</button></td>
+        </tr> 
+        <tr>
+          <td><button class="botao botao-ponto">.</button></td> 
+          <td><button class="botao botao-numero">0</button></td>
+          <td><button class="botao botao-del">&laquo;</button></td>
+          <td><button class="botao botao-igual">=</button></td>
+        </tr> 
+      </table>
+      <p>| * : Multiplicação,  ** : Exponenciação,  / : Divisão,  &lt;&lt; : Apaga último digito, = : Resultado |
+      </p>
+    </div>
+
     <script src="pagport/site.js"></script>
     <script src="pagport/RotaçaoGif.js"></script>
   </main>
 </body>
 
-  <footer>
-    <p>&copy; 2023 - Portifólio JavaScript by Adriano Gullo
-    </p>
-  </footer>
+  
 </body>
 </html>

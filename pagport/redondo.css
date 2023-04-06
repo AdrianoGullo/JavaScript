@@ -243,18 +243,7 @@ main {
 
 /*/////////////////////////////////////////////////////////*/
 /* Estilos para o rodapé */
-footer {
-  position:fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #000000;
-  padding: 10px 0;
-  color: #ffffff;
-  text-align: left;
-}
-footer p {
-  margin-left: 20px;
-}
+
 
 /*/////////////////////////////////////////////////////////*/
 /*Estios e definições para o MENU*/
@@ -379,12 +368,6 @@ footer p {
 }
 
 /*/////////////////////////////////////////////////////////*/
-/* Adicionar margens ao cabeçalho */
-header{
-  margin: 0px 0;
-}
-
-/*/////////////////////////////////////////////////////////*/
 /*Box1 é um container adicionado durante a execução do site*/
 #box1 {
   display: flex;
@@ -394,6 +377,7 @@ header{
   text-align: center;
   background-color: rgba(51, 51, 51, 0.8);
 }
+
 .box {
   width: 100%;
   margin-left: 1%;
@@ -405,20 +389,80 @@ header{
   background-color: rgba(0, 0, 0, 0.9); /* Define um fundo preto fosco com transparência */
   border-radius: 8px;
 }
+
+.box1 h2{
+  font-size: 25px;
+  align-items: center;
+  font-weight: bold;
+}
+
 .box1.expandidoIMC{
   display: block;
   height: 400px;
   background-color: rgb(124, 124, 124);
   text-align: right;
 }
+
 button {
   margin-right: 10px;
 }
 
-/*/////////////////////////////////////////////////////////*/
+/*///////////////////////////*/
 /*CRONÔMETRO*/
 .relogio.pausado {
   color: red;
 }
 
-/*pasta alterada*/
+/*///////////////////////////*/
+/*CALCULADORA*/
+.calculadora {
+  width: 30%;
+  margin-left: 1%;
+  margin-right: 1%;
+  justify-content: center;
+  align-items: center;
+  display:inline-block;
+  color: #fff; /* Define a cor do texto como branco */
+  border: 1px solid #ccc; /* Define um fundo preto fosco com transparência */
+  border-radius: 8px;
+}
+.displayCalculadora{
+  font-size: 2em;
+  border-radius: 8px;
+  width: 100%;
+  text-align: right;
+}
+#boxCalculadora {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: rgba(51, 51, 51, 0.8);
+}
+.botao {
+  width: 100%;
+  height: 50px;
+  font-size: 1.5em;
+  border-radius: 8px;
+  border-style:groove;
+  color: #fff;
+  background:rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+.botao:hover {
+  background:rgba(114, 114, 114, 0.8);
+}
+.botao-igual {
+  background:rgb(67, 69, 182);
+}
+.botao-igual:hover {
+  background:rgb(106, 109, 255);
+}
+.botao-numero{
+  color: #fff;
+}
+.legenda {
+  margin-left: 20px;
+}

@@ -117,4 +117,33 @@
     */
 
     //Factory Functions (Funções Fábrica):
-    
+    function criaPessoa(nome, sobrenome, altura, peso){
+        return{
+            nome,
+            sobrenome,
+            nomeCompleto(){
+                return `${this.nome} ${this.sobrenome}`;
+            },
+            //Método normal
+            fala(assunto){
+                return `${this.nome} está ${assunto}`;
+            },
+            altura,
+            peso,
+            //Getter
+            get imc(){                                      //sem 'get', deve ser chamado como imc();                            
+                const indice = this.peso/(this.altura**2);
+                return indice.toFixed(2);
+            },
+            //Setter
+            set separarEspaço(valor){       //pegar duas ou mais strings e adicionar a uma só, com espaço.
+                valor = valor.spli(' ');
+                this.nome = valor.shift();
+                this.sobrenome = valor.join(' ');
+            }
+        };
+    }
+    const p1 = criaPessoa('Adriano', 'Gullo', 1.74, 64);
+    console.log(p1.imc);      //imprime o imc
+    console.log(p1.fala('sentada.'))       //imprime fala com oq está dentro do ();
+    console.log(p1.nomeCompleto);

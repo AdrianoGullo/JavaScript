@@ -83,13 +83,10 @@ imagem1.addEventListener('click', function() {
   });
 }
 
-
-
 ///////////////////////////////////////
 
 //IMC:
 const IMC = document.getElementById('ImgIMC');
-var box1 = document.querySelector(".box");
 
 IMC.addEventListener('click', function() {
 
@@ -97,6 +94,10 @@ IMC.addEventListener('click', function() {
     box1.style.display = 'none';
   } else {
     box1.style.display = 'block';
+  }
+
+  if (boxCalculadora.style.display === 'block') {
+    boxCalculadora.style.display = 'none';
   }
 
   box1.classList.toggle("expandidoIMC");
@@ -113,7 +114,7 @@ IMC.addEventListener('click', function() {
 
 
 ///////////////////////////////////////////
-/*ROTAÇÃO DOS GAMES NO PAINEL PRINCIPAL POR CLICK NA SETA*/
+{/*ROTAÇÃO DOS GAMES NO PAINEL PRINCIPAL POR CLICK NA SETA*/
 const container = document.querySelector('.container');
 const elemento = document.querySelectorAll('.elemento');
 const SetaEsquerda = document.querySelector('.seta-esquerda');
@@ -145,7 +146,9 @@ function updateVisibleElemento() {
   }
   
   // oculta o elemento mais à esquerda
-  elemento[Index-1].style.display = 'none';
+  if(Index > 0){
+    elemento[Index-1].style.display = 'none';
+  }
 }
 
 SetaEsquerda.addEventListener('click', () => {
@@ -175,3 +178,106 @@ elemento[4].style.display = 'none';
 
 // inicia mostrando os três primeiros elementos
 updateVisibleElemento();
+}
+
+////////////////////////////////////////
+//CALCULADORA
+const calculadora = document.getElementById("ImgCalculadora");
+const boxCalculadora = document.getElementById('boxCalculadora');
+
+calculadora.addEventListener('click', function() {
+  
+  if (boxCalculadora.style.display === 'block') {
+    boxCalculadora.style.display = 'none';
+  } else {
+    boxCalculadora.style.display = 'block';
+  }
+  if (box1.style.display === 'block') {
+    box1.style.display = 'none';
+  } 
+  function criaCalculadora(){
+    return {
+      display: document.querySelector('.displayCalculadora'),
+      botaoLimpa: document.querySelector('.botao-limpa'),
+      
+      inicia(){
+        this.cliqueBotao();
+        this.pressionaEnter();
+      },
+
+      pressionaEnter(){
+        this.display.addEventListener('keyup', e=>{
+          if(e.keyCode === 13){
+            this.realizaConta();
+          }
+        });
+      },
+
+      limpaDisplay(){
+        this.display.value = '';
+      }, 
+
+      deletaUltimo(){
+        this.display.value = this.display.value.slice(0, -1);
+      },
+
+      realizaConta(){
+        let conta = this.display.value;
+        try{
+          conta = eval(conta);
+
+          if(!conta){
+            this.limpaDisplay();
+            this.botaoParaDisplay('Conta Inválida.');
+            return;
+          }
+
+          this.display.value = conta;
+        } catch(e){
+          this.limpaDisplay();
+          this.botaoParaDisplay('Conta Inválida.');
+        }
+      },
+
+      cliqueBotao(){
+        document.addEventListener('click', function(event){
+          const clique = event.target;
+          
+          if (clique.classList.contains('botao-limpa')){
+            this.limpaDisplay();
+          }else if (clique.classList.contains('botao-del')){
+            this.deletaUltimo(clique.innerText);
+          }else if (clique.classList.contains('botao-igual')){
+            this.realizaConta();
+          }else if (clique.classList.contains('botao-numero')){
+            this.botaoParaDisplay(clique.innerText);
+          }else if (clique.classList.contains('botao-ponto')){
+            this.botaoParaDisplay(clique.innerText);
+          }else if (clique.classList.contains('botao-vezes')){
+            this.botaoParaDisplay(clique.innerText);
+          }else if (clique.classList.contains('botao-mais')){
+            this.botaoParaDisplay(clique.innerText);
+          }else if (clique.classList.contains('botao-menos')){
+            this.botaoParaDisplay(clique.innerText);
+          }else if (clique.classList.contains('botao-barra1')){
+            this.botaoParaDisplay(clique.innerText);
+          }else if (clique.classList.contains('botao-parent1')){
+            this.botaoParaDisplay(clique.innerText);
+          }else if (clique.classList.contains('botao-parent2')){
+            this.botaoParaDisplay(clique.innerText);
+          }
+          
+        }.bind(this));
+      },
+
+      botaoParaDisplay(valor){
+        this.display.value += valor;
+      },
+
+      
+    };
+  }
+
+  const calc = criaCalculadora();
+  calc.inicia();
+});
