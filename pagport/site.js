@@ -11,19 +11,22 @@ menuBtn.addEventListener("click", function() {
 });
 
 /////////////////////////////////////////////////////////////
-
 {//CRONÔMETRO:
 const imagem1 = document.getElementById('imagem1');
 const box1 = document.getElementById('box1');
 
 imagem1.addEventListener('click', function() {
 
-  if (box1.style.display === 'block') {
-    box1.style.display = 'none';
-  } else {
+  if (box1.style.display === 'none') {
     box1.style.display = 'block';
+  } else {
+    box1.style.display = 'none';
   }
-  
+
+  if (boxCalculadora.style.display === 'block') {
+    boxCalculadora.style.display = 'none';
+  }
+
   box1.innerHTML = " CRONÔMETRO:";
     
   const iniciar = document.createElement('button');
@@ -82,10 +85,8 @@ imagem1.addEventListener('click', function() {
 
   });
 }
-
 ///////////////////////////////////////
-
-//IMC:
+{//IMC:
 const IMC = document.getElementById('ImgIMC');
 
 IMC.addEventListener('click', function() {
@@ -111,10 +112,9 @@ IMC.addEventListener('click', function() {
   box1.innerHTML += "Mais do que 40: Obesidade de Grau 3";
   
 });
-
-
-///////////////////////////////////////////
-{/*ROTAÇÃO DOS GAMES NO PAINEL PRINCIPAL POR CLICK NA SETA*/
+}
+////////////////////////////////////////
+{//ROTAÇÃO DOS GAMES NO PAINEL PRINCIPAL POR CLICK NA SETA:
 const container = document.querySelector('.container');
 const elemento = document.querySelectorAll('.elemento');
 const SetaEsquerda = document.querySelector('.seta-esquerda');
@@ -179,9 +179,8 @@ elemento[4].style.display = 'none';
 // inicia mostrando os três primeiros elementos
 updateVisibleElemento();
 }
-
 ////////////////////////////////////////
-//CALCULADORA
+{//CALCULADORA:
 const calculadora = document.getElementById("ImgCalculadora");
 const boxCalculadora = document.getElementById('boxCalculadora');
 
@@ -195,11 +194,12 @@ calculadora.addEventListener('click', function() {
   if (box1.style.display === 'block') {
     box1.style.display = 'none';
   } 
+
   function criaCalculadora(){
     return {
       display: document.querySelector('.displayCalculadora'),
       botaoLimpa: document.querySelector('.botao-limpa'),
-      
+
       inicia(){
         this.cliqueBotao();
         this.pressionaEnter();
@@ -219,6 +219,11 @@ calculadora.addEventListener('click', function() {
 
       deletaUltimo(){
         this.display.value = this.display.value.slice(0, -1);
+      },
+
+      botaoParaDisplay(valor){
+        this.display.value += valor;
+        this.display.focus();
       },
 
       realizaConta(){
@@ -242,6 +247,10 @@ calculadora.addEventListener('click', function() {
       cliqueBotao(){
         document.addEventListener('click', function(event){
           const clique = event.target;
+
+          if (this.display.value === 'Conta Inválida.') {
+            this.limpaDisplay();
+          }
           
           if (clique.classList.contains('botao-limpa')){
             this.limpaDisplay();
@@ -269,15 +278,12 @@ calculadora.addEventListener('click', function() {
           
         }.bind(this));
       },
-
-      botaoParaDisplay(valor){
-        this.display.value += valor;
-      },
-
-      
     };
   }
 
   const calc = criaCalculadora();
   calc.inicia();
 });
+}
+////////////////////////////////////////
+

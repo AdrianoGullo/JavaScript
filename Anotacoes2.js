@@ -116,7 +116,7 @@
     })(24, 67); //passando parâmetros
     */
 
-    //Factory Functions (Funções Fábrica):
+    /*//Factory Functions (Funções Fábrica):
     function criaPessoa(nome, sobrenome, altura, peso){
         return{
             nome,
@@ -146,4 +146,144 @@
     const p1 = criaPessoa('Adriano', 'Gullo', 1.74, 64);
     console.log(p1.imc);      //imprime o imc
     console.log(p1.fala('sentada.'))       //imprime fala com oq está dentro do ();
-    console.log(p1.nomeCompleto);
+    console.log(p1.nomeCompleto);*/
+
+    /*//Função construtora:
+    function pessoa(nome, sobrenome){
+        //Atributos privados
+        const ID = 12345;
+        const metodoInterno = function(){
+
+        };
+        //Atributos ou métodos publicos (acessavel fora da função)
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+
+        this.metodo = function(){
+            console.log(this.nome + ': sou um método');
+        };
+    }
+
+    const pessoa1 = new pessoa ('Adriano', 'Gullo'); //new cria um objeto vazio e faz o this apontar para ele
+    pessoa1.metodo();
+    */
+
+    /*//Função Recursiva:
+    function recursiva(max){                //função se chama dentro dela mesmo até alguma comparação
+        if(max>=10) return;                 //nesse caso, rota até o valor max ser 10.
+        max++;
+        console.log(max);
+        recursiva(max);
+    }
+    recursiva(0);
+    */
+
+    /*//Função Geradora:
+    //Lazy Avaliation
+    function* geradora1(){
+        yield 'Valor 1';            //semelhante ao return;
+        yield 'Valor 2';            //cada vez que for executada, muda seu valor de acordo com definição
+        yield 'Valor 3';
+    }
+
+    const g1 = geradora1();
+    console.log(g1.next().value);   //Valor 1
+    console.log(g1.next().value);   //Valor 2
+    console.log(g1.next().value);   //Valor 3
+
+    for(let valor of g1){           //Imprimi todos os valores de g1
+        console.log(valor);
+    }
+
+    //Gerador de gerador
+    function* gerador2(){
+        yield 0;
+        yield 1;
+        yield 2;
+    }
+    function* gerador3(){
+        yield* gerador2();
+        yield 3;
+        yield 4;
+        yield 5;
+    }
+    */
+
+
+//JavaScript - Arrays (avançado):^
+
+    /*//Básico:
+    const nomes = ['Luiz', 'Rodolfo', 'Joao'];
+    nomes[1] = 'Adriano';
+    delete nomes[2];            //remove joao e não altera os indices, fica um empty item
+    console.log(nomes);
+
+    const novo = [...nomes];    //por esse declaração:
+    novo.pop();
+    console.log(nomes);         //novo nao afeta nomes
+
+    nomes.shift()                       //retira do começo do array
+    nomes.unshift('Wallace');           //adiciona no começo do array, diferente de push que insere no final
+    const nomes2 = nomes.slice(1, 3);   //corta do indice um até dois, 3 não é incluso
+    //const nomes2 = nomes.slice(0, -1); //remove o dado do último indice
+    */
+    
+    /*//Converter string em array:
+    const nome = 'Adriano Gullo Momesso';
+    const nomeArray = nome.split(' ');
+    console.log(nomes);
+
+    //Retornando de array para string
+    const nomestring = nomeArray.join(' '); 
+    */
+    
+    /*//Método Splice:
+    const nomes = ['Adriano', 'Joao', 'Eduardo', 'Gabriel', 'Julia'];
+    //nomes.splice(indice atual, qtd delete, addElem1, addElem2,...addElem3);
+    const removidos = nomes.splice(3, 2);      //Remove Gabriel[3] e Julia[4], removidos é outro array
+    removidos = nomes.splice(2, 1, 'Otavio');       //Remove Eduardo[2] e adiciona Otavio
+
+    //Usando como um Pop (retira ultimo elemento)
+    const removidos1 = nomes.splice(-1, 1);
+
+    //Usando como Shift (retira o primeiro elemento)
+    const removidos2 = nomes.splice(0, 1);
+
+    //Usando como Push (adicionar um elemento ao final do array)
+    const removidos3 = nomes.splice(nomes.length, 0, 'Luiz');
+
+    //Usando como Unshift (adiciona no primeiro elemento)
+    const removidos4 = nomes.splice(0, 0, 'Ronaldo');
+    */
+
+    /*//Concatenando Arrays:
+    const a1 = [1, 2, 3];
+    const a2 = [4, 5, 6];
+    const a3 = a1.concat(a2);                       //array+array vira array
+    const a4 = a1.concat(a2, [7,8,9], 'Gullo');     //um array só, adicionando 7,8,9 e a string Gullo  
+
+    const a5 = [...a1, ...a2, ...[7,8,9]];          //array vira a1+a2+[7,8,9]
+    */
+
+    /*//Filter:
+    //Array com numeros maiores que 10
+    const numeros = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
+    const numerosFiltrados = numeros.filter(function(valor){    //é igual à = numeros.filter(valor=>valor>10);
+        return valor>10;
+     });
+    console.log(numerosFiltrados);
+
+    //Retorne as pessoas com +20 anos, nome > 5 letras e nome termina com A
+    const pessoas = [
+        {nome: 'Adriano', idade: 24},
+        {nome: 'Robson', idade: 13},
+        {nome: 'Fernanda', idade: 42},
+        {nome: 'Rodrigo', idade: 04},
+        {nome: 'Beatriz', idade: 32},
+    ];
+    const nomeGrande = pessoas.filter(valor => valor.nome.length>=5);
+    const MaisDe20Anos = pessoas.filter(valor => valor.idade>20);
+    const terminaComA = pessoas.filter(valor => valor.nome.toLocaleLowerCase().endsWith('a'));
+    */
+
+    //Map:
