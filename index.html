@@ -47,7 +47,7 @@
           <p>Prove que você consegue limpar o campo sem ser explodido. O desafio é grande e as explosões também.</p></div>
         <div class="elemento" id="JogoDaVelha"><h2>Jogo da Velha</h2>
           <p>Jogue o classico Jogo da Velha para você se divertir e tentar acumular o máximo de vitórias seguidas.</p></div>
-        <div class="elemento" id="Snake"><h2>Snake</h2>
+        <div class="elemento" id="Snake"><h2 id="start-game">Snake</h2>
           <p>Coma maças, colete moedas e abata inimigos para crescer cada vez mais.</p></div>
         <button class="seta seta-esquerda">&#8249;</button>
         <button class="seta seta-direita">&#8250;</button>
@@ -69,6 +69,10 @@
     </div>
 
     <div id="box1" class="box" style="display: none;">
+    </div>
+
+    <div id="boxSnake" class="boxsnake" style="display: none;">
+      <canvas id="snake" width="512" height="512"></canvas>
     </div>
 
     <div id="boxCalculadora" class="calculadora" style="display: none;">
@@ -115,6 +119,7 @@
     </div>
 
     <script src="pagport/site.js"></script>
+    <script src="pagport/Snake.js"></script>
     <script src="pagport/RotaçaoGif.js"></script>
   </main>
 </body>

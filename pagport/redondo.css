@@ -466,3 +466,25 @@ button {
 .legenda {
   margin-left: 20px;
 }
+
+
+
+/* SNAKE GAME */
+/* Estilo do canvas */
+canvas {
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 75%;
+  height: 100%;
+}
+
+.boxsnake {
+  width: 98%;
+  height: 500px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: rgba(51, 51, 51, 0.8);
+  border: 1px solid #CCC;
+  border-radius: 8px;
+}
