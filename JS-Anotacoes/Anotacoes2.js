@@ -210,7 +210,7 @@
     */
 
 
-//JavaScript - Arrays (avançado):^
+//JavaScript - Arrays (avançado):
 
     /*//Básico:
     const nomes = ['Luiz', 'Rodolfo', 'Joao'];
@@ -286,4 +286,182 @@
     const terminaComA = pessoas.filter(valor => valor.nome.toLocaleLowerCase().endsWith('a'));
     */
 
-    //Map:
+    /*//Map:
+
+    //Dobrar numeros
+    const numeros = [5, 10, 50, 80, 2, 5];
+    const numerosDobrados = numeros.map(valor=>valor*2);
+    console.log(numerosDobrados);
+
+    //Para o objeto pessoas, retornar string com o nome da pessoa, outra com idade
+    const pessoas = [
+        {nome: 'Adriano', idade: 24},
+        {nome: 'Roberto', idade: 45},
+        {nome: 'Gessica', idade: 28},
+        {nome: 'Lucas', idade: 33}
+    ]
+
+    const nomePessoas = pessoas.map(obj => obj.nome);
+    console.log(nomePessoas);
+    const idadePessoas = pessoas.map(obj => obj.idade); // obj => ({idade: obj.idade}) = retorna {idade: x}
+    console.log(idadePessoas);
+
+    //Adicionando uma chave de ID para cada objeto, mudando o original e em um NOVO OBJETO
+    const comID = pessoas.map(function(obj, indice){
+        obj.id = indice*15;
+        return obj;
+    });
+
+    const comID2 = pessoas.map(function(obj, indice){
+        const newObj = {...obj};
+        newObj.id = indice*10;
+        return newObj;
+    })
+
+    console.log(pessoas);
+    console.log(comID2);
+    */
+
+    /*//Reduce:
+    const numeros = [5, 10, 50, 80, 3];
+
+    //Soma todos os valores em total em um único numero, valor inicial (0);
+    const total = numeros.reduce(function(cont, valor){
+        cont+=valor;
+        return cont;
+    }, 0);
+
+    //Retornar array ([]) com pares (filter)
+    const total2 = numeros.reduce(function(cont, valor, indice, array){
+        if(valor%2 === 0) cont.push(valor);
+        return cont;
+    }, []);
+
+    //Retoorna pessoa mais velha
+    const pessoas = [
+        {nome: 'Adriano', idade: 24},
+        {nome: 'Roberto', idade: 45},
+        {nome: 'Gessica', idade: 28},
+        {nome: 'Lucas', idade: 33}
+    ];
+
+    const maisVelha = pessoas.reduce(function(acumulador, valor){
+        if(acumulador.idade > valor.idade) return acumulador;
+        return valor;
+    });
+    console.log(maisVelha);
+    */
+
+    /*//MAP + FILTER + REDUCE:
+    //Returne a soma do dobro de todos os pares:
+    const numeros = [5, 10, 50, 80, 3, 7, 12, 54, 33];
+    const numerosPares = numeros.filter(function(valor){
+        return valor % 2 === 0;
+    }).map(function(valor){
+        return valor*2;
+    }).reduce(function(cont, valor){
+        return cont+valor;
+    })
+    //Em arrow function:
+    const numerosPares2 = numeros
+        .filter(valor => valor % 2 === 0)
+        .map(valor => valor*2)
+        .reduce(valor=>cont+valor);
+    */
+
+    /*//forEach:
+    const a1 = [1, 2, 3, 4, 5, 6, 7, 8];
+    let total = 0;
+    a1.forEach(valor => {
+        total += valor;
+    });
+    console.log(total); //a1.forEach vai passar por cada elemento e somar no total;
+    */
+    
+    //Alterar array = MAP
+    //Filtrar array = Filter
+    //Reduzir array = Reduce
+
+
+//Javascript Objetos e prototypes (Avançado)
+
+    /*//Criação OBJETO - Factory/Constructor Functions e Classes:
+    //Definindo um novo Objeto e atribuindo novos dados:
+    const pessoa = new Object();
+    pessoa.nome = 'Adriano';
+    pessoa.sobrenome = 'Gullo';
+    pessoa.idade = 24;
+    pessoa.falar = function(){
+        return (`${this.nome} está falando.`);
+    };
+
+    console.log(pessoa.falar());
+
+    //Molde de criação para Factory functions
+    function criaPessoa (nome, sobrenome, idade){
+        return{
+            nome,
+            sobrenome,
+            idade,
+            nomeCompleto(){
+                return `${this.nome} ${this.sobrenome} ${this.idade}`;
+            }
+        };
+    };
+    const p1 = criaPessoa('Roberto', 'Carlos', 45);
+    console.log(p1.nomeCompleto());
+
+    //Molde de criação para Constructor functions
+    function Pessoa(nome, sobrenome){
+        this.nome = nome;               //o this é referente a pessoa que for criada
+        this.sobrenome = sobrenome;
+    };
+    const p2 = new Pessoa('Luiz', 'Roberto');
+    const p3 = new Pessoa('Maria', 'Lopes');
+    console.log(p2);
+    */
+
+    /*//Object.defineProperty() e Object.defineProperties():
+    function Produto(nome, preço, estoque){
+        this.nome = nome;                           //variável publica
+        this.preço = preço;                         //variável publica
+
+        Object.defineProperty(this, 'estoque', {
+            enumerable: true,                       //mostra a chave?
+            value: estoque,                         //add valor
+            writable: false,                        //pode alterar o valor?
+            configurable: false,                    //configurável?
+        });
+    }
+
+    const produto1 = new Produto('Camiseta', 22, 3);
+    produto1.estoque = 5000;            //não vai alterar o valor de estoque (writable: false)
+    delete produto1.estoque;            //não vai deletar estoque (configurable: false)
+    console.log(produto1);
+
+    //Com várias propriedades
+    function Produto2(nome, preço, estoque){
+        Object.defineProperty(this, {
+            nome: {
+                enumerable: true,                     
+                value: nome,                         
+                writable: false,                        
+                configurable: false, 
+            },
+            preço: {
+                enumerable: true,                     
+                value: preço,                         
+                writable: false,                        
+                configurable: false, 
+            },
+            estoque: {
+                enumerable: true,                     
+                value: estoque,                         
+                writable: false,                        
+                configurable: false, 
+            }
+        });
+    };
+    */
+
+    //Getters e Setters:

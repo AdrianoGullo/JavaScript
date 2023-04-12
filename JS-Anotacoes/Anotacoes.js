@@ -77,6 +77,7 @@ console.log(nome);*/
     alunos.pop();                                   //retira o ULTIMO do array
     alunos.shift();                                 //retira o PRIMEIRO do array
     */
+   
     /*// Duas+ [LISTAS, OBJETOS, FUNCTIONS] que apontam para o mesmo lugar na memória:
     let a = [1, 2, 3];      
     let b = a;
