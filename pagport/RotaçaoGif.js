@@ -28,15 +28,12 @@ menu1.addEventListener("click", function() {
 
 
 //TROCA DE BACKGROUND PELO USUÁRIO//
-// Obtém uma referência à lista de imagens na sublista
 const imgList = document.querySelectorAll('#SublistaMenu1 img');
 
 // Adiciona um evento de clique para cada imagem
 imgList.forEach(img => {
   img.addEventListener('click', function() {
-    // Obtém a referência ao elemento body
     const body = document.querySelector('body'); 
-    // Atualiza o background-image do body com a URL do gif correspondente
     switch (this.id) {
         case 'ImgDia':
             body.style.backgroundImage = 'url("pagport/Imagens/dia.gif")';

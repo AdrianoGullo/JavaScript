@@ -10,7 +10,6 @@ menuBtn.addEventListener("click", function() {
   }
 });
 
-/////////////////////////////////////////////////////////////
 {//CRONÔMETRO:
 const imagem1 = document.getElementById('imagem1');
 const box1 = document.getElementById('box1');
@@ -32,9 +31,9 @@ imagem1.addEventListener('click', function() {
   const iniciar = document.createElement('button');
   const pausar = document.createElement('button');
   const zerar = document.createElement('button');
-  const relogio = document.createElement('p');  // criando o elemento HTML do relógio
+  const relogio = document.createElement('p');  
   relogio.classList.add('relogio');
-  relogio.style.fontWeight = 'bold';             // adicionando a classe "relogio" ao parágrafo
+  relogio.style.fontWeight = 'bold';            
   relogio.textContent = '00:00:00';
   box1.appendChild(relogio);
 
@@ -58,7 +57,7 @@ imagem1.addEventListener('click', function() {
     clearInterval(timer);
     timer = setInterval(function(){
         segundos++;
-        relogio.innerHTML = criaHoraSegundos(segundos); // atualizando o conteúdo do parágrafo       
+        relogio.innerHTML = criaHoraSegundos(segundos);        
     }, 1000)
   }; 
 
@@ -69,14 +68,14 @@ imagem1.addEventListener('click', function() {
 
   pausar.addEventListener('click', function(event){
     relogio.classList.add('pausado');
-    clearInterval(timer); // parando o temporizador
+    clearInterval(timer); 
   });
 
   zerar.addEventListener('click', function(event){
     relogio.classList.remove('pausado');
-    clearInterval(timer); // parando o temporizador
+    clearInterval(timer); 
     segundos = 0;
-    relogio.innerHTML = '00:00:00'; // reiniciando o conteúdo do parágrafo
+    relogio.innerHTML = '00:00:00'; 
   });
     
   box1.appendChild(iniciar);
@@ -85,7 +84,7 @@ imagem1.addEventListener('click', function() {
 
   });
 }
-///////////////////////////////////////
+
 {//IMC:
 const IMC = document.getElementById('ImgIMC');
 
@@ -113,7 +112,7 @@ IMC.addEventListener('click', function() {
   
 });
 }
-////////////////////////////////////////
+
 {//ROTAÇÃO DOS GAMES NO PAINEL PRINCIPAL POR CLICK NA SETA:
 const container = document.querySelector('.container');
 const elemento = document.querySelectorAll('.elemento');
@@ -179,7 +178,7 @@ elemento[4].style.display = 'none';
 // inicia mostrando os três primeiros elementos
 updateVisibleElemento();
 }
-////////////////////////////////////////
+
 {//CALCULADORA:
 const calculadora = document.getElementById("ImgCalculadora");
 const boxCalculadora = document.getElementById('boxCalculadora');
@@ -285,5 +284,4 @@ calculadora.addEventListener('click', function() {
   calc.inicia();
 });
 }
-////////////////////////////////////////
 

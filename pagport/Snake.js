@@ -60,7 +60,7 @@ function drawFood() {
 }
 
 
-// atualiza a posição da cobra com base na última direção escolhida pelo usuário
+//Atualiza a posição da cobra com base na última direção escolhida pelo usuário
 function update() {
   let snakeX = snake[0].x;
   let snakeY = snake[0].y;
@@ -149,7 +149,6 @@ function changeDirection(event) {
   speed *= 1.5/1.0;
 }
 
-// inicia o jogo ao clicar em "ImgSnake"
 ImgSnake.addEventListener("click", function() {
   if (box1.style.display === 'none') {
     box1.style.display = 'block';
