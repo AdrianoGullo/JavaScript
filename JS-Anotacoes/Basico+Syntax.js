@@ -1,5 +1,5 @@
-//Curso JavaScript e TypeScript//
-//----------ANOTAÇÕES----------//
+//-----Curso JavaScript-----//
+//-------ANOTAÇÕES-1--------//
 
 /*//Transformar input (prompt) em número e console.log/alert() no navegador;
 

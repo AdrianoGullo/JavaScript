@@ -1,5 +1,5 @@
-//Curso JavaScript e TypeScript//
-//----------ANOTAÇÕES-2--------//
+//-----Curso JavaScript-----//
+//-------ANOTAÇÕES-2--------//
 
 //JavaScript - Funções (Avançado):
 
@@ -383,7 +383,7 @@
     //Reduzir array = Reduce
 
 
-//Javascript Objetos e prototypes (Avançado)
+//Javascript Objetos e Prototypes (Avançado)
 
     /*//Criação OBJETO - Factory/Constructor Functions e Classes:
     //Definindo um novo Objeto e atribuindo novos dados:
@@ -464,4 +464,359 @@
     };
     */
 
-    //Getters e Setters:
+    /*//Getters e Setters:
+    function Produto(nome, preco, estoque){
+        this.nome = nome;
+        this.preco = preco;
+
+        Object.defineProperty(this, 'estoque', {
+            enumerable: true,
+            configurable: true,
+            get: function(){
+                return estoque;
+            },
+            set: function(valor){
+                if (typeof valor !== 'number'){
+                    console.log('Bad value');
+                    throw new TypeError('BadValue');
+                }
+            }
+        });
+    };
+    const p1 = new Produto('Camiseta', 20, 3);
+    console.log(p1.estoque);
+    */
+
+    /*//Métodos Úteis para Objetos:
+    const produto = {nome: 'Caneca', preco:2.5};
+
+    //copia produto e adiciona mais métodos
+    const canecaCara = {        
+        ...produto,
+        material: 'porcelana'
+    };
+    const caneca1 = Object.assign({}, produto, {material: 'ceramica'});
+
+    //Descrição de 'nome', mostra as configs (writable, configurable, enumerable):
+    console.log(Object.getOwnPropertyDescriptor(produto, 'nome'));
+    
+    //Object.freeze (congela o obj)
+    //Object.keys (retorna as chaves)
+    //Object.assing(destino, any)  -> copia
+
+    //Pega arrays com Nome: 'Produto', outro com Preço: '2.5' e assim por diante
+    for (let entry of Object.entries(produto)){
+        console.log(entry);
+    };
+    */
+
+    /*//Prototypes:
+    //DEFINIÇÃO: Prototypes ou Protótipos é um termo usado para se referir ao que foi criado pela
+    //primeira vez, servindo de modelo ou molde para futuras produções.
+    
+    function Pessoa(nome, sobrenome){
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.nomeCompleto = () => this.nome+' '+this.sobrenome;
+    }
+    //Todos os objetos Pessoa vão ter esse método
+    Pessoa.prototype.estouAqui = 'Hahahah';
+    Pessoa.prototype.NomeCompleto = function(){
+        return this.nome+' '+this.sobrenome;
+    }
+
+    const pessoa1 = new Pessoa('Adriano', 'Gullo'); //<-- Pessoa = função construtora
+    const data = new Date();                        //<-- Date = função construtora
+
+    //new Object -> Object.prototype
+    const objA = {
+        chaveA: 'A',
+        //__proto__: Objecto.prototupe
+    }
+    const objB = {
+        chaveB: 'B',
+        //__proto__: objA
+    }
+    const objC = {
+        chaveC: 'C',
+        //__proto__: Objecto.prototype
+    }
+    Object.setPrototypeOf(objB, objA);      //adiciona a chave A em B em cadeia (chave B vira pai de chave A)
+    Object.setPrototypeOf(objC, objB);      //adiciona a chave B em C em cadeia (chave C vira pai de chave B)
+    console.log(objB.chaveA);
+    console.log(objC.chaveB);
+    */
+
+    /*//Manipulando prototypes:
+    function Produto(nome, preco){
+        this.nome = nome;
+        this.preco = preco;
+    };
+
+    Produto.prototype.desconto = function(percentual){
+        this.preco = this.preco - (this.preco*(percentual/100));
+    }
+    Produto.prototype.aumento = function(percentual){
+        this.preco = this.preco + (this.preco*(percentual/100));
+    }
+
+    const p1 = new Produto('Camiseta', 50);
+    p1.desconto(50);
+    console.log(p1);
+    p1.aumento(200);
+    console.log(p1);
+
+    //Adicionando prototype para outro objeto
+    const p2 = {
+        nome: 'Cadeira',
+        preco: 15
+    };
+
+    Object.setPrototypeOf(p2, Produto.prototype);
+    p2.aumento(40);
+
+    //Criando outro objeto e setando direto o prototype
+    const p3 = Object.create(Produto.prototype, {
+        tamanho: {
+            writable: true,
+            configurable: true,
+            enumerable: true,
+            value: 42
+        },
+        tamanho2: {
+            writable: true,
+            configurable: true,
+            enumerable: true,
+            value: 50
+        },
+        preco:{
+            writable: true,
+            configurable: true,
+            enumerable: true,
+            value: 100
+        }
+    });
+
+    p3.aumento(25);
+    console.log(p3);
+    */
+
+    /*//Prototypes - Herança:
+    //Produto -> aumento, desconto
+    //Camiseta = cor, caneca = material
+    function Produto(nome, preco){
+        this.nome = nome,
+        this.preco = preco
+    };
+
+    Produto.prototype.aumento = function(valor){
+        this.preco += valor;
+    };
+    Produto.prototype.desconto = function(valor){
+        this.preco -= valor;
+    };
+
+    function Camiseta(nome, preco, cor){
+        Produto.call(this, nome, preco);
+    }
+
+    //
+    Camiseta.prototype = Object.create(Produto.prototype);      //construtor vira Produto
+    Camiseta.prototype.constructor = Camiseta                   //Faz o construtor ser Camiseta
+    const camiseta = new Camiseta('Regata', 7.5, 'Preta');
+    camiseta.aumento(10);
+
+    function Caneca(nome, preco, material){
+        Produto.call(this, nome, preco);
+        this.material = material;
+        Object.defineProperty(this, 'estoque',{
+            enumerable: true,
+            configurable: false,
+            get: function(){
+                return estoque;
+            },
+            set: function(valor){
+                if(typeof valor !== 'number') return;
+                estoque = valor;
+            },
+        })
+    };
+
+    Caneca.prototype = Object.create(Produto.prototype);
+    Caneca.prototype.constructor = Caneca;
+    const caneca = new Caneca('Caneca 1', 17, 'Plástico', 5);
+    */
+
+    /*//Polimorfismo:
+    //Métodos com comportamento de subclasses
+    function Conta(agencia, conta, saldo){
+        this.agencia = agencia;
+        this.conta = conta;
+        this.saldo = saldo;
+    };
+
+    Conta.prototype.sacar= function(valor){
+        if(this.saldo < valor){
+            console.log("Saldo insuficiente.")
+            this.verSaldo();
+            return;
+        }
+        this.saldo -= valor;
+        this.verSaldo();
+    };
+
+    Conta.prototype.depositar = function(valor){
+        this.saldo += valor;
+        this.verSaldo();
+    };
+
+    Conta.prototype.verSaldo = function(){
+        console.log(`Ag/conta: ${this.agencia}/${this.conta} | Saldo: R$${this.saldo.toFixed(2)}`);
+    };
+
+    const conta1 = new Conta(11, 230, 400);
+    //conta1.verSaldo();
+    //conta1.depositar(25);
+    //conta1.sacar(80);
+    //conta1.sacar(560);
+
+
+    function ContaCorrente(agencia, conta, saldo, limite){
+        Conta.call(this, agencia, conta, saldo);
+        this.limite = limite;
+    }
+
+    ContaCorrente.prototype = Object.create(Conta.prototype);
+    ContaCorrente.prototype.constructor = ContaCorrente;
+
+    ContaCorrente.prototype.sacar= function(valor){
+        if( (this.saldo + this.limite) < valor){
+            console.log(`Saldo insuficiente ${this.saldo}.`)
+            return;
+        }
+        this.saldo -= valor;
+        this.verSaldo();
+    };
+
+    const contacorrente1 = new ContaCorrente(11, 230, 0, 200);
+    contacorrente1.depositar(20);
+    contacorrente1.sacar(100);
+    contacorrente1.sacar(100);
+    contacorrente1.sacar(100);
+    */
+
+    /*//FactoryFunctions + Prototypes:
+    //Melhor funcionamento e uso da memória, as pessoas criadas acessam o prototype e rodam, mas não possuem ele
+    
+    //Modo 1 - Acoplado
+    function CriaPessoa(nome, sobrenome){
+        const pessoaPrototype = {
+            nome,
+            sobrenome,
+            falar(){
+                console.log(`${this.nome} está falando.`); 
+            },
+            comer(){
+                console.log(`${this.nome} está comendo.`); 
+            },
+            beber(){
+                console.log(`${this.nome} está bebendo.`); 
+            }
+        };
+        return Object.create(pessoaPrototype, {
+            nome: {value: nome},
+            sobrenome: {value: sobrenome},
+        });
+    }
+
+    const p1 = CriaPessoa('Adriano', 'Gullo');
+    p1.falar();
+    p1.beber();
+    p1.comer();
+    const p2 = CriaPessoa('Maria', 'Ulisses');
+    p2.falar();
+    p2.beber();
+    p2.comer();
+
+    //Modo 2 - Descoplado/Livre -> Programação de composição/Mixing
+    const falar2 = {
+        falar2(){
+            console.log(`${this.nome} está falando.`); 
+        },
+    };
+    const comer2 = {
+        comer2(){
+            console.log(`${this.nome} está comendo.`); 
+        },
+    };
+    const beber2 = {
+        beber2(){
+            console.log(`${this.nome} está bebendo.`); 
+        },
+    };
+
+    //const pessoaPrototype2 = Object.assign({}, falar2, beber2, comer2);
+    const pessoaPrototype2 = {...falar2, ...comer2, ...beber2};
+
+    function CriaPessoa2(nome, sobrenome){
+        return Object.create(pessoaPrototype2, {
+            nome: {value: nome},
+            sobrenome: {value: sobrenome},
+        });
+    }
+    
+    const p3 = CriaPessoa2('Lucas', 'Rocha');
+    p3.falar2();
+    p3.beber2();
+    p3.comer2();
+    const p4 = CriaPessoa2('Julia', 'Maria');
+    p4.falar2();
+    p4.beber2();
+    p4.comer2();
+    */
+
+    /*//Map() - Estrutura de dados:
+    const pessoas = [
+        {id: 3, nome: 'Adriano'},
+        {id: 2, nome: 'Julio'},
+        {id: 1, nome: 'Tólio'},
+    ];
+
+    const novasPessoas = {};
+    for (const {id,nome} of pessoas){
+        novasPessoas[id] = {id, nome};
+        //ou
+        //const {id} = pessoa;
+        //novasPessoas[id] = {...pessoa};
+    }
+    //Irá mostrar o objeto mas em ordem crescente dado a forma de análise
+    console.log(novasPessoas);
+
+    //Para mostrar mantendo a ORDEM ORIGINAL:
+    const novasPessoas2 = new Map();
+    for (const pessoa of pessoas){
+        const {id} = pessoa;
+        novasPessoas2.set(id, {...pessoa});
+    }
+    console.log(novasPessoas2);
+    console.log(novasPessoas2.get(2)); //Pega quem tiver a chave 2 (ou ID);
+
+    //Para retornar em ARRAY:
+    for (const pessoa of novasPessoas2){
+        console.log(pessoa);
+    }
+
+    //Manipulando para retorno em ARRAY, separando em chave, id e nome:
+    for (const [identifier, {id,nome}] of novasPessoas2){
+        console.log(identifier, id, nome);
+    }
+
+    //Para pegar só as chaves
+    for (const pessoa of novasPessoas2.keys()){
+        console.log(pessoa);
+    }
+
+    novasPessoas2.delete(2);
+    console.log(novasPessoas2);
+    */
+   
