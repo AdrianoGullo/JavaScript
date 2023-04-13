@@ -28,15 +28,24 @@ document.addEventListener("keydown", function(event) {
   }
 });
 
+function probrabilidade(prob, acao){
+  if (Math.random()<prob) acao();
+}
+
 let food = {
-  x: Math.floor(Math.random()) * box,
-  y: Math.floor(Math.random()) * box
+  x: Math.floor(Math.random()+15) * box,
+  y: Math.floor(Math.random()+18) * box
 };
 
 let snake = [{
   x: 9 * box, 
   y: 10 * box
 }];
+
+let poder = {
+  x: Math.floor(Math.random()+22) * box,
+  y: Math.floor(Math.random()+10) * box
+};
 
 function DesenhaCobra() {
   for(let i = 0; i < snake.length; i++){
@@ -58,6 +67,13 @@ function DesenhaScore() {
   ctx.fillStyle = "white";
   ctx.font = "20px Arial";
   ctx.fillText("Score: " + Score, 20, 40);
+}
+
+function DesenhaPoder() {
+  ctx.fillStyle = "blue";
+  probrabilidade(0.003, function(){
+    ctx.fillRect(poder.x, poder.y, box, box);
+  });
 }
 
 let Poder = 0;
@@ -111,39 +127,30 @@ function update() {
 
   if (UltimaDirecao === "right") {
     snakeX += box;
-    if (snakeX >= GameAreaX + GameWidht) {
-      snakeX = GameAreaX;
-    }
-  }
+    if (snakeX >= GameAreaX + GameWidht) snakeX = GameAreaX;    
+  } 
   if (UltimaDirecao === "left") {
     snakeX -= box;
-    if (snakeX < GameAreaX) {
-      snakeX = GameAreaX + GameWidht - box;
-    }
+    if (snakeX < GameAreaX) snakeX = GameAreaX + GameWidht - box; 
   }
   if (UltimaDirecao === "up") {
     snakeY -= box;
-    if (snakeY < GameAreaY) {
-      snakeY = GameAreaY + GameWidth - box;
-    }
+    if (snakeY < GameAreaY) snakeY = GameAreaY + GameWidth - box;
   }
   if (UltimaDirecao === "down") {
     snakeY += box;
-    if (snakeY >= GameAreaY + GameWidth) {
-      snakeY = GameAreaY;
-    }
+    if (snakeY >= GameAreaY + GameWidth) snakeY = GameAreaY;
   }
 
   // verifica se a cobra comeu a comida
-  if (snakeX === food.x && snakeY === food.y) {
+  if(snakeX === food.x && snakeY === food.y) {
     snake.unshift(newHead);
     food = {
       x: Math.floor(Math.random() * 16 + 1) * box,
       y: Math.floor(Math.random() * 16 + 3) * box
     };
     Score += 10;
-  } 
-  else {
+  }else{
     snake.pop();
     let newHead = {
       x: snakeX,
@@ -152,9 +159,21 @@ function update() {
     snake.unshift(newHead);
   }
 
+  // verifica se a cobra pegou poder
+  if(snakeX === poder.x && snakeY === poder.y) {
+    Score += 5;
+    Poder = 1;
+    poder = {
+      x: Math.floor(Math.random() * 16 + 1) * box,
+      y: Math.floor(Math.random() * 16 + 3) * box
+    };
+  } 
+
+  DesenhaPoder();
   DesenhaCobra();
   DesenhaComida();
 };
+
 
 function iniciarJogo() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -168,6 +187,7 @@ function iniciarJogo() {
   }, 100);
   document.addEventListener("keydown", changeDirecao);
 }
+
 
 ImgSnake.addEventListener("click", function() {
   if (box1.style.display === 'none') {
