@@ -1,0 +1,89 @@
+/*Estios e definições para o MENU*/
+#menu-box {
+    position: fixed;
+    top: 0;
+    margin-top: 8px;
+    left: auto;
+    right: -200px; 
+    width: 200px;
+    height: calc(50px*3.5);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    border: 0.25px solid #4b4b4b;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000; 
+}
+
+#menu-box.expandido {
+    height: calc(50px*5.2);
+}
+
+#menu-box a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+#menu-git {
+    float: right;
+    margin-right: 10px;
+    bottom: 5px;
+    width: 30px;
+    height: 30px;
+    border: 0.25px solid #ffffff;
+    border-radius: 8px;
+}
+
+#menu-box a:hover {
+    background-color: #8a8a8a;
+}
+
+.menu {
+    position: fixed;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    top: 15px;
+    right: 13px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1001;
+}
+
+  .menu-item {
+    font-size: 10px;
+    border-bottom: 0.25px solid #4b4b4b;;
+}
+
+.sublista img {
+    margin-top: 1.5%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: inline;
+    border-radius: 10%;
+    border: 0.25px solid #4b4b4b;
+}
+
+.sublista {
+    display: none;
+    margin-top: 10px;
+}
+
+.sublista.visivel {
+    display: block;
+    height: 75px;
+    background-color: rgb(124, 124, 124);
+    text-align: center;
+}

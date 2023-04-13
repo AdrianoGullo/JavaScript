@@ -1,0 +1,283 @@
+/* Estilos para o contêiner */
+.container {
+    width: 100%;
+    height: 1%;
+    max-height: 1%;
+    margin-top: 5%;
+    margin-left: 1%;
+    margin-right: 1%;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 1%;
+    color: #fff;
+    border: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    text-align: center;
+  }
+.container img{
+    margin:auto;
+    flex: 1;
+    width: 4.5%;
+    max-width: 4.5%;
+    min-width: 3%;
+    height: 4.5%;
+    max-height: 4.5%;
+    min-height: 3%;
+    cursor: pointer;
+    color: #fff;
+    object-fit: cover;
+    border-radius: 100%;
+    border: 0.25px solid #ffffff;
+}
+.image {
+    width: 100px;
+    height: 100px;
+    margin: 10px 20px;
+}
+  
+/*Box1 é um container adicionado durante a execução do site*/
+#box1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(51, 51, 51, 0.8);
+}
+  
+.box {
+    width: 100%;
+    margin-left: 1%;
+    justify-content: center;
+    align-items: center;
+    display:inline-block;
+    color: #fff; 
+    border: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.9); 
+    border-radius: 8px;
+}
+  
+.box1 h2{
+    font-size: 25px;
+    align-items: center;
+    font-weight: bold;
+}
+  
+.box1.expandidoIMC{
+    display: block;
+    height: 400px;
+    background-color: rgb(124, 124, 124);
+    text-align: right;
+}
+  
+button {
+    margin-right: 10px;
+}
+  
+
+
+/*Para o painel principal dos games*/
+.containerPainel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: transparent;
+    width: 100%;
+    overflow: hidden;
+    margin-left: 1%;
+    margin-top: 3%;
+}
+
+.elemento {
+    width: 33%;
+    height: 250px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: 1px solid #ccc;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    transition: transform 1s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.elemento h2{
+    font-size: 1.5em;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    border: 0.25px solid #ffffff; 
+    border-radius: 8px;
+    width: 50%;
+    height: 15%;
+    background-clip: padding-box; 
+    margin: 0; 
+    top: 0; 
+    left: 6px; 
+    right: 6px;
+}
+
+.elemento p{
+    font-size: 1.0em;
+    justify-content:left;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 50%;
+    height: 50%;
+    font-weight:bold;
+    margin: 20px 6px 6px 6px;
+}
+  
+  /*Seta para rotação do painel*/
+.seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color:rgba(255, 255, 255, 0.7);
+    font-size: 70px;
+    margin: 0 auto;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.seta-esquerda:before {
+    margin-right: 5px;
+    transform: rotate(225deg);
+}
+
+.seta-direita:before {
+    margin-left: 5px;
+    transform: rotate(45deg);
+}
+
+.seta:hover {
+    color: #999;
+}
+
+.seta-esquerda {
+    left: 0;
+    padding: 8px;
+    z-index: 2;
+}
+  
+.seta-direita {
+    position: absolute;
+    top: 50%;
+    right: 10px; 
+    transform: translateY(-50%);
+    font-size: 70px;
+    color:rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 2;
+}
+  
+  /*Alterando o background dos games*/
+#Xadrez {
+    position: relative;
+    z-index: 1;
+}
+#Xadrez::before {
+    content: "";
+    background-image: url("Imagens/BG-GamesMain/xadrez.jpg");
+    background-size: cover;
+    position: absolute;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(2px);
+}
+
+#BatalhaNaval {
+    position: relative;
+    z-index: 1;
+}
+#BatalhaNaval::before {
+    content: "";
+    background-image: url("Imagens/BG-GamesMain/battleship.jpg");
+    background-size: cover;
+    position: absolute;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(2px);
+}
+
+#CampoMinado {
+    position: relative;
+    z-index: 1;
+}
+#CampoMinado::before {
+    content: "";
+    background-image: url("Imagens/BG-GamesMain/campominado.png");
+    background-size: cover;
+    position: absolute;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(2px);
+}
+
+#JogoDaVelha {
+    position: relative;
+    z-index: 1;
+}
+#JogoDaVelha::before {
+    content: "";
+    background-image: url("Imagens/BG-GamesMain/jogodavelha.jpg");
+    background-size: cover;
+    position: absolute;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(2px);
+}
+
+#Snake {
+    position: relative;
+    z-index: 1;
+}
+#Snake::before {
+    content: "";
+    background-image: url("Imagens/BG-GamesMain/snake.jpg");
+    background-size: cover;
+    position: absolute;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(2px);
+}
+    
