@@ -1,7 +1,7 @@
 //-----Curso JavaScript-----//
 //-------ANOTAÇÕES-3--------//
 
-//Javascript - Classes (POO):
+//JavaScript - Classes (POO):
     /*//Criando Classes:
     //Semelhante a função construtora
     class Pessoa{
@@ -159,5 +159,57 @@
     console.log(controle1);
     */
 
-    //Usando Classes - Validar um formulário:
+//JavaScript assíncrono - Promises, Ajax, Fetch e Async/Await:
+    /*//Promises:
+    function esperaAi(msg, tempo, cb){
+        setTimeout(() =>{
+            console.log(msg);
+            if(cb) cb();
+        }, tempo);
+    }
+
+    function aleatorio(min, max,){
+        min *= 1000;
+        max *= 1000;
+        return Math.floor(Math.random()*(max-min)+min);
+    }
+
+    //Para sair na ordem, deve-se utilizar uma função callback, entretanto não é a melhor solução
+    //esperaAi('Frase 1', aleatorio(1, 3), function(){
+    //    esperaAi('Frase 2', aleatorio(1, 3), function(){
+    //        esperaAi('Frase 3', aleatorio(1, 3));
+    //    });
+    //});
+
+    //Com PROMISE e as devidas alterações para resolução:
+    function esperaAi2(msg, tempo){
+        return new Promise((resolve, reject) => {
+            if (typeof msg !== 'string') reject('Bad Value');
+
+            setTimeout(() =>{
+                resolve(msg);
+            }, tempo);
+        });   
+    }
     
+    esperaAi2('Conexão com DB.', aleatorio(1,3))
+        .then(resposta =>{
+            console.log(resposta);
+            return esperaAi2('Buscando dados da Base.', aleatorio(1, 3));
+        })
+        .then(resposta => {
+            console.log(resposta);
+            return esperaAi2('Tratando dados.', aleatorio(1, 3));
+        })
+        .then(resposta => {
+            console.log(resposta);
+        })
+        .then(() => {
+            console.log('Dados:')
+        })
+        .catch(e => {
+            console.log('Erro:', e);            //caso em algum .then aconteça um erro, o catch mostraria
+        });
+        */
+
+    //
