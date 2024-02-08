@@ -210,6 +210,105 @@
         .catch(e => {
             console.log('Erro:', e);            //caso em algum .then aconteça um erro, o catch mostraria
         });
-        */
+        
 
-    //
+    //Async e Await - melhor forma de utilização
+    async function executa(){
+        try{
+            const fase1 = await esperaAi2('Fase 1', aleatorio(0,3));
+            console.log(fase1);
+
+            const fase2 = await esperaAi2('Fase 2', aleatorio(0,3));
+            console.log(fase2);
+
+            const fase3 = await esperaAi2('Fase 3', aleatorio(0,3));
+            console.log(fase3);
+
+            console.log('Terminamos na fase:', fase3);
+        }
+        catch(e){
+            console.log(e);
+        }
+    }
+    executa();
+*/
+
+    /*//Fetch API e Axios (coleta de dados):
+    //Fetch API (substituindo XML Http) - Página principal com clicks de outras páginas (pag 1, pag2 e pag 3)
+    fetch('ExemposPag.html')
+        .then(resposta => {
+            if(resposta.status !== 200) throw new Error('ERRO 404 Nosso');
+            return resposta.text();
+        })
+        .then(html => console.log(html))
+        .catch(e => console.log(e));
+
+    //exemplo:
+    async function carregaPagina(el){
+        const href = el.getAttribute('href');
+        fetch(href)
+            .then(response => {
+                if(response.status !== 200) throw new Error('ERRO 404');
+                response.text();
+            })
+            .then(html => carregaResultado(html))
+            .catch(e => console.log(e));
+        carregaResultado(response);
+    }
+    function carregaResultado(response){
+        const resultado = document.querySelector('.resultado');
+        resultado.innerHTML = response;
+    }
+
+    //OU ENTÃO:
+    async function carregaPagina2(el){
+        const href = el.getAttribute('href');
+        const response = await fetch(href);
+
+        if(response.status !== 200) throw new Error('Error404');
+        
+        const html = await response.text();
+        carregaResultado(response);
+    }
+
+    function carregaResultado2(response){
+        const resultado = document.querySelector('.resultado');
+        resultado.innerHTML = response;
+    }
+
+    //Fetch API com Axios (json)  - supondo arquivo "pessoas.json"
+    fetch('pessoas.json')
+        .then(resposta => resposta.json())
+        .then(json => carregaElementosNaPagina());
+
+    //pode virar:
+    axios('pessoas.json')          //adicionar no html para utilizar axios -> ( <script src="https://unpkg.com/axios/dist/axios.min.js"></script> )
+        .then(resposta => carregaElementosNaPagina(resposta.data))
+
+    function carregaElementosNaPagina(json){
+        //criar um div class = resultados no html
+        const table = document.createElement('table');
+        for(let pessoa of json){
+            const tr = document.createElement('tr');
+
+            let td = document.createElement('td');
+            td.innerHTML = pessoa.nome
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML = pessoa.idade
+            tr.appendChild(td);
+
+            td = document.createElement('td');
+            td.innerHTML = pessoa.salario
+            tr.appendChild(td);
+
+            table.appendChild(tr);
+
+            console.log(pessoa.nome);
+        }
+    
+        const resultado = document.querySelector('.resultado')
+        resultado.appendChild(table);
+    }
+    */
