@@ -4,7 +4,7 @@
 
 //JavaScript Tooling e ES6 Modules - Módulos
 
-//Babel auxilia ao seu código funcionar em todos os navegadores (transpilador)
+//Babel auxilia ao seu código a funcionar em todos os navegadores (transpilador)
 // https://babeljs.io/
 
 /*//Webpack (Boilerplate)
@@ -20,7 +20,7 @@
 
 //Dentro de public/assets, um arquivo html (index.html) pode ser criado para acompanhar bundle.js como script e ser executado.
 //Toda vez que houver alteração em index.js na src, ao usar npm run carregarWebpack bundle.js será atualizado também.
-//Em caso de Live Server, o "-w" em "webpack -w" serve para o json sempre acompanhar o index.js e ir atualizando o bundle.js simultaneamente.
+//Em caso de Live Server, o "-w" em "webpack -w" serve para o json sempre acompanhar o index.js e ir atualizando o bundle.js simultaneamente. Ctrl+C para terminar
 
 //As alterações no arquivo .js devem ser realizadas somente no arquivo da pasta src, não deve-se alterar pelos arquivos na pasta public
 
@@ -28,4 +28,8 @@
 */
 
 //ES6 Modules - Import/Export
-
+    //metodos de import em "index.js"
+    //metodos de export em "modulo1.js"
+    //Com o modulos, é possível trabalhar com uma variável privada ao não exportar ela, não alterando o escopo global
+    //Se colocar algo como export default, ao usar "import qualquerNome from '.modulo1'" vai importar a variável/função default, apenas 1 default por modulo.
+    //Ler documentação, as vezes há mudanças na sintaxe
