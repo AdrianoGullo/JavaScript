@@ -7,7 +7,7 @@ fs.readdir(path.resolve(__dirname))
     .catch(e => console.log(e));
     */
 
-async function readdir(rootDir){
+async function readdir(rootDir){                                //atraves de um diretório raiz, percorrer todos seus arquivos
     rootDir = rootDir || path.resolve(__dirname);
     const files = await fs.readdir(rootDir);
     walk(files, rootDir);
@@ -18,12 +18,15 @@ async function walk(files, rootDir){
         const fileFullPath = path.resolve(rootDir, file);
         const stats = await fs.stat(fileFullPath);
 
-        if(/\.git/g.test(fileFullPath)) continue;
+        if(/\.git/g.test(fileFullPath)) continue;                   //excluindo pastas de git e node_modelus
+        if(/\.node_modules/g.test(fileFullPath)) continue;
 
-        if(stats.isDirectory()){
+        if(stats.isDirectory()){                                    //Se for uma pasta, lista os arquivos dela
             readdir(fileFullPath);
             continue;
         }
+
+        if(!/\.css$/g.test(fileFullPath)) continue;                 //expressão para procurar apenas os arquivos .css
 
         console.log(file, stats.isDirectory());
     }
