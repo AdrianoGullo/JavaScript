@@ -8,8 +8,3 @@ module.exports = (requisicao, resposta, next) => {
 exports.middlewareGlobal = (requisicao, resposta, next) =>{
     next();
 };
-
-exports.middlewareGlobal2 = (requisicao, resposta, next) =>{
-    console.log('\nSou o 2.')
-    next();
-};
