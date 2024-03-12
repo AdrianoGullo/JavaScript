@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js --ignore public --ignore FrontEnd",  
+    "start": "nodemon server.js --ignore public --ignore FrontEnd",
     "dev": "webpack -w"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "css-loader": "^6.10.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "mongodb": "^6.5.0",
     "regenerator-runtime": "^0.14.1",
     "style-loader": "^3.3.4"
   },
