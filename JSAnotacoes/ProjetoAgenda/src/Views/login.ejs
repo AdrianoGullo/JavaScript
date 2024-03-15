@@ -9,6 +9,8 @@
             <h1 class="display-1 text-center">Login</h1>
             <p class="text-center lead">Faça login ou crie sua conta:</p>
 
+            <%- include('includes/messages') %>
+
             <div class="row">
 
                 <div class="col-lg">
@@ -26,7 +28,7 @@
                         <label>Senha</label>
                           <input type="password" class="form-control" name="password" aria-describedby="emailHelp" placeholder="Enter password">
                         </div>
-                        
+                        <div></div>
                         <button type="submit" class="btn btn-primary">Criar minha conta</button>
                       </form>
                 </div>
@@ -42,11 +44,11 @@
                           <label>Email</label>
                           <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                         </div>
-
+                          
                         <label>Senha</label>
                           <input type="password" class="form-control" name="password" aria-describedby="emailHelp" placeholder="Enter password">
                         </div>
-                        
+                        <div></div>
                         <button type="submit" class="btn btn-primary">Login</button>
                       </form>
                 </div>

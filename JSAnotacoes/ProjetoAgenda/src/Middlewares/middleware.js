@@ -1,5 +1,7 @@
 exports.middlewareGlobal = (requisicao, resposta, next) =>{
-    resposta.locals.umaVariavel = 'Esta é uma variavel.'
+    resposta.locals.errors = requisicao.flash('errors');
+    resposta.locals.success = requisicao.flash('success');
+    resposta.locals.user = requisicao.session.user;
     next();
 };
 
