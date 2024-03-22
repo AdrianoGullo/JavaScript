@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 exports.middlewareGlobal = (requisicao, resposta, next) =>{
     resposta.locals.errors = requisicao.flash('errors');
     resposta.locals.success = requisicao.flash('success');
@@ -16,4 +18,13 @@ exports.checkCSRF= (err, requisicao, resposta, next) => {
 exports.csrfMiddleware = (requisicao, resposta, next) => {
     resposta.locals.csrfToken = requisicao.csrfToken();
     next();
-}
+};
+
+exports.loginRequired = (requisicao, resposta, next) =>{
+    if(!requisicao.session.user){
+        requisicao.flash('errors', 'Você precisa fazer login');
+        requisicao.session.save(() => resposta.redirect('/'));
+        return;
+    }
+    next();
+};

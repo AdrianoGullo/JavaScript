@@ -15,7 +15,7 @@ class Login {
         this.body = body;
         this.errors = [];
         this.user = null;
-    }
+    };
 
     async logar(){
         this.valida();
@@ -31,7 +31,7 @@ class Login {
             this.user = null;
             return;
         }
-    }
+    };
 
     async register(){
         this.valida();
@@ -49,12 +49,12 @@ class Login {
         } catch(e){
             console.log(e);
         }
-    }
+    };
     
     async userExist(){
         this.user = await loginModel.findOne({email: this.body.email});
         if(this.user) this.errors.push('Usuário existente');
-    }
+    };
 
     valida(){
         this.cleanUp();
@@ -67,7 +67,7 @@ class Login {
         if(this.body.password.length < 3 || this.body.password.length >= 50){
             this.errors.push('A senha precisa ter entre 3 e 50 caracteres');
         };
-    }
+    };
 
     cleanUp(){
         for(const key in this.body){
@@ -80,7 +80,7 @@ class Login {
             email: this.body.email,
             password: this.body.password,
         }
-    }
+    };
 }
 
 module.exports = Login;
