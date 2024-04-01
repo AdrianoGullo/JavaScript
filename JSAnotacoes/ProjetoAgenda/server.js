@@ -53,6 +53,7 @@ app.set('view engine', 'ejs', )
 
 //CSRF Token - configurando código de segurança
 app.use(csrf());
+
 //Utilização dos Middlewares
 app.use(meuMiddleware.middlewareGlobal);
 app.use(meuMiddleware.checkCSRF);

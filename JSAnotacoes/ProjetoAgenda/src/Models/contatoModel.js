@@ -15,7 +15,7 @@ const contatoModel = mongoose.model('contato', contatoSchema);
 function Contato(body){
     this.body = body;
     this.errors = [];
-    this.Contato = null;
+    this.contato = null;
 };
 
 Contato.prototype.register = async function(){
@@ -57,7 +57,19 @@ Contato.prototype.edit = async function(id){
     if(typeof id !== 'string') return;
     this.valida();
     if(this.errors.length > 0) return;
-    this.contato = contatoModel.findByIdAndUpdate(id, this.body, {new: true});
+    this.contato = await contatoModel.findByIdAndUpdate(id, this.body, {new: true});
+};
+
+Contato.buscaContatos = async function(){
+    const users = await contatoModel.find()
+        .sort({criadoEm: -1});
+    return users;
+};
+
+Contato.delete = async function(id){
+    if(typeof id !== 'string') return;
+    const user = await contatoModel.findOneAndDelete({_id: id});
+    return user;
 };
 
 module.exports = Contato;

@@ -12,7 +12,7 @@
             <%- include('includes/messages') %>
             
             <% if(contato._id) {%>
-              <form action="/contato/edit/<% contato._id %>" method="post">
+              <form action="/contato/edit/<%= contato._id %>" method="post">
             <% } else{ %>
               <form action="/contato/register" method="post">
            <% } %>
@@ -40,7 +40,7 @@
   
                 <button type="submit" class="btn btn-primary">Salvar</button>
               
-              </form>
+              </form >
             
         </div>
 

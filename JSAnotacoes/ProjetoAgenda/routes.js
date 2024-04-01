@@ -19,6 +19,7 @@ route.get('/contato/index', loginRequired.loginRequired, contatoController.index
 route.post('/contato/register', loginRequired.loginRequired, contatoController.register);
 route.get('/contato/index/:id', loginRequired.loginRequired, contatoController.editIndex);
 route.post('/contato/edit/:id', loginRequired.loginRequired, contatoController.edit);
+route.get('/contato/delete/:id', loginRequired.loginRequired, contatoController.delete);
 
 
 module.exports = route;

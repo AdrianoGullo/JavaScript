@@ -43,7 +43,7 @@ exports.edit = async function(requisicao, resposta){
         
         if(contato.errors.length > 0){
             requisicao.flash('errors', contato.errors);
-            requisicao.session.save(() => resposta.redirect('/contato/index'));
+            requisicao.session.save(() => resposta.redirect('back'));
             return;
         };
 
@@ -55,4 +55,16 @@ exports.edit = async function(requisicao, resposta){
         console.log(e);
         resposta.render('404');
     }
+};
+
+exports.delete = async function(requisicao, resposta){
+    if(!requisicao.params.id) return resposta.render('404');
+
+    const contato = await Contato.delete(requisicao.params.id);
+
+    if(!contato) return resposta.render('404');
+
+    requisicao.flash('success', 'Contato apagado com sucesso.');
+    requisicao.session.save(() => resposta.redirect('back'));
+    return;
 }
