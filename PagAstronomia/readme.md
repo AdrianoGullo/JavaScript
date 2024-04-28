@@ -17,7 +17,7 @@ Antes de começar, tenha o Node.js e o npm (gerenciador de pacotes do Node.js) i
 ### MongoDB
 
 1. Entre na sua conta [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
-2. Crie um novo cluster e siga as instruções para configurá-lo.
+2. Crie um novo cluster e siga as instruções para configuração.
 3. Obtenha sua URI de conexão do MongoDB.
 
 ### Variáveis de Ambiente
@@ -47,6 +47,8 @@ Features planejadas ou em desenvolvimento:
 Fique à vontade para sugerir novas features ou contribuir com código para implementar essas!
 
 ## Uso
+
+Na raiz da pasta e usando dois terminais separados, rode os seguintes comandos:
 
 1. Execute `npm start` para iniciar o servidor.
 2. Execute `npm run dev` para iniciar o webpack em modo de desenvolvimento.
