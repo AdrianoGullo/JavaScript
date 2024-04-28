@@ -1,0 +1,44 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+
+<main>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <img class="img-fluid" src="/Imagens/PaginaMars/marsPage.png" alt="Generic placeholder image" width="100%" height="315">
+      </div>
+
+      <div class="col">
+        <div class="btn-group" style="position: absolute; margin-left: 13%; margin-top: 3%;">
+          <input type="number" id="numberInput" min="1" max="1000">
+        </div>
+        
+      
+        <img class="img-fluid" src="/Imagens/PaginaMars/marsqueryrovers.png" alt="Generic placeholder image" width="100%" height="315">
+
+        <div class="d-flex">
+          <a id="btnCuriosity" class="btn btn-secondary my-2 text-white mx-1">Curiosity</a>
+          <a id="btnOpportunity" class="btn btn-secondary my-2 text-white mx-1">Opportunity</a>
+          <a id="btnSpirit" class="btn btn-secondary my-2 text-white mx-1">Spirit</a>
+        </div>
+        <div class="d-flex">
+          <a id="btnSearch" class="btn btn-dark my-2 text-white mx-1">Search</a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="featurette-divider"></hr>
+  
+    <div class="album py-1 bg-body-dark">
+        <div class="container">
+            <div class="row row-cols-3 row-cols-sm-3 row-cols-md-3 row-cols-lg-3 g-3" id="album">
+                <!-- Fotos serão adicionadas aqui -->
+            </div>
+        </div>
+    </div>
+
+    <button id="showMoreBtn" class="btn-sm btn-outline-primary text-blue" style="margin-bottom: 5%; margin-left: 50%;">Show More</button>
+    
+    <script src="/scripts/marsPag.js"></script>
+
+</main>
+<%- include('includes/footer'); %>

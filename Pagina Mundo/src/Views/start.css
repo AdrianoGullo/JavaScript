@@ -1,0 +1,117 @@
+body {
+    background-color: black;
+}
+
+.container {
+    position: absolute;
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Move o elemento de volta metade de sua própria largura e altura */
+}
+
+.texto-import {
+    background-color: rgba(128, 128, 128, 0.8);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#hidden {
+    display: none;
+}
+
+.description-box {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: none; /* Inicialmente escondido */
+  }
+
+/* Estilo da barra de rolagem */
+::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+}
+
+/* Estilo do botão de rolagem */
+::-webkit-scrollbar-button {
+    background-color: #ccc; /* Cor de fundo do botão de rolagem */
+}
+
+/* Estilo da trilha (fundo) */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Cor de fundo da trilha */
+}
+
+/* Estilo do "pulso" (a parte que cobre a trilha quando a barra de rolagem é arrastada) */
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* Cor de fundo do "pulso" */
+    border-radius: 5px; /* Raio da borda do "pulso" */
+}
+
+/* Estilo do "canto" (entre a trilha e o "pulso") */
+::-webkit-scrollbar-corner {
+    background-color: #f1f1f1; /* Cor de fundo do "canto" */
+}
+
+/* Estilo da barra de rolagem quando o conteúdo está sendo arrastado */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Cor de fundo do "pulso" quando o mouse passa por cima */
+}
+
+.video-background {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  .video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .navbar {
+    position: relative;
+  }
+  
+  .badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.7); /* Cor de fundo do badge */
+    color: #333; /* Cor do texto do badge */
+    font-size: 14px;
+  }
+
+  .navbar-nav {
+    background-color: rgb(141, 181, 255); /* cor preta com 50% de opacidade */
+    padding: 10px; /* ajuste o preenchimento conforme necessário */
+    border-radius: 10px; /* borda arredondada para um visual mais suave */
+  }

@@ -1,0 +1,42 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+
+<div>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <img class="img-fluid text-center" src="/Imagens/favoritos.png" alt="Generic placeholder image" width="380" height="380" style="text-align: center;">
+            <p>
+              <a id="btnFav1" class="btn btn-secondary my-2">Photos/Videos</a>
+              <a id="btnFav2" class="btn btn-secondary my-2">News</a>
+              <a id="btnFav3" class="btn btn-secondary my-2">Following Events</a>
+            </p>
+            <p class="lead text-body-secondary">Search in your favorite stuff for incredible content.</p>
+          </div>
+        </div>
+    </section>
+
+
+    <section class="py-8 text-center container">
+        <div class="container" style="display: none;">
+            <ul id="photosVideosFav" class="list-group">
+                <li class="list-group-item">Photos/Videos Item</li>
+            </ul>
+        </div>
+        <div class="container" style="display: none;">
+            <ul id="newsFav" class="list-group">
+                <li class="list-group-item">News Item</li>
+            </ul>
+        </div>
+        <div class="container" style="display: none;">
+            <ul id="eventsFav" class="list-group">
+                <li class="list-group-item">Events Item</li>
+            </ul>
+        </div>
+    </section>
+    
+    <script src="/scripts/favoritosScript.js"></script>
+</div>
+
+<%- include('includes/footer'); %>

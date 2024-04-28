@@ -1,0 +1,26 @@
+<div class="col-md-6 order-md-2 bg-body rounded shadow-sm">
+
+  <% if(LaunchsData !== undefined){ %>
+    <% LaunchsData.forEach(launch => { %>
+      <div class="d-flex text-body-secondary pt-3" id="upcomingLaunchs">
+        <image src="<%= launch.img %>" width="50px" height="50px" style="margin-top: 7px; border-radius: 10px;" />
+        <div class="d-flex flex-column justify-content-between" style="margin-left: 20px;">
+          <div class="d-flex align-items-center">
+            <strong><span><%= launch.title %></span></strong>
+            <button type="button" class="btn btn-dark" style="margin-left: 10px; margin-top: 3px; padding: 0.1rem 0.15rem; height: 0.7rem; font-size: 10px; line-height: 0.4rem;">Read more</button> 
+          </div>
+          <div class="d-flex align-items-center"> 
+            <span class="badge badge-primary mr-2"><%= launch.date %></span> 
+          </div>
+          <div id="tagsLaunch"><span class="badge badge-light mr-2"><%= launch.headAgency %></span></div>
+          <div id="descLaunch" style="max-height: 3em; overflow: auto; text-overflow: ellipsis; width: 100%;"><%= launch.description %></div>
+        </div>      
+      </div>
+    <%}); %>
+  <%};%>
+    
+    <small class="badge badge-light" style="margin-left: 75%; margin-bottom: 3%;  margin-top: 5px;">
+      <a href="/events/index">View all launchs</a>
+    </small>
+    
+</div>

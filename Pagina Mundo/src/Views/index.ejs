@@ -1,0 +1,61 @@
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+
+<body>
+    <main role="main">
+
+      <div class="container marketing" style="margin-top: 50px;">
+
+        <!-- 3 colunas destaque // Mars, weather, spacecraft = highlights -->
+        <%- include('includes/indexHome/highlights') %>
+
+        <hr class="featurette-divider"></hr>
+        <h1 class="badge text-bg-light rounded-pill" style="width: 100%;">API - Astronomy Picture of the Day (NASA)</h1>
+        <hr class="featurette-divider">
+        <%- include('includes/indexHome/dayPicture'); %>
+
+        <hr class="featurette-divider">
+        <div class="row featurette">
+          <div class="col-md-6 order-md-1">
+            <img id='news' class="img-fluid" src="/Imagens/homeImgs/launches.png" alt="Generic placeholder image" width="400" height="400">
+          </div>
+          <div class="col-md-6 order-md-2">
+            <img id='news' class="img-fluid" src="/Imagens/homeImgs/upcomingevents.png" alt="Generic placeholder image" width="400" height="400">
+          </div>
+        </div>
+          
+        <hr class="featurette-divider">
+        <div class="row featurette">
+          <%- include('includes/indexHome/launches'); %>
+          <%- include('includes/indexHome/upcomingEvents'); %>
+        </div>
+
+        <hr class="featurette-divider">
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Bloco de exemplos de simulação<span class="text-muted">- Tentar algo iterativo</span></h2>
+            <p class="lead">Descrição e mini-canvas</p>
+          </div>
+          <div class="col-md-5" id="simulacaoPlanetasContainer">
+            <canvas id="myCanvas"  width="1000" height="600"></canvas>
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+      </div>
+
+      <hr class="featurette-divider">
+      <a href="https://github.com/AdrianoGullo" target="_blank">
+        <img id='github' class="img-fluid" src="/Imagens/homeImgs/personalstuff.png" alt="Generic placeholder image" width="100" height="100" style="margin-left: 100px;">
+      </a>
+
+      <footer class="container">
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>© Site portifólio, 2024 · <a href="#">About</a></p>
+      </footer>
+      
+      <script src="/scripts/functionFavorito.js" type="js"></script>
+
+    </main>
+<%- include('includes/footer'); %>
