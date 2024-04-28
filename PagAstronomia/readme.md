@@ -5,7 +5,7 @@ Este projeto é uma iniciativa pessoal para praticar minhas habilidades em desen
 
 ## Pré-requisitos
 
-Antes de começar, tenha o Node.js e o npm (gerenciador de pacotes do Node.js) instalados.[clique aqui](https://nodejs.org/).
+Antes de começar, tenha o Node.js e o npm (gerenciador de pacotes do Node.js) instalados -> [clique aqui](https://nodejs.org/).
 
 ## Instalação
 
@@ -33,9 +33,9 @@ Substitua `sua_uri_deConexão_doMongoDB` pela URI de conexão do seu cluster Mon
 
 ## Features Planejadas
 
-Aqui estão algumas features que planejamos implementar no futuro:
+Features planejadas ou em desenvolvimento:
 
-- [ ] Organização página fotos de Marte (marsPag)
+- [ ] Organização página de fotos de Marte (marsPag)
 - [ ] Lista de eventos/lançamentos na página 'Events' - Mesmo API já usado na home
 - [ ] Sistema de favoritos para os usuários favoritarem qualquer foto ou noticia/lançamento que achar interessante
 - [ ] Página 'Favorites' - Lista relacionado ao tipo de favorito e mostrando os favoritos do usuário (excluir, compartilhar, abrir informações)
