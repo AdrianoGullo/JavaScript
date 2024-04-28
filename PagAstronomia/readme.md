@@ -1,6 +1,6 @@
 # Planeta Astronômico
 
-O Planeta Astronômico é um site dedicado à divulgação de informações sobre astronomia, explorando o vasto cosmos e os mistérios do universo. Ainda em desenvolvimento, a ideia do site é oferecer uma jornada pelo espaço sideral, incluindo notícias, imagens impressionantes, artigos informativos e muito mais.
+O Planeta Astronômico é um site dedicado à divulgação de informações sobre astronomia, explorando o cosmos e os mistérios do universo. O site ainda está em desenvolvimento, a ideia do site é oferecer uma jornada pelo espaço sideral, incluindo notícias, imagens impressionantes, artigos informativos e muito mais.
 Este projeto é uma iniciativa pessoal para praticar minhas habilidades em desenvolvimento, além de fornecer um recurso informativo para amantes do espaço.
 
 Para conseguir acessar as páginas além da 'home', é necessário criar uma conta e fazer login.
