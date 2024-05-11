@@ -1,4 +1,4 @@
-exports.index = (requisicao, resposta) => {
+exports.index = async (requisicao, resposta) => {
     if(requisicao.session.user) return resposta.render('marsPag', {Mars_apiRequest});
     return resposta.render('login');
 };

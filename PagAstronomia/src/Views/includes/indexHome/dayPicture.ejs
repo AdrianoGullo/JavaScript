@@ -1,6 +1,12 @@
 <div class="row featurette">
     <div class="col-md-6" style="position: relative;">
-      <img id="imagemDoDia" src="<%= PictureData.hdurl %>" class="featurette-image img-fluid mx-auto" alt="Imagem do Dia" style="border-radius: 20px; width: 500px; height: 600px;">
+      <% if (PictureData.media_type  == "photo") { %>
+          <img id="imagemDoDia" src="<%= PictureData.hdurl %>" class="featurette-image img-fluid mx-auto" alt="Imagem do Dia" style="border-radius: 20px; width: 500px; height: 600px;">
+      <% } else if (PictureData.media_type == "video") { %>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="<%= PictureData.url %>?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+      <% } %>
     </div>
     <div class="col-md-6">
       <h2 class="featurette-heading">Picture of the Day:</h2>

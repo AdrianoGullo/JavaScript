@@ -16,15 +16,25 @@ async function api_dayPicture(){
         let API_KEY = process.env.NASA_API;
         let response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
         let data = await response.json();
+
         return data;
 };
+
+function isExpired(data) {
+    const umDiaEmMilissegundos = 24 * 60 * 60 * 1000; // 1 dia em milissegundos
+    const dataAtual = new Date();
+    return dataAtual - data > umDiaEmMilissegundos;
+}
 
 async function api_upcomingEvents(){
     try{
         const response = await fetch(`https://ll.thespacedevs.com/2.2.0/event/upcoming/`);
         const dataEvent = await response.json();
-        const upcomingEvents = dataEvent.results.slice(0, 4).map((event, index) => {
-            let primeiraAgencia = event.agencies[0]?.abbrev || "N/A"; 
+        if (!dataEvent.results || !Array.isArray(dataEvent.results)) {
+            throw new Error("Estrutura de dados inválida: results não encontrado ou não é uma matriz");
+        }
+        const upcomingEvents = dataEvent.results.slice(1, 5).map((event, index) => {
+            let primeiraAgencia = obterNomePrimeiraAgencia(event); 
             let typeOfMission = event.type?.name || "N/A"; 
     
             return {
@@ -37,23 +47,34 @@ async function api_upcomingEvents(){
                 index: index + 1 
             };
         });
-    
         return upcomingEvents;
     }catch(error){
         console.log(error);
     }
 };
 
+function obterNomePrimeiraAgencia(event) {
+    if (event && event.agencies) {
+        if (Array.isArray(event.agencies) && event.agencies.length > 0) {
+            return event.agencies[0].name || "N/A";
+        } else if (!Array.isArray(event.agencies)) {
+            return event.agencies.name || "N/A";
+        }
+    }
+    return "N/A";
+}
+
 async function api_upcomingLaunchs(){
     try{
         const launches = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/upcoming/`);
         const launchEvent = await launches.json();
+        console.log(launchEvent);
     
         const upcomingLaunchs = launchEvent.results.slice(0, 4).map((launch, index) => {
             let windowStart = launch.window_start;
             let missionDescription = launch.mission?.description || "None";
             let typeOfMission = launch.mission.orbit.name || "None";
-            let agencia = launch.mission.agencies[0].abbrev || "None";
+            let agencia = obterAbbrevAgencia(launch);
     
             return {
                 img: launch.image,
@@ -70,6 +91,13 @@ async function api_upcomingLaunchs(){
         console.log(error);
     }
 };
+
+function obterAbbrevAgencia(launch) {
+    if (launch && launch.mission && launch.mission.agencies && Array.isArray(launch.mission.agencies) && launch.mission.agencies.length > 0) {
+        return launch.mission.agencies[0].abbrev || "None";
+    }
+    return "None";
+}
 
 // dataEvent.results[index].date contém a data no formato "2024-04-15T14:45:00Z"
 function changeDateType(dataEvent){
