@@ -1,5 +1,5 @@
 const { createConnection } = require('mongoose');
-const { APOD, APODModel } = require('../Models/homeModel');
+const { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel } = require('../Models/homeModel');
 const moment = require('moment');
 
 exports.index = async (requisicao, resposta) =>{   

@@ -1,13 +1,5 @@
 const mongoose = require('mongoose');
 
-//Modelagem dos dados
-const homeSchema = new mongoose.Schema({
-    titulo: String,
-    data: Number,
-    objetivo: { type: String, required: true},
-});
-
-
 // Cache de Dados do API - Astronomic Picture of Day (APOD)
 const APODSchema = new mongoose.Schema({
     data: { type: mongoose.Schema.Types.Mixed, required: true }
@@ -34,7 +26,27 @@ APOD.delete = async function(id) {
 };
 
 
-
 // Cache de Dados do API - TheSpaceDevs (Events and Upcoming Launchs)
+const EventsSchema = new mongoose.Schema({
+    data: { type: mongoose.Schema.Types.Mixed, required: true }
+});
+const LaunchsSchema = new mongoose.Schema({
+    data: { type: mongoose.Schema.Types.Mixed, required: true }
+});
 
-module.exports = { APOD, APODModel };
+const EventsModel = mongoose.model('Events_api', EventsSchema);
+const LaunchsModel = mongoose.model('Launchs_api', LaunchsSchema);
+
+function Events(body) {
+    this.body = body;
+    this.errors = [];
+    this.imagem = null;
+}
+
+function Launchs(body) {
+    this.body = body;
+    this.errors = [];
+    this.imagem = null;
+}
+
+module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel };
