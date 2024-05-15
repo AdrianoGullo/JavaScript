@@ -1,6 +1,6 @@
 <div class="row featurette">
     <div class="col-md-6" style="position: relative;">
-      <% if (PictureData.media_type  == "photo") { %>
+      <% if (PictureData.media_type  == "image") { %>
           <img id="imagemDoDia" src="<%= PictureData.hdurl %>" class="featurette-image img-fluid mx-auto" alt="Imagem do Dia" style="border-radius: 20px; width: 500px; height: 600px;">
       <% } else if (PictureData.media_type == "video") { %>
           <div class="embed-responsive embed-responsive-16by9">

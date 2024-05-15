@@ -1,4 +1,6 @@
 const { createConnection } = require('mongoose');
+const { APOD, APODModel } = require('../Models/homeModel');
+const moment = require('moment');
 
 exports.index = async (requisicao, resposta) =>{   
     try{
@@ -12,18 +14,30 @@ exports.index = async (requisicao, resposta) =>{
     }
 };
 
-async function api_dayPicture(){
-        let API_KEY = process.env.NASA_API;
-        let response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
-        let data = await response.json();
+async function api_dayPicture() {
+    try {   
+        //verificação de dados no MongoDB para o dia     
+        const APOD_obj = APOD.buscaObjeto();
+        if(APOD_obj.length > 0){
+            const APODAtual = APOD_obj[0];
+            const dataAtual = new Date().toISOString().split('T')[0];
+
+            if(APODAtual.data.date === dataAtual)   return APODAtual;
+            else    await APOD.delete(APODAtual._id);
+        }
+        //nova requisição de dados
+        const API_KEY = process.env.NASA_API;
+        const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
+        const data = await response.json();
+
+        const novoAPOD = new APODModel({ data });
+        await novoAPOD.save();
 
         return data;
-};
-
-function isExpired(data) {
-    const umDiaEmMilissegundos = 24 * 60 * 60 * 1000; // 1 dia em milissegundos
-    const dataAtual = new Date();
-    return dataAtual - data > umDiaEmMilissegundos;
+    } catch (error) {
+        console.error('Erro em requisição - APOD', error);
+        throw error;
+    }
 }
 
 async function api_upcomingEvents(){
