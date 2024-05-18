@@ -1,13 +1,12 @@
 const { createConnection } = require('mongoose');
 const { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel } = require('../Models/homeModel');
-const moment = require('moment');
 
 exports.index = async (requisicao, resposta) =>{   
     try{
-        const PictureData = await api_dayPicture(); 
+        const apods = await api_dayPicture(); 
         const EventsData = await api_upcomingEvents(); 
         const LaunchsData = await api_upcomingLaunchs(); 
-        resposta.render('index.ejs', {PictureData, EventsData, LaunchsData});
+        resposta.render('index.ejs', {apods, EventsData, LaunchsData});
     } catch(error){
         console.log(error),
         resposta.render('/includes/Errors/404.ejs');
@@ -15,25 +14,42 @@ exports.index = async (requisicao, resposta) =>{
 };
 
 async function api_dayPicture() {
-    try {   
-        //verificação de dados no MongoDB para o dia     
-        const APOD_obj = APOD.buscaObjeto();
-        if(APOD_obj.length > 0){
-            const APODAtual = APOD_obj[0];
-            const dataAtual = new Date().toISOString().split('T')[0];
-
-            if(APODAtual.data.date === dataAtual)   return APODAtual;
-            else    await APOD.delete(APODAtual._id);
-        }
-        //nova requisição de dados
+    try {
+        // Recuperar todos os objetos APOD do banco de dados
+        const apods = await APOD.buscaObjeto();
         const API_KEY = process.env.NASA_API;
-        const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
-        const data = await response.json();
+        const today = new Date();
 
-        const novoAPOD = new APODModel({ data });
-        await novoAPOD.save();
+        if (apods.length === 0) {
+            for (let i = 1; i < 6; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const formattedDate = date.toISOString().split('T')[0];
+                const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&date=${formattedDate}`);
+                const data = await response.json();
+                const novoAPOD = new APODModel({ data });
+                await novoAPOD.save();
+                apods.push(novoAPOD); // Adicionar o novo APOD à lista
+            }
+        } else {
+            // Se houver registros no banco de dados
+            const latestApodDate = apods[0].data.date;
+            const date = new Date(today);
+            date.setDate(date.getDate() - 0);
 
-        return data;
+            if (latestApodDate === date) {
+                return apods;
+            } else {
+                await APOD.delete(apods[apods.length - 1]._id);
+                const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
+                const data = await response.json();
+                const novoAPOD = new APODModel({ data });
+                await novoAPOD.save();
+                apods.push(novoAPOD);
+            }
+        }
+        return apods;
+
     } catch (error) {
         console.error('Erro em requisição - APOD', error);
         throw error;
@@ -45,7 +61,7 @@ async function api_upcomingEvents(){
         const response = await fetch(`https://ll.thespacedevs.com/2.2.0/event/upcoming/`);
         const dataEvent = await response.json();
         if (!dataEvent.results || !Array.isArray(dataEvent.results)) {
-            throw new Error("Estrutura de dados inválida: results não encontrado ou não é uma matriz");
+            throw new Error("Estrutura de dados inválida ou undefined");
         }
         const upcomingEvents = dataEvent.results.slice(1, 5).map((event, index) => {
             let primeiraAgencia = obterNomePrimeiraAgencia(event); 
@@ -82,7 +98,6 @@ async function api_upcomingLaunchs(){
     try{
         const launches = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/upcoming/`);
         const launchEvent = await launches.json();
-        console.log(launchEvent);
     
         const upcomingLaunchs = launchEvent.results.slice(0, 4).map((launch, index) => {
             let windowStart = launch.window_start;
