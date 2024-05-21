@@ -21,21 +21,21 @@ APOD.buscaObjeto = async function() {
     return await APODModel.find().sort({ date: -1 });
 };
 
-APOD.delete = async function(id) {
-    return await APODModel.findOneAndDelete({ _id: id });
+APOD.apagarBanco = async function() {
+    return await APODModel.deleteMany({});
 };
 
 
 // Cache de Dados do API - TheSpaceDevs (Events and Upcoming Launchs)
 const EventsSchema = new mongoose.Schema({
-    data: { type: mongoose.Schema.Types.Mixed, required: true }
+    data: { type: mongoose.Schema.Types.Mixed}
 });
 const LaunchsSchema = new mongoose.Schema({
-    data: { type: mongoose.Schema.Types.Mixed, required: true }
+    data: { type: mongoose.Schema.Types.Mixed}
 });
 
-const EventsModel = mongoose.model('Events_api', EventsSchema);
-const LaunchsModel = mongoose.model('Launchs_api', LaunchsSchema);
+const EventsModel = mongoose.model('events_api', EventsSchema);
+const LaunchsModel = mongoose.model('launchs_api', LaunchsSchema);
 
 function Events(body) {
     this.body = body;
@@ -48,5 +48,21 @@ function Launchs(body) {
     this.errors = [];
     this.imagem = null;
 }
+
+Events.buscaObjeto = async function() {
+    return await EventsModel.find();
+};
+
+Launchs.buscaObjeto = async function() {
+    return await LaunchsModel.find();
+};
+
+Events.apagarBanco = async function() {
+    return await EventsModel.deleteMany({});
+};
+
+Launchs.apagarBanco = async function() {
+    return await EventsModel.deleteMany({});
+};
 
 module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel };
