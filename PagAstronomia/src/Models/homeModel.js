@@ -28,10 +28,10 @@ APOD.apagarBanco = async function() {
 
 // Cache de Dados do API - TheSpaceDevs (Events and Upcoming Launchs)
 const EventsSchema = new mongoose.Schema({
-    data: { type: mongoose.Schema.Types.Mixed}
+    data: { type: mongoose.Schema.Types.Mixed, required: true}
 });
 const LaunchsSchema = new mongoose.Schema({
-    data: { type: mongoose.Schema.Types.Mixed}
+    data: { type: mongoose.Schema.Types.Mixed, required: true}
 });
 
 const EventsModel = mongoose.model('events_api', EventsSchema);
@@ -49,20 +49,5 @@ function Launchs(body) {
     this.imagem = null;
 }
 
-Events.buscaObjeto = async function() {
-    return await EventsModel.find();
-};
-
-Launchs.buscaObjeto = async function() {
-    return await LaunchsModel.find();
-};
-
-Events.apagarBanco = async function() {
-    return await EventsModel.deleteMany({});
-};
-
-Launchs.apagarBanco = async function() {
-    return await EventsModel.deleteMany({});
-};
 
 module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel };

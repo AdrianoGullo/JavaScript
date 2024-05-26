@@ -43,7 +43,7 @@ async function apiAPOD_dayPicture() {
 }
 
 async function requestAPODs_lastFiveDays(apods, today, API_KEY) {
-    for (let i = 1; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
         const formattedDate = date.toISOString().split('T')[0];
@@ -57,27 +57,17 @@ async function requestAPODs_lastFiveDays(apods, today, API_KEY) {
 
 async function api_upcomingEvents() {
     try {
-        const AtualEvents_MongoDB = await Events.buscaObjeto();
+        const AtualEvents_MongoDB = await EventsModel.find();
 
         if (AtualEvents_MongoDB.length === 0) {
             const upcomingEvents = await requestAPI_UpcomingEvents();
-            AtualEvents_MongoDB.push(upcomingEvents); 
             return upcomingEvents;
         } else {
-            AtualEvents_MongoDB.sort((a, b) => new Date(b.results.date) - new Date(a.results.date));
-            const latestApodDate = new Date(AtualEvents_MongoDB[0].results.date);
-            const dataAtual = new Date(today);
-
-            if (latestApodDate.getTime() === dataAtual.getTime()) {
-                return AtualEvents_MongoDB;
-            } else {
-                await Events.apagarBanco({});
-                AtualEvents_MongoDB.length = 0;
-                const upcomingEvents = await requestAPI_UpcomingEvents();
-                AtualEvents_MongoDB.push(upcomingEvents);
-                return upcomingEvents;
-            }
+            const AtualEvents_First4 = await EventsModel.find({}).limit(4); 
+            const upcomingEvents = formatEvent(AtualEvents_First4);
+            return upcomingEvents;
         }
+
     } catch(error) {
         console.log(error);
     }
@@ -86,29 +76,19 @@ async function api_upcomingEvents() {
 async function requestAPI_UpcomingEvents() {
     const response = await fetch(`https://ll.thespacedevs.com/2.2.0/event/upcoming/`);
     const dataEvent = await response.json();
-    console.log(dataEvent);
-
-    const novoEvents = new EventsModel({ dataEvent });
-    await novoEvents.save();
-
+    const dataResults = dataEvent.results;
+    
     if (!dataEvent.results) {
         throw new Error("Estrutura de dados inválida ou undefined");
     }
 
-    const upcomingEvents = dataEvent.results.slice(1, 5).map((event, index) => {
-        let primeiraAgencia = firstAgencyName(event); 
-        let typeOfMission = event.type?.name || "N/A"; 
+    for (const eventData of dataResults) {
+        const novoEvents = new EventsModel({ data: eventData }); 
+        await novoEvents.save();
+        Events.push(novoEvents);
+    }
 
-        return {
-            img: event.feature_image,
-            title: event.name,
-            description: event.description,
-            date: changeDateType(event.date),
-            agencia: primeiraAgencia,
-            mission: typeOfMission, 
-            index: index + 1 
-        };
-    });
+    const upcomingEvents = formatEvent(dataEvent.results.slice(0, 4));
     return upcomingEvents;
 }
 
@@ -123,62 +103,79 @@ function firstAgencyName(event) {
     return "N/A";
 }
 
+function formatEvent(eventos) {
+    return eventos.map((event, index) => {
+        let primeiraAgencia = firstAgencyName(event.data); 
+        let typeOfMission = event.data.type?.name || "N/A"; 
+
+        return {
+            img: event.data.feature_image,
+            title: event.data.name,
+            description: event.data.description,
+            date: changeDateType(event.data.date),
+            agencia: primeiraAgencia,
+            mission: typeOfMission, 
+            index: index + 1 
+        };
+    });
+}
+
 async function api_upcomingLaunchs(){
     try{
-        const AtualLaunchs_MongoDB = await Launchs.buscaObjeto();
-        if (AtualLaunchs_MongoDB.length === 0) {
+        const AtualLaunchs_MongoDB = await LaunchsModel.find();
+
+        if (AtualLaunchs_MongoDB.length === 0 ) {
             const upcomingLaunchs = await requestAPI_upcomingLaunchs();
-            AtualLaunchs_MongoDB.push(upcomingLaunchs); 
             return upcomingLaunchs;
         } else {
-            AtualLaunchs_MongoDB.sort((a, b) => new Date(b.results.net) - new Date(a.results.net));
-            const latestLaunchDate = new Date(AtualLaunchs_MongoDB[0].results.net);
-            const dataAtual = new Date(today);
-
-            if (latestLaunchDate.getTime() === dataAtual.getTime()) {
-                return AtualLaunchs_MongoDB;
-            } else {
-                await Launchs.apagarBanco({});
-                AtualLaunchs_MongoDB.length = 0;
-                const upcomingLaunchs = await requestAPI_upcomingLaunchs();
-                AtualLaunchs_MongoDB.push(upcomingLaunchs);
-                return upcomingLaunchs;
-            }
+            const AtualLaunchs_First4 = await LaunchsModel.find({}).limit(4); 
+            const upcomingLaunchs = formatLaunchs(AtualLaunchs_First4);
+            return upcomingLaunchs;
         }    
+
     }catch(error){
         console.log(error);
     }
 };
 
 async function requestAPI_upcomingLaunchs() {
-    const launches = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/upcoming/`);
-    const dataLaunch = await launches.json();
-    console.log(dataLaunch);
-
-    const novoLaunchs = new LaunchsModel({ dataLaunch });
-    await novoLaunchs.save();
+    const launchesResponse = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/upcoming/`);
+    const dataLaunch = await launchesResponse.json();
+    console.log(dataLaunch.results);
 
     if (!dataLaunch.results) {
         throw new Error("Estrutura de dados inválida ou undefined");
     }
+
+    for (const launchData of dataLaunch.results) {
+        if (launchData && launchData.window_start && launchData.name) {
+            const novoLaunch = new LaunchsModel({ data: launchData });
+            await novoLaunch.save();
+            Launchs.push(novoLaunch);
+        }
+    }
     
-    const upcomingLaunchs = launchEvent.results.slice(0, 4).map((launch, index) => {
-    let windowStart = launch.window_start;
-    let missionDescription = launch.mission?.description || "None";
-    let typeOfMission = launch.mission.orbit.name || "None";
-    let agencia = findAgencyAbbrev(launch);
-    
-    return {
-        img: launch.image,
-        title: launch.name,
-        description: missionDescription,
-        date: changeDateType(windowStart),
-        mission: typeOfMission,
-        headAgency: agencia,
-        index: index + 1
+    const upcomingLaunchs = formatLaunchs(dataLaunch.results.slice(0, 4));
+    return upcomingLaunchs;
+}
+
+function formatLaunchs(lancamentos) {
+    return lancamentos.map((launch, index) => {
+        let windowStart = launch.window_start;
+        let missionDescription = launch.mission?.description || "None";
+        let typeOfMission = launch.mission?.orbit?.name || "None";
+        let agencia = findAgencyAbbrev(launch);
+        
+        return {
+            img: launch.image,
+            title: launch.name,
+            description: missionDescription,
+            date: changeDateType(windowStart),
+            mission: typeOfMission,
+            headAgency: agencia,
+            index: index + 1
         };
     });
-    return upcomingLaunchs;
 }
 
 function findAgencyAbbrev(launch) {
@@ -199,9 +196,9 @@ function changeDateType(dataEvent){
     
     let formattedDate;
 
-    if(minutes < 10 & month < 10) formattedDate = `Data: ${hours}:0${minutes} - ${day}/0${month}/${year}`;
-    else if (minutes < 10 & month >= 10) formattedDate = `Data: ${hours}:0${minutes} - ${day}/${month}/${year}`;
-    else if (minutes > 10 & month < 10) formattedDate = `Data: ${hours}:${minutes} - ${day}/0${month}/${year}`;
+    if(minutes < 10 & month < 10) formattedDate = `${hours}:0${minutes} - ${day}/0${month}/${year}`;
+    else if (minutes < 10 & month >= 10) formattedDate = `${hours}:0${minutes} - ${day}/${month}/${year}`;
+    else if (minutes > 10 & month < 10) formattedDate = `${hours}:${minutes} - ${day}/0${month}/${year}`;
     
     return formattedDate;
 }
