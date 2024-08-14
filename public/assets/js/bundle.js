@@ -21,7 +21,163 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, `/* Estilo geral */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#daycontainer {
+  height: 400px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto; /* Adicionado para permitir rolagem horizontal */
+}
+
+.card {
+  width: 300px;
+  border-radius: 2rem;
+  background-size: cover;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 0 10px;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
+}
+
+.card > .row {
+  color: white;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.card > .row > .icon {
+  background: #223;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+
+.card > .row > .description {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  height: 80px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+.card:hover > .description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description p {
+  color: #ffffff;
+  padding-top: 5px;
+}
+
+.description h4 {
+  text-transform: uppercase;
+}
+
+
+input[type="radio"] {
+  display: none;
+}
+
+input:checked + label {
+  width: 600px;
+}
+
+input:checked + label .description {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+
+
+/* Estilo para o bloco principal */
+.main-block {
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #181818;
+  text-align: center;
+}
+
+.main-block h2 {
+  margin-top: 15px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.main-block p {
+  color: #ffffff;
+}
+
+/* Estilo para os blocos pequenos */
+.small-block {
+  flex: 1 1 30%;
+  max-width: 30%;
+}
+
+.small-block img {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .col-lg-8, .col-lg-4 {
+      flex-basis: 100%;
+      max-width: 100%;
+  }
+
+  .small-block {
+      max-width: 45%;
+      margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-block {
+      padding: 10px;
+  }
+
+  .main-block h2 {
+      font-size: 20px;
+  }
+
+  .small-block {
+      max-width: 100%;
+  }
+}
+`, "",{"version":3,"sources":["webpack://./FrontEnd/assets/css/style.css"],"names":[],"mappings":"AAAA,iBAAiB;AACjB;EACE,sBAAsB;EACtB,SAAS;EACT,UAAU;EACV,yCAAyC;AAC3C;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,WAAW;EACX,aAAa;EACb,aAAa;EACb,mBAAmB;EACnB,uBAAuB;AACzB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,iBAAiB;EACjB,2BAA2B;EAC3B,gBAAgB,EAAE,gDAAgD;AACpE;;AAEA;EACE,YAAY;EACZ,mBAAmB;EACnB,sBAAsB;EACtB,eAAe;EACf,gBAAgB;EAChB,cAAc;EACd,aAAa;EACb,qBAAqB;EACrB,mDAAmD;EACnD,iDAAiD;AACnD;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,iBAAiB;AACnB;;AAEA;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,uBAAuB;EACvB,mBAAmB;EACnB,YAAY;AACd;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,WAAW;EACX,UAAU;EACV,2BAA2B;EAC3B,yBAAyB;EACzB,cAAc;AAChB;;AAEA;EACE,UAAU;EACV,wBAAwB;AAC1B;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,yBAAyB;AAC3B;;;AAGA;EACE,aAAa;AACf;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,qBAAqB;EACrB,mCAAmC;AACrC;;;;AAIA,kCAAkC;AAClC;EACE,yBAAyB;EACzB,aAAa;EACb,yBAAyB;EACzB,kBAAkB;AACpB;;AAEA;EACE,gBAAgB;EAChB,eAAe;EACf,cAAc;AAChB;;AAEA;EACE,cAAc;AAChB;;AAEA,mCAAmC;AACnC;EACE,aAAa;EACb,cAAc;AAChB;;AAEA;EACE,mBAAmB;EACnB,8CAA8C;AAChD;;AAEA,mBAAmB;AACnB;EACE;MACI,gBAAgB;MAChB,eAAe;EACnB;;EAEA;MACI,cAAc;MACd,mBAAmB;EACvB;AACF;;AAEA;EACE;MACI,aAAa;EACjB;;EAEA;MACI,eAAe;EACnB;;EAEA;MACI,eAAe;EACnB;AACF","sourcesContent":["/* Estilo geral */\r\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: Arial, Helvetica, sans-serif;\r\n}\r\n\r\nbody {\r\n  background-color: #f8f9fa;\r\n}\r\n\r\n.wrapper {\r\n  width: 100%;\r\n  height: 100vh;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n#daycontainer {\r\n  height: 400px;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  overflow-x: auto; /* Adicionado para permitir rolagem horizontal */\r\n}\r\n\r\n.card {\r\n  width: 300px;\r\n  border-radius: 2rem;\r\n  background-size: cover;\r\n  cursor: pointer;\r\n  overflow: hidden;\r\n  margin: 0 10px;\r\n  display: flex;\r\n  align-items: flex-end;\r\n  transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);\r\n  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);\r\n}\r\n\r\n.card > .row {\r\n  color: white;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n}\r\n\r\n.card > .row > .icon {\r\n  background: #223;\r\n  color: white;\r\n  border-radius: 50%;\r\n  width: 50px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin: 15px;\r\n}\r\n\r\n.card > .row > .description {\r\n  display: flex;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n  overflow: hidden;\r\n  height: 80px;\r\n  width: 100%;\r\n  opacity: 0;\r\n  transform: translateY(30px);\r\n  transition: all 0.3s ease;\r\n  color: #ffffff;\r\n}\r\n\r\n.card:hover > .description {\r\n  opacity: 1;\r\n  transform: translateY(0);\r\n}\r\n\r\n.description p {\r\n  color: #ffffff;\r\n  padding-top: 5px;\r\n}\r\n\r\n.description h4 {\r\n  text-transform: uppercase;\r\n}\r\n\r\n\r\ninput[type=\"radio\"] {\r\n  display: none;\r\n}\r\n\r\ninput:checked + label {\r\n  width: 600px;\r\n}\r\n\r\ninput:checked + label .description {\r\n  opacity: 1 !important;\r\n  transform: translateY(0) !important;\r\n}\r\n\r\n\r\n\r\n/* Estilo para o bloco principal */\r\n.main-block {\r\n  background-color: #ffffff;\r\n  padding: 20px;\r\n  border: 1px solid #181818;\r\n  text-align: center;\r\n}\r\n\r\n.main-block h2 {\r\n  margin-top: 15px;\r\n  font-size: 24px;\r\n  color: #ffffff;\r\n}\r\n\r\n.main-block p {\r\n  color: #ffffff;\r\n}\r\n\r\n/* Estilo para os blocos pequenos */\r\n.small-block {\r\n  flex: 1 1 30%;\r\n  max-width: 30%;\r\n}\r\n\r\n.small-block img {\r\n  border-radius: 10px;\r\n  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);\r\n}\r\n\r\n/* Responsividade */\r\n@media (max-width: 768px) {\r\n  .col-lg-8, .col-lg-4 {\r\n      flex-basis: 100%;\r\n      max-width: 100%;\r\n  }\r\n\r\n  .small-block {\r\n      max-width: 45%;\r\n      margin-bottom: 15px;\r\n  }\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .main-block {\r\n      padding: 10px;\r\n  }\r\n\r\n  .main-block h2 {\r\n      font-size: 20px;\r\n  }\r\n\r\n  .small-block {\r\n      max-width: 100%;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

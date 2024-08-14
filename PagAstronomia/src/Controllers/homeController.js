@@ -57,18 +57,17 @@ async function requestAPODs_lastFiveDays(apods, today, API_KEY) {
 
 async function api_upcomingEvents() {
     try {
-        const AtualEvents_MongoDB = await EventsModel.find();
-
+        const AtualEvents_MongoDB = await Events.buscaObjeto(); // Ordena por data crescente
+        AtualEvents_Results = AtualEvents_MongoDB;
+        
         if (AtualEvents_MongoDB.length === 0) {
             const upcomingEvents = await requestAPI_UpcomingEvents();
             return upcomingEvents;
         } else {
-            const AtualEvents_First4 = await EventsModel.find({}).limit(4); 
-            const upcomingEvents = formatEvent(AtualEvents_First4);
-            return upcomingEvents;
+            const AtualEvents_First4 = await formatEvent(AtualEvents_MongoDB.slice(0, 4))
+            return AtualEvents_First4;
         }
-
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -82,11 +81,10 @@ async function requestAPI_UpcomingEvents() {
         throw new Error("Estrutura de dados inválida ou undefined");
     }
 
-    for (const eventData of dataResults) {
-        const novoEvents = new EventsModel({ data: eventData }); 
-        await novoEvents.save();
-        Events.push(novoEvents);
-    }
+    await EventsModel.insertMany(dataResults.map(eventData => ({
+        data: eventData,
+        createdAt: new Date() // Data de criação atual
+    })));
 
     const upcomingEvents = formatEvent(dataEvent.results.slice(0, 4));
     return upcomingEvents;
@@ -107,14 +105,26 @@ function formatEvent(eventos) {
     return eventos.map((event, index) => {
         let primeiraAgencia = firstAgencyName(event.data); 
         let typeOfMission = event.data.type?.name || "N/A"; 
+        let eventDate = changeDateType(event.data.date);
+
+        let eventEnd = new Date(event.data.date); // Data do evento
+        let currentDate = new Date(); // Data atual
+
+        let status = "soon";
+
+        // Verifica o status do evento
+        if (currentDate > eventEnd) {
+            status = "done";
+        } 
 
         return {
             img: event.data.feature_image,
             title: event.data.name,
             description: event.data.description,
-            date: changeDateType(event.data.date),
+            date: eventDate,
             agencia: primeiraAgencia,
             mission: typeOfMission, 
+            status: status,           
             index: index + 1 
         };
     });
@@ -122,16 +132,15 @@ function formatEvent(eventos) {
 
 async function api_upcomingLaunchs(){
     try{
-        const AtualLaunchs_MongoDB = await LaunchsModel.find();
+        const AtualLaunchs_MongoDB = await Launchs.buscaObjeto();
 
         if (AtualLaunchs_MongoDB.length === 0 ) {
             const upcomingLaunchs = await requestAPI_upcomingLaunchs();
             return upcomingLaunchs;
         } else {
-            const AtualLaunchs_First4 = await LaunchsModel.find({}).limit(4); 
-            const upcomingLaunchs = formatLaunchs(AtualLaunchs_First4);
-            return upcomingLaunchs;
-        }    
+            const AtualLanchs_First4 = await formatLaunchs(AtualLaunchs_MongoDB.slice(0, 4))
+            return AtualLanchs_First4;
+        }
 
     }catch(error){
         console.log(error);
@@ -141,17 +150,16 @@ async function api_upcomingLaunchs(){
 async function requestAPI_upcomingLaunchs() {
     const launchesResponse = await fetch(`https://ll.thespacedevs.com/2.2.0/launch/upcoming/`);
     const dataLaunch = await launchesResponse.json();
-    console.log(dataLaunch.results);
+    const dataResults = dataLaunch.results;
 
     if (!dataLaunch.results) {
         throw new Error("Estrutura de dados inválida ou undefined");
     }
 
-    for (const launchData of dataLaunch.results) {
+    for (const launchData of dataResults) {
         if (launchData && launchData.window_start && launchData.name) {
             const novoLaunch = new LaunchsModel({ data: launchData });
-            await novoLaunch.save();
-            Launchs.push(novoLaunch);
+            await LaunchsModel.create(novoLaunch);
         }
     }
     
@@ -161,18 +169,31 @@ async function requestAPI_upcomingLaunchs() {
 
 function formatLaunchs(lancamentos) {
     return lancamentos.map((launch, index) => {
-        let windowStart = launch.window_start;
-        let missionDescription = launch.mission?.description || "None";
-        let typeOfMission = launch.mission?.orbit?.name || "None";
-        let agencia = findAgencyAbbrev(launch);
+        let launchDate = launch.data.window_start;
+        let missionDescription = launch.data.mission?.description || "None";
+        let typeOfMission = launch.data.mission?.orbit?.name || "None";
+        let status = "soon";
+
+
+        let currentDate = new Date();
+        let windowStart = new Date(launch.data.window_start);
+        let windowEnd = new Date(launch.data.window_end);
+
+        if (currentDate > windowEnd) {
+            status = "done";
+        } else if (currentDate >= windowStart && currentDate <= windowEnd) {
+            status = "live";
+        }
         
+
         return {
-            img: launch.image,
-            title: launch.name,
+            img: launch.data.image,
+            title: launch.data.name,
             description: missionDescription,
-            date: changeDateType(windowStart),
+            date: changeDateType(launchDate),
             mission: typeOfMission,
-            headAgency: agencia,
+            headAgency: findAgencyAbbrev(launch.data),
+            status: status,
             index: index + 1
         };
     });
@@ -196,9 +217,14 @@ function changeDateType(dataEvent){
     
     let formattedDate;
 
-    if(minutes < 10 & month < 10) formattedDate = `${hours}:0${minutes} - ${day}/0${month}/${year}`;
-    else if (minutes < 10 & month >= 10) formattedDate = `${hours}:0${minutes} - ${day}/${month}/${year}`;
-    else if (minutes > 10 & month < 10) formattedDate = `${hours}:${minutes} - ${day}/0${month}/${year}`;
-    
+    if (hours < 10){
+        if(minutes < 10 & month < 10) formattedDate = `0${hours}:0${minutes} - ${day}/0${month}/${year}`;
+        else if (minutes < 10 & month >= 10) formattedDate = `0${hours}:0${minutes} - ${day}/${month}/${year}`;
+        else if (minutes > 10 & month < 10) formattedDate = `0${hours}:${minutes} - ${day}/0${month}/${year}`;
+    } else {
+        if(minutes < 10 & month < 10) formattedDate = `${hours}:0${minutes} - ${day}/0${month}/${year}`;
+        else if (minutes < 10 & month >= 10) formattedDate = `${hours}:0${minutes} - ${day}/${month}/${year}`;
+        else if (minutes > 10 & month < 10) formattedDate = `${hours}:${minutes} - ${day}/0${month}/${year}`;
+    }
     return formattedDate;
 }

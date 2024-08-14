@@ -4,17 +4,18 @@
 <body>
     <main role="main">
 
-      <div class="container marketing" style="margin-top: 50px;">
+      <div class="container" style="margin-top: 50px;">
 
         <!-- 3 colunas destaque // Mars, weather, spacecraft = highlights -->
         <%- include('includes/indexHome/highlights') %>
 
         <hr class="featurette-divider"></hr>
+        
         <h1 class="badge text-bg-light rounded-pill" style="width: 100%;">API - Astronomy Picture of the Day (NASA)</h1>
-        <hr class="featurette-divider">
         <%- include('includes/indexHome/dayPicture'); %>
 
         <hr class="featurette-divider">
+
         <div class="row featurette">
           <div class="col-md-6 order-md-1">
             <img id='news' class="img-fluid" src="/Imagens/homeImgs/launches.png" alt="Generic placeholder image" width="400" height="400">

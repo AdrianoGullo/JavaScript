@@ -28,10 +28,12 @@ APOD.apagarBanco = async function() {
 
 // Cache de Dados do API - TheSpaceDevs (Events and Upcoming Launchs)
 const EventsSchema = new mongoose.Schema({
-    data: { type: mongoose.Schema.Types.Mixed, required: true}
+    data: { type: mongoose.Schema.Types.Mixed, required: true},
+    createdAt: { type: Date, default: Date.now, expires: '1d' } // Configura o índice de expiração para 1 dia
 });
 const LaunchsSchema = new mongoose.Schema({
-    data: { type: mongoose.Schema.Types.Mixed, required: true}
+    data: { type: mongoose.Schema.Types.Mixed, required: true},
+    createdAt: { type: Date, default: Date.now, expires: '1d' } // Configura o índice de expiração para 1 dia
 });
 
 const EventsModel = mongoose.model('events_api', EventsSchema);
@@ -43,11 +45,18 @@ function Events(body) {
     this.imagem = null;
 }
 
+Events.buscaObjeto = async function() {
+    return await EventsModel.find().sort({ date: -1 });
+};
+
 function Launchs(body) {
     this.body = body;
     this.errors = [];
     this.imagem = null;
 }
 
+Launchs.buscaObjeto = async function() {
+    return await LaunchsModel.find().sort({ date: -1 });
+};
 
 module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel };

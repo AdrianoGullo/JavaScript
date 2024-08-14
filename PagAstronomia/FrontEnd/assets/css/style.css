@@ -1,0 +1,156 @@
+/* Estilo geral */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#daycontainer {
+  height: 400px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto; /* Adicionado para permitir rolagem horizontal */
+}
+
+.card {
+  width: 300px;
+  border-radius: 2rem;
+  background-size: cover;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 0 10px;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
+}
+
+.card > .row {
+  color: white;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.card > .row > .icon {
+  background: #223;
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+
+.card > .row > .description {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  height: 80px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+.card:hover > .description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description p {
+  color: #ffffff;
+  padding-top: 5px;
+}
+
+.description h4 {
+  text-transform: uppercase;
+}
+
+
+input[type="radio"] {
+  display: none;
+}
+
+input:checked + label {
+  width: 600px;
+}
+
+input:checked + label .description {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+
+
+/* Estilo para o bloco principal */
+.main-block {
+  background-color: #ffffff;
+  padding: 20px;
+  border: 1px solid #181818;
+  text-align: center;
+}
+
+.main-block h2 {
+  margin-top: 15px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.main-block p {
+  color: #ffffff;
+}
+
+/* Estilo para os blocos pequenos */
+.small-block {
+  flex: 1 1 30%;
+  max-width: 30%;
+}
+
+.small-block img {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .col-lg-8, .col-lg-4 {
+      flex-basis: 100%;
+      max-width: 100%;
+  }
+
+  .small-block {
+      max-width: 45%;
+      margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-block {
+      padding: 10px;
+  }
+
+  .main-block h2 {
+      font-size: 20px;
+  }
+
+  .small-block {
+      max-width: 100%;
+  }
+}
