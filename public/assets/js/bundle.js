@@ -33,94 +33,45 @@ body {
   background-color: #f8f9fa;
 }
 
-.wrapper {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.custom-img {
+  width: 100%; /* A imagem vai ocupar toda a largura do div */
+  height: 100%; /* A imagem vai ocupar toda a altura do div */
+  object-fit: cover; /* Garante que a imagem seja cortada para cobrir o espaço do div */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para as imagens */
+  transition: transform 0.3s ease-in-out; /* Animação ao passar o mouse */
 }
 
-#daycontainer {
-  height: 400px;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  overflow-x: auto; /* Adicionado para permitir rolagem horizontal */
-}
-
-.card {
-  width: 300px;
-  border-radius: 2rem;
-  background-size: cover;
-  cursor: pointer;
-  overflow: hidden;
-  margin: 0 10px;
-  display: flex;
-  align-items: flex-end;
-  transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);
-  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
-}
-
-.card > .row {
-  color: white;
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.card > .row > .icon {
-  background: #223;
-  color: white;
-  border-radius: 50%;
-  width: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 15px;
-}
-
-.card > .row > .description {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  overflow: hidden;
-  height: 80px;
-  width: 100%;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.3s ease;
-  color: #ffffff;
-}
-
-.card:hover > .description {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.description p {
-  color: #ffffff;
-  padding-top: 5px;
-}
-
-.description h4 {
-  text-transform: uppercase;
+.custom-img:hover {
+  transform: scale(1.3); /* Aumenta 30% ao passar o mouse */
 }
 
 
-input[type="radio"] {
-  display: none;
+.carousel-caption h5, 
+.carousel-caption p {
+  display: block;
+  margin-bottom: 10px;
 }
 
-input:checked + label {
-  width: 600px;
+.carousel-caption .Description p {
+  font-size: 1rem; /* Ajuste o tamanho conforme necessário */
+  max-width: 100%; /* Garantir que seja responsivo */
 }
 
-input:checked + label .description {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+.apodDescription {
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */
+  color: white; /* Texto em branco */
+  padding: 15px; /* Espaçamento interno */
+  border-bottom-left-radius: 20px; /* Bordas arredondadas no canto inferior esquerdo */
+  border-bottom-right-radius: 20px; /* Bordas arredondadas no canto inferior direito */
+  text-align: justify; /* Ajusta a formatação do texto */
 }
 
-
+.apodDescription-text {
+  margin: 0;
+  font-size: 1rem; /* Ajuste do tamanho da fonte */
+  line-height: 1.5; /* Espaçamento entre as linhas */
+}
 
 /* Estilo para o bloco principal */
 .main-block {
@@ -177,7 +128,7 @@ input:checked + label .description {
       max-width: 100%;
   }
 }
-`, "",{"version":3,"sources":["webpack://./FrontEnd/assets/css/style.css"],"names":[],"mappings":"AAAA,iBAAiB;AACjB;EACE,sBAAsB;EACtB,SAAS;EACT,UAAU;EACV,yCAAyC;AAC3C;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,WAAW;EACX,aAAa;EACb,aAAa;EACb,mBAAmB;EACnB,uBAAuB;AACzB;;AAEA;EACE,aAAa;EACb,aAAa;EACb,iBAAiB;EACjB,2BAA2B;EAC3B,gBAAgB,EAAE,gDAAgD;AACpE;;AAEA;EACE,YAAY;EACZ,mBAAmB;EACnB,sBAAsB;EACtB,eAAe;EACf,gBAAgB;EAChB,cAAc;EACd,aAAa;EACb,qBAAqB;EACrB,mDAAmD;EACnD,iDAAiD;AACnD;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,iBAAiB;AACnB;;AAEA;EACE,gBAAgB;EAChB,YAAY;EACZ,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,uBAAuB;EACvB,mBAAmB;EACnB,YAAY;AACd;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,gBAAgB;EAChB,YAAY;EACZ,WAAW;EACX,UAAU;EACV,2BAA2B;EAC3B,yBAAyB;EACzB,cAAc;AAChB;;AAEA;EACE,UAAU;EACV,wBAAwB;AAC1B;;AAEA;EACE,cAAc;EACd,gBAAgB;AAClB;;AAEA;EACE,yBAAyB;AAC3B;;;AAGA;EACE,aAAa;AACf;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,qBAAqB;EACrB,mCAAmC;AACrC;;;;AAIA,kCAAkC;AAClC;EACE,yBAAyB;EACzB,aAAa;EACb,yBAAyB;EACzB,kBAAkB;AACpB;;AAEA;EACE,gBAAgB;EAChB,eAAe;EACf,cAAc;AAChB;;AAEA;EACE,cAAc;AAChB;;AAEA,mCAAmC;AACnC;EACE,aAAa;EACb,cAAc;AAChB;;AAEA;EACE,mBAAmB;EACnB,8CAA8C;AAChD;;AAEA,mBAAmB;AACnB;EACE;MACI,gBAAgB;MAChB,eAAe;EACnB;;EAEA;MACI,cAAc;MACd,mBAAmB;EACvB;AACF;;AAEA;EACE;MACI,aAAa;EACjB;;EAEA;MACI,eAAe;EACnB;;EAEA;MACI,eAAe;EACnB;AACF","sourcesContent":["/* Estilo geral */\r\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: Arial, Helvetica, sans-serif;\r\n}\r\n\r\nbody {\r\n  background-color: #f8f9fa;\r\n}\r\n\r\n.wrapper {\r\n  width: 100%;\r\n  height: 100vh;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n#daycontainer {\r\n  height: 400px;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n  justify-content: flex-start;\r\n  overflow-x: auto; /* Adicionado para permitir rolagem horizontal */\r\n}\r\n\r\n.card {\r\n  width: 300px;\r\n  border-radius: 2rem;\r\n  background-size: cover;\r\n  cursor: pointer;\r\n  overflow: hidden;\r\n  margin: 0 10px;\r\n  display: flex;\r\n  align-items: flex-end;\r\n  transition: 0.6s cubic-bezier(0.28, -0.03, 0, 0.99);\r\n  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);\r\n}\r\n\r\n.card > .row {\r\n  color: white;\r\n  display: flex;\r\n  flex-wrap: nowrap;\r\n}\r\n\r\n.card > .row > .icon {\r\n  background: #223;\r\n  color: white;\r\n  border-radius: 50%;\r\n  width: 50px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  margin: 15px;\r\n}\r\n\r\n.card > .row > .description {\r\n  display: flex;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n  overflow: hidden;\r\n  height: 80px;\r\n  width: 100%;\r\n  opacity: 0;\r\n  transform: translateY(30px);\r\n  transition: all 0.3s ease;\r\n  color: #ffffff;\r\n}\r\n\r\n.card:hover > .description {\r\n  opacity: 1;\r\n  transform: translateY(0);\r\n}\r\n\r\n.description p {\r\n  color: #ffffff;\r\n  padding-top: 5px;\r\n}\r\n\r\n.description h4 {\r\n  text-transform: uppercase;\r\n}\r\n\r\n\r\ninput[type=\"radio\"] {\r\n  display: none;\r\n}\r\n\r\ninput:checked + label {\r\n  width: 600px;\r\n}\r\n\r\ninput:checked + label .description {\r\n  opacity: 1 !important;\r\n  transform: translateY(0) !important;\r\n}\r\n\r\n\r\n\r\n/* Estilo para o bloco principal */\r\n.main-block {\r\n  background-color: #ffffff;\r\n  padding: 20px;\r\n  border: 1px solid #181818;\r\n  text-align: center;\r\n}\r\n\r\n.main-block h2 {\r\n  margin-top: 15px;\r\n  font-size: 24px;\r\n  color: #ffffff;\r\n}\r\n\r\n.main-block p {\r\n  color: #ffffff;\r\n}\r\n\r\n/* Estilo para os blocos pequenos */\r\n.small-block {\r\n  flex: 1 1 30%;\r\n  max-width: 30%;\r\n}\r\n\r\n.small-block img {\r\n  border-radius: 10px;\r\n  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);\r\n}\r\n\r\n/* Responsividade */\r\n@media (max-width: 768px) {\r\n  .col-lg-8, .col-lg-4 {\r\n      flex-basis: 100%;\r\n      max-width: 100%;\r\n  }\r\n\r\n  .small-block {\r\n      max-width: 45%;\r\n      margin-bottom: 15px;\r\n  }\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .main-block {\r\n      padding: 10px;\r\n  }\r\n\r\n  .main-block h2 {\r\n      font-size: 20px;\r\n  }\r\n\r\n  .small-block {\r\n      max-width: 100%;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./FrontEnd/assets/css/style.css"],"names":[],"mappings":"AAAA,iBAAiB;AACjB;EACE,sBAAsB;EACtB,SAAS;EACT,UAAU;EACV,yCAAyC;AAC3C;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,WAAW,EAAE,8CAA8C;EAC3D,YAAY,EAAE,6CAA6C;EAC3D,iBAAiB,EAAE,kEAAkE;EACrF,mBAAmB,EAAE,wBAAwB;EAC7C,wCAAwC,EAAE,2BAA2B;EACrE,sCAAsC,EAAE,+BAA+B;AACzE;;AAEA;EACE,qBAAqB,EAAE,kCAAkC;AAC3D;;;AAGA;;EAEE,cAAc;EACd,mBAAmB;AACrB;;AAEA;EACE,eAAe,EAAE,yCAAyC;EAC1D,eAAe,EAAE,iCAAiC;AACpD;;AAEA;EACE,oCAAoC,EAAE,kCAAkC;EACxE,YAAY,EAAE,oBAAoB;EAClC,aAAa,EAAE,wBAAwB;EACvC,+BAA+B,EAAE,mDAAmD;EACpF,gCAAgC,EAAE,kDAAkD;EACpF,mBAAmB,EAAE,iCAAiC;AACxD;;AAEA;EACE,SAAS;EACT,eAAe,EAAE,+BAA+B;EAChD,gBAAgB,EAAE,gCAAgC;AACpD;;AAEA,kCAAkC;AAClC;EACE,yBAAyB;EACzB,aAAa;EACb,yBAAyB;EACzB,kBAAkB;AACpB;;AAEA;EACE,gBAAgB;EAChB,eAAe;EACf,cAAc;AAChB;;AAEA;EACE,cAAc;AAChB;;AAEA,mCAAmC;AACnC;EACE,aAAa;EACb,cAAc;AAChB;;AAEA;EACE,mBAAmB;EACnB,8CAA8C;AAChD;;AAEA,mBAAmB;AACnB;EACE;MACI,gBAAgB;MAChB,eAAe;EACnB;;EAEA;MACI,cAAc;MACd,mBAAmB;EACvB;AACF;;AAEA;EACE;MACI,aAAa;EACjB;;EAEA;MACI,eAAe;EACnB;;EAEA;MACI,eAAe;EACnB;AACF","sourcesContent":["/* Estilo geral */\r\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: Arial, Helvetica, sans-serif;\r\n}\r\n\r\nbody {\r\n  background-color: #f8f9fa;\r\n}\r\n\r\n.custom-img {\r\n  width: 100%; /* A imagem vai ocupar toda a largura do div */\r\n  height: 100%; /* A imagem vai ocupar toda a altura do div */\r\n  object-fit: cover; /* Garante que a imagem seja cortada para cobrir o espaço do div */\r\n  border-radius: 10px; /* Bordas arredondadas */\r\n  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para as imagens */\r\n  transition: transform 0.3s ease-in-out; /* Animação ao passar o mouse */\r\n}\r\n\r\n.custom-img:hover {\r\n  transform: scale(1.3); /* Aumenta 30% ao passar o mouse */\r\n}\r\n\r\n\r\n.carousel-caption h5, \r\n.carousel-caption p {\r\n  display: block;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.carousel-caption .Description p {\r\n  font-size: 1rem; /* Ajuste o tamanho conforme necessário */\r\n  max-width: 100%; /* Garantir que seja responsivo */\r\n}\r\n\r\n.apodDescription {\r\n  background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semi-transparente */\r\n  color: white; /* Texto em branco */\r\n  padding: 15px; /* Espaçamento interno */\r\n  border-bottom-left-radius: 20px; /* Bordas arredondadas no canto inferior esquerdo */\r\n  border-bottom-right-radius: 20px; /* Bordas arredondadas no canto inferior direito */\r\n  text-align: justify; /* Ajusta a formatação do texto */\r\n}\r\n\r\n.apodDescription-text {\r\n  margin: 0;\r\n  font-size: 1rem; /* Ajuste do tamanho da fonte */\r\n  line-height: 1.5; /* Espaçamento entre as linhas */\r\n}\r\n\r\n/* Estilo para o bloco principal */\r\n.main-block {\r\n  background-color: #ffffff;\r\n  padding: 20px;\r\n  border: 1px solid #181818;\r\n  text-align: center;\r\n}\r\n\r\n.main-block h2 {\r\n  margin-top: 15px;\r\n  font-size: 24px;\r\n  color: #ffffff;\r\n}\r\n\r\n.main-block p {\r\n  color: #ffffff;\r\n}\r\n\r\n/* Estilo para os blocos pequenos */\r\n.small-block {\r\n  flex: 1 1 30%;\r\n  max-width: 30%;\r\n}\r\n\r\n.small-block img {\r\n  border-radius: 10px;\r\n  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);\r\n}\r\n\r\n/* Responsividade */\r\n@media (max-width: 768px) {\r\n  .col-lg-8, .col-lg-4 {\r\n      flex-basis: 100%;\r\n      max-width: 100%;\r\n  }\r\n\r\n  .small-block {\r\n      max-width: 45%;\r\n      margin-bottom: 15px;\r\n  }\r\n}\r\n\r\n@media (max-width: 576px) {\r\n  .main-block {\r\n      padding: 10px;\r\n  }\r\n\r\n  .main-block h2 {\r\n      font-size: 20px;\r\n  }\r\n\r\n  .small-block {\r\n      max-width: 100%;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

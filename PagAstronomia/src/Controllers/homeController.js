@@ -1,18 +1,61 @@
 const { createConnection } = require('mongoose');
-const { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel } = require('../Models/homeModel');
+const { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel, Mars, MarsModel } = require('../Models/homeModel');
+
 
 exports.index = async (requisicao, resposta) =>{   
     try{
         const apods = await apiAPOD_dayPicture(); 
         const EventsData = await api_upcomingEvents(); 
         const LaunchsData = await api_upcomingLaunchs(); 
-        resposta.render('index.ejs', {apods, EventsData, LaunchsData});
+        const MarsPhotos = await Mars_apiRequest();
+        console.log(MarsPhotos);
+        resposta.render('index.ejs', {apods, EventsData, LaunchsData, MarsPhotos});
     } catch(error){
         console.log(error),
         resposta.render('/includes/Errors/404.ejs');
     }
 };
 
+
+// Mars Rover Photos API - NASA (Rovers: curiosity, opportuniy e perceverence)
+async function Mars_apiRequest(){
+    try {
+        const MarsPhotos_MongoDB = await Mars.buscaObjeto();
+
+        if (MarsPhotos_MongoDB.length === 0) {
+            const newPhotos = await requestAPI_MarsPhotos();
+            return newPhotos;
+        } else {
+            const cachedPhotos = await MarsPhotos_MongoDB.slice(0, 6)
+            return cachedPhotos;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+async function requestAPI_MarsPhotos() {
+    let API_KEY = process.env.NASA_API;
+    let response = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?max_date&page=1&api_key=${API_KEY}`);
+
+    let dataMars = await response.json();
+    let dataMars_Results = dataMars.photos;
+    console.log(dataMars)
+
+    if (!dataMars.photos) {
+        throw new Error("Estrutura de dados inválida ou undefined");
+    }
+
+    await MarsModel.insertMany(dataMars_Results.map(marsPhotos => ({
+        data: marsPhotos,
+    })));
+
+    const homeHighlightsPhotos = dataMars_Results.slice(0, 6);
+    return homeHighlightsPhotos;
+}
+
+
+// Astronomic Picture of the Day - APOD API - NASA
 async function apiAPOD_dayPicture() {
     try {
         // Recuperar todos os objetos APOD do banco de dados
@@ -55,6 +98,8 @@ async function requestAPODs_lastFiveDays(apods, today, API_KEY) {
     }
 }
 
+
+// Upcomingo Events - TheSpaceDevs API
 async function api_upcomingEvents() {
     try {
         const AtualEvents_MongoDB = await Events.buscaObjeto(); // Ordena por data crescente
@@ -130,6 +175,8 @@ function formatEvent(eventos) {
     });
 }
 
+
+// Upcoming Launchs - TheSpaceDevs API
 async function api_upcomingLaunchs(){
     try{
         const AtualLaunchs_MongoDB = await Launchs.buscaObjeto();
@@ -206,6 +253,7 @@ function findAgencyAbbrev(launch) {
     return "None";
 }
 
+
 // dataEvent.results[index].date contém a data no formato "2024-04-15T14:45:00Z"
 function changeDateType(dataEvent){
     let dateObj = new Date(dataEvent);
@@ -228,3 +276,4 @@ function changeDateType(dataEvent){
     }
     return formattedDate;
 }
+

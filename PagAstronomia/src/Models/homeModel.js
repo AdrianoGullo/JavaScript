@@ -59,4 +59,22 @@ Launchs.buscaObjeto = async function() {
     return await LaunchsModel.find().sort({ date: -1 });
 };
 
-module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel };
+
+// Cache de dados para as fotos do Home para os Rovers de Marte
+const MarsSchema = new mongoose.Schema({
+    data: { type: mongoose.Schema.Types.Mixed, required: true }
+});
+
+const MarsModel = mongoose.model('Mars_api', MarsSchema);
+
+function Mars(body) {
+    this.body = body;
+    this.errors = [];
+    this.imagem = null;
+}
+
+Mars.buscaObjeto = async function() {
+    return await MarsModel.find().sort({ date: -1 });
+};
+
+module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel, Mars, MarsModel};
