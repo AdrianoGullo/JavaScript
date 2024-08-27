@@ -1,4 +1,8 @@
 const { createConnection } = require('mongoose');
+const apodAPI = require('./homeIncludes/apodAPIController');
+const eventsAPI = require('./homeIncludes/eventsAPIController');
+const launchsAPI = require('./homeIncludes/launchsAPIController');
+
 const { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel, Mars, MarsModel } = require('../Models/homeModel');
 
 
@@ -8,7 +12,6 @@ exports.index = async (requisicao, resposta) =>{
         const EventsData = await api_upcomingEvents(); 
         const LaunchsData = await api_upcomingLaunchs(); 
         const MarsPhotos = await Mars_apiRequest();
-        console.log(MarsPhotos);
         resposta.render('index.ejs', {apods, EventsData, LaunchsData, MarsPhotos});
     } catch(error){
         console.log(error),
@@ -36,11 +39,10 @@ async function Mars_apiRequest(){
 
 async function requestAPI_MarsPhotos() {
     let API_KEY = process.env.NASA_API;
-    let response = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?max_date&page=1&api_key=${API_KEY}`);
+    let response = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1&api_key=${API_KEY}`);
 
     let dataMars = await response.json();
     let dataMars_Results = dataMars.photos;
-    console.log(dataMars)
 
     if (!dataMars.photos) {
         throw new Error("Estrutura de dados inválida ou undefined");
@@ -277,3 +279,6 @@ function changeDateType(dataEvent){
     return formattedDate;
 }
 
+function handleDownloadClick(index, url) {
+    console.log(`Botão de download ${index} clicado. URL da imagem: ${url}`);
+}

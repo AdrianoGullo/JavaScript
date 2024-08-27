@@ -34,7 +34,7 @@ app.use('/imagens', express.static(imagensDiretorio));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.static(path.resolve(__dirname, 'public'))); //Acessar arquivos estaticos de /public, como css, bundle.js
+app.use(express.static('public')); //Acessar arquivos estaticos de /public, como css, bundle.js
 app.use(
     helmet({
       contentSecurityPolicy: false,

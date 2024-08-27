@@ -1,17 +1,130 @@
 <%- include('includes/head'); %>
 <%- include('includes/nav'); %>
 
-<div>
-    <section class="py-5 container">
-        <div class="row py-lg-5">
-            <div class="text-align: left">
-                <img class="img-fluid" src="/Imagens/newsLogo.png" alt="Generic placeholder image" width="300" height="200" style="text-align: left;">
-                <p class="lead text-body-secondary">
-                    Explore what's <strong>new</strong> in the world of <strong>technology, science and astronomy.</strong>
-                </p>
-            </div>
+<body>
+    <main role="main">
+        <div>
+            <section class="py-5 container">
+
+                <div class="row py-lg-5">
+                    <div class="text-align: left">
+                        <img class="img-fluid" src="/Imagens/newsLogo.png" alt="Generic placeholder image" width="300" height="200" style="text-align: left;">
+                        <p class="lead text-body-secondary">
+                            Search what's <strong>new</strong> in the world of science and astronomy and be updated in the <strong>upcoming events</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="info-block" style="background-color: #fdfcfc; border-radius: 10px;">
+                    <div class="tabs">
+                        <button class="btn btn-light" onclick="showContent('events')" style="margin-left: 30px;">Events</button>
+                        <button class="btn btn-light" onclick="showContent('launches')" style="margin-left: 10px;">Launchs</button>
+                    </div>
+                    
+                    <div id="events" class="eventContent" style="display: none;">
+                        <div class="row row-cols-1 g-3">
+                            <% if(EventsData !== undefined){ %>
+                                <% EventsData.forEach(event => { %>
+                                    <div class="col d-flex justify-content-center">
+                                        <div class="card shadow-sm w-100" style="max-width: 100%; margin: 10px auto; border: 20px solid #fafafae5; height: 250px;">
+                                            <div class="row g-0 h-100 flex-column flex-md-row">
+                                                <div class="col-12 col-md-4">
+                                                    <img src="<%= event.img %>" alt="Thumbnail" style="object-fit: cover; height: 100%; max-height: 210px; width: 100%;">
+                                                </div>
+                                                <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+                                                    <div class="card-body p-2" style="overflow: hidden;">
+                                                        <h5 class="card-title text-truncate mb-1"><%= event.title %></h5>
+                                                        <p class="card-text text-truncate mb-0"><%= event.description %></p>
+                                                        <small class="text-muted"><%= new Date(event.date).toLocaleDateString() %></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                <% }); %>
+                            <% }; %>
+                        </div>
+                    </div>
+                
+                    <div id="launches" class="eventContent" style="display: none;">
+                        <div class="row row-cols-1 g-3">
+                            <% if(LaunchsData !== undefined){ %>
+                                <% LaunchsData.forEach(launch => { %>
+                                    <div class="col d-flex justify-content-center">
+                                        <div class="card shadow-sm w-100" style="max-width: 100%; margin: 10px auto; border: 20px solid #fafafa; height: 250px;">
+                                            <div class="row g-0 h-100 flex-column flex-md-row">
+                                                <div class="col-12 col-md-4">
+                                                    <img src="<%= launch.img %>" alt="Thumbnail" style="object-fit: cover; height: 210px; width: 100%;">
+                                                </div>
+                                                <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+                                                    <div class="card-body p-2">
+                                                        <h5 class="card-title text-truncate mb-1"><%= launch.title %></h5>
+                                                        <p class="card-text text-truncate mb-0"><%= launch.description %></p>
+                                                        <small class="text-muted"><%= new Date(launch.date).toLocaleDateString() %></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            <% }; %>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </section>
         </div>
-    </section>
-</div>
+
+
+        <script>
+            function showContent(contentId, clickedButton) {
+                // Esconde todos os conteúdos
+                document.getElementById('events').style.display = 'none';
+                document.getElementById('launches').style.display = 'none';
+                
+                // Mostra o conteúdo específico
+                document.getElementById(contentId).style.display = 'block';
+                
+                // Remove a classe active de todos os botões
+                document.querySelectorAll('.tabs .btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Adiciona a classe active ao botão clicado
+                clickedButton.classList.add('active');
+            }
+
+            // Mostra inicialmente o conteúdo de eventos e marca o botão de eventos como ativo
+            showContent('events', document.getElementById('btn-events'));
+        </script>
+
+
+        <style>
+            @media (max-width: 768px) {
+                .card .row {
+                    flex-direction: column !important;
+                }
+                .card img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+                .card-body {
+                    text-align: center;
+                }
+                .card .col-3 {
+                    justify-content: center !important;
+                    text-align: center;
+                }
+            }
+            
+            .active {
+                background-color: #343a40; /* Cor do botão ativo (btn-dark) */
+                color: white; /* Cor do texto do botão ativo */
+            }
+            </style>
+
+    </main>
+</body>
 
 <%- include('includes/footer'); %>
