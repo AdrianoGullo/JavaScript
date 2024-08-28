@@ -5,7 +5,6 @@ const route = express.Router();
 const homeController = require('./src/Controllers/homeController');
 const loginController = require('./src/Controllers/loginController.js');
 const favoritosController = require('./src/Controllers/favoritosController');
-const eventsController = require('./src/Controllers/eventsController');
 const newsController = require('./src/Controllers/newsController');
 const contatoController = require('./src/Controllers/contatoController');
 const marsController = require('./src/Controllers/marsController');
@@ -35,8 +34,5 @@ route.get('/fav/index', favoritosController.index);
 
 //Rotas pag. News
 route.get('/news/index', newsController.index);
-
-//Rotas pag. Events
-route.get('/events/index', eventsController.index);
 
 module.exports = route;

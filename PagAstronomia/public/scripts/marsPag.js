@@ -1,137 +1,53 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var btnCuriosity = document.getElementById('btnCuriosity');
-    var btnOpportunity = document.getElementById('btnOpportunity');
-    var btnSpirit = document.getElementById('btnSpirit');
-    var btnSearch = document.getElementById('btnSearch');
-    let rover, MarsDate;
-    let page = 1;
-
-    changeButtonVisibility(btnCuriosity, btnOpportunity, btnSpirit, rover);
-
-    const numberInput = document.getElementById('numberInput');
-    numberInput.addEventListener('click', function() {
-        MarsDate = numberInput.value;
+    document.getElementById('curiosityTab').addEventListener('click', function() {
+        showTab('curiosityBody', this);
     });
 
-    btnSearch.addEventListener('click', function() { 
-        if(btnCuriosity.classList.contains('btn-light')) rover = 'curiosity';
-        else if(btnOpportunity.classList.contains('btn-light')) rover = 'opportunity';
-        else if(btnSpirit.classList.contains('btn-light')) rover = 'spirit';
-        Mars_apiRequest(rover, page, MarsDate)
+    document.getElementById('opportunityTab').addEventListener('click', function() {
+        showTab('opportunityBody', this);
     });
 
-    var btnShowMore = document.getElementById('showMoreBtn');
-    btnShowMore.addEventListener('click', async function(){
-        await Mars_apiRequest(rover, page++, MarsDate);
-    })
-});
-
-function changeButtonVisibility(btnCuriosity, btnOpportunity, btnSpirit, rover) {
-    btnCuriosity.addEventListener('click', function() {
-        btnCuriosity.classList.remove('btn-secundary');
-        btnCuriosity.classList.add('btn-light');
-        btnCuriosity.classList.remove('text-white');
-        btnCuriosity.classList.add('text-black');
-
-        btnOpportunity.classList.remove('btn-light');
-        btnOpportunity.classList.add('btn-secundary');
-        btnOpportunity.classList.remove('text-black');
-        btnOpportunity.classList.add('text-white');
-
-        btnSpirit.classList.remove('btn-light');
-        btnSpirit.classList.add('btn-secundary');
-        btnSpirit.classList.remove('text-black');
-        btnSpirit.classList.add('text-white');
+    document.getElementById('spiritTab').addEventListener('click', function() {
+        showTab('spiritBody', this);
     });
 
-    btnOpportunity.addEventListener('click', function() {
-        btnOpportunity.classList.remove('btn-secundary');
-        btnOpportunity.classList.add('btn-light');
-        btnCuriosity.classList.remove('text-black');
-        btnCuriosity.classList.add('text-white');
-
-        btnCuriosity.classList.remove('btn-light');
-        btnCuriosity.classList.add('btn-secundary');
-        btnOpportunity.classList.remove('text-white');
-        btnOpportunity.classList.add('text-black');
+    function showTab(tabId, tabElement) {
+        // Esconder todos os corpos de cards
+        document.getElementById('curiosityBody').style.display = 'none';
+        document.getElementById('opportunityBody').style.display = 'none';
+        document.getElementById('spiritBody').style.display = 'none';
         
-        btnSpirit.classList.remove('btn-light');
-        btnSpirit.classList.add('btn-secundary');
-        btnSpirit.classList.remove('text-black');
-        btnSpirit.classList.add('text-white');
-    });
+        // Mostrar o corpo do card correspondente
+        document.getElementById(tabId).style.display = 'block';
 
-    btnSpirit.addEventListener('click', function() {
-        btnSpirit.classList.remove('btn-secundary');
-        btnSpirit.classList.add('btn-light');
-        btnCuriosity.classList.remove('text-black');
-        btnCuriosity.classList.add('text-white');
+        // Remover a classe 'active' de todos os links e adicionar ao link clicado
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.classList.remove('active');
+        });
+        tabElement.classList.add('active');
+    }
 
-        btnCuriosity.classList.remove('btn-light');
-        btnCuriosity.classList.add('btn-secundary');
-        btnOpportunity.classList.remove('text-black');
-        btnOpportunity.classList.add('text-white');
-
-        btnOpportunity.classList.remove('btn-light');
-        btnOpportunity.classList.add('btn-secundary');
-        btnSpirit.classList.remove('text-white');
-        btnSpirit.classList.add('text-black');
-    });
-};
-
-function adicionaFotoNoAlbum(album, foto){
-    //cria elementos para representar a foto e infos
-    const cardCol = document.createElement('div');
-    cardCol.classList.add('col');
-
-    const card = document.createElement('div');
-    card.classList.add('card', 'shadow-sm');
-    card.style.width = '300x';
-    card.style.height = '400px';
-    card.style.marginTop = '30px';
-        
-    const cardImg = document.createElement('img');
-    cardImg.classList.add('bd-placeholder-img', 'card-img-top');
-    cardImg.setAttribute('src', foto.img_src);
-    cardImg.style.width = '100%';
-    cardImg.style.height = '300px';
-
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
-
-    const cardText = document.createElement('p');
-    cardText.classList.add('card-text');
-    cardText.textContent = 'Descrição da foto';
-
-    const cardBtnGroup = document.createElement('div');
-    cardBtnGroup.classList.add('btn-group');
-
-    const btnFav = document.createElement('button');
-    btnFav.setAttribute('type', 'button');
-    btnFav.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
-    btnFav.textContent = 'Fav';
-
-    const btnShare = document.createElement('button');
-    btnShare.setAttribute('type', 'button');
-    btnShare.classList.add('btn', 'btn-sm', 'btn-outline-secondary');
-    btnShare.textContent = 'Share';
-
-    const cardTime = document.createElement('small');
-    cardTime.classList.add('text-body-secondary');
-    cardTime.textContent = '9 mins';
-    
-    // Adiciona elementos à carta
-    card.appendChild(cardImg);
-    card.appendChild(cardBody);
-    cardBody.appendChild(cardText);
-    cardBody.appendChild(cardBtnGroup);
-    cardBody.appendChild(cardTime);
-    cardBtnGroup.appendChild(btnFav);
-    cardBtnGroup.appendChild(btnShare);
-    cardCol.appendChild(card);
-    album.appendChild(cardCol);
-};
-
-function changeCameraBtnText(text) {
-    document.getElementById('dropdownMenuButton').textContent = text;
-}
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('thumbnailContainer');
+      
+        container.addEventListener('scroll', function() {
+          const firstChild = container.firstElementChild;
+          const lastChild = container.lastElementChild;
+      
+          // Verifica se o container está próximo do final do primeiro filho
+          if (container.scrollLeft + container.offsetWidth >= container.scrollWidth) {
+            // Move o primeiro filho para o final
+            container.appendChild(firstChild);
+            // Reseta a rolagem
+            container.scrollLeft -= firstChild.offsetWidth;
+          }
+      
+          // Verifica se o container está rolando para o início
+          if (container.scrollLeft === 0) {
+            // Move o último filho para o início
+            container.insertBefore(lastChild, firstChild);
+            // Ajusta a rolagem para corresponder à nova posição do último filho
+            container.scrollLeft += lastChild.offsetWidth;
+          }
+        });
+      });
+      
