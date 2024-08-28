@@ -1,5 +1,8 @@
 exports.index = async (requisicao, resposta) => {
-    if(requisicao.session.user) return resposta.render('marsPag', {Mars_apiRequest});
+    if(requisicao.session.user) {
+        let dadosMars = await Mars_apiRequest('curiosity', 1, 1000);
+        return resposta.render('marsPag', {dadosMars});
+    }
     return resposta.render('login');
 };
 
@@ -8,16 +11,14 @@ async function Mars_apiRequest(roverMars, page, solMarte){
     let response = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${roverMars}/photos?sol=${solMarte}&page=${page}&api_key=${API_KEY}`);
 
     let dadosMars = await response.json();
-    console.log(dadosMars);
-    if(dadosMars.length == 0){
-        //adicionar badge avisando que não tem fotos para esse dia
-        return;
-    }
-    const album = document.getElementById('album');
 
-    for (let index = 0; index < dadosMars.photos.length; index++) {
-        adicionaFotoNoAlbum(album, dadosMars.photos[index]);
+    if (!dadosMars.photos || dadosMars.photos.length === 0) {
+        console.error("Nenhuma foto foi encontrada para o sol ou página especificados.");
+        return { photos: [] };
     }
-};
+
+    return dadosMars;
+}
+
 
 exports.module = Mars_apiRequest;

@@ -23,7 +23,54 @@
             <button type="button" class="btn btn-dark" style="padding: 0.1rem 0.15rem; height: 0.7rem; font-size: 10px; line-height: 0.4rem;" data-toggle="modal" data-target=".bd-card-modal-lg">Read more</button> 
           </div>
           
-          <%- include('./readMoreModal'); %>
+          <div class="modal fade bd-card-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+        
+                 <div class="modal-header">
+                   <h5 class="modal-title" id="exampleModalLongTitle"><%= event.title %></h5>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                   </button>
+                  </div>
+        
+                 <div class="container-fluid">
+                   <div class="row">
+                     <div class="col-md-4">.col-md-0</div>
+                     <div class="col-md-0 ml-auto"><%= event.agencia %></div>
+                   </div>
+        
+                   <div class="row">
+                     <div class="col-md-3 ml-0"><%= event.description %></div>
+                     <div class="col-md-2 ml-auto">.col-md-2 .ml-auto</div>
+                   </div>
+        
+                   <div class="row">
+                     <div class="col-md-6 ml-auto">.col-md-7 .ml-auto</div>
+                   </div>
+        
+                   <div class="row">
+                     <div class="col-sm-9">
+                        <%= event.date %>
+                       <div class="row">
+                         <div class="col-8 col-sm-6">
+                           Level 2: .col-8 .col-sm-6
+                         </div>
+                         <div class="col-4 col-sm-6">
+                           Level 2: .col-4 .col-sm-6
+                         </div>
+                       </div>
+                     </div>
+                 </div>
+        
+                 </div>
+                 <div class="modal-footer">
+                   <a href="/news/index">View all</a>
+                 </div>
+        
+               </div>
+            </div>
+          </div>
 
           <div id="tagsEvento1"><span class="badge badge-light mr-2"><%= event.agencia %></span></div>
           <div id="descEvento1" style="max-height: 3em; overflow: auto; text-overflow: ellipsis; width: 100%;"><%= event.description %></div>

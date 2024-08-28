@@ -51,3 +51,20 @@
         });
       });
       
+      document.addEventListener('DOMContentLoaded', function() {
+        // Inicializa o carrossel
+        const carousel = new bootstrap.Carousel(document.getElementById('carouselExample'));
+      
+        // Adiciona o evento de clique nas miniaturas
+        document.getElementById('thumbnailContainer').addEventListener('click', function(event) {
+          if (event.target.classList.contains('thumbnail')) {
+            const index = event.target.getAttribute('data-bs-slide-to');
+            if (index !== null) {
+              carousel.to(parseInt(index));
+            }
+          }
+        });
+      });
+      
+      
+      
