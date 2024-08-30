@@ -31,7 +31,7 @@
                     <div id="events" class="card-body">
                         <div class="row row-cols-1 g-3">
                             <% if(EventsData !== undefined){ %>
-                                <% EventsData.forEach(event => { %>
+                                <% EventsData.forEach((event, index) => { %>
                                     <div class="col d-flex justify-content-center">
                                         <div class="card shadow-sm w-100" style="margin: 10px auto; border: 20px solid #fafafae5;">
                                             <div class="row g-0 flex-column flex-md-row">
@@ -45,8 +45,11 @@
                                                         <small class="text-muted"><%= new Date(event.date).toLocaleDateString() %></small>
                                                     </div>
                                                 </div>
+                                                <button type="button" class="btn btn-dark" id="readMoreBtn" style="padding: 0.1rem 0.15rem; height: 0.7rem; font-size: 10px; line-height: 0.4rem;" data-toggle="modal" data-target="#modal-<%= index %>">Read more</button>                                         
+                                                <!-- MODAL ReadMore -->
+                                                <%- include('includes/indexHome/readMoreEvent', { event, index}) %>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 <% }); %>
                             <% }; %>
@@ -56,7 +59,7 @@
                     <div id="launches" class="card-body" style="display: none;">
                         <div class="row row-cols-1 g-3">
                             <% if(LaunchsData !== undefined){ %>
-                                <% LaunchsData.forEach(launch => { %>
+                                <% LaunchsData.forEach((launch, index) => { %>
                                     <div class="col d-flex justify-content-center">
                                         <div class="card shadow-sm w-100" style="margin: 10px auto; border: 20px solid #fafafa;">
                                             <div class="row g-0 flex-column flex-md-row">
@@ -70,9 +73,12 @@
                                                         <small class="text-muted"><%= new Date(launch.date).toLocaleDateString() %></small>
                                                     </div>
                                                 </div>
+                                                <button type="button" class="btn btn-dark" id="readMoreBtn" style="padding: 0.1rem 0.15rem;" data-toggle="modal" data-target="#modalLaunch-<%= index %>">Read more</button>                                         
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- MODAL ReadMore -->
+                                    <%- include('includes/indexHome/readMoreLaunch', { launch, index}) %>
                                 <% }); %>
                             <% }; %>
                         </div>

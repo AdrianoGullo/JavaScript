@@ -29,6 +29,7 @@
     "mongoose": "^8.2.1",
     "node-fetch": "^3.3.2",
     "p5": "^1.9.3",
+    "popper": "^1.0.1",
     "regenerator-runtime": "^0.14.1",
     "style-loader": "^3.3.4",
     "validator": "^13.11.0"

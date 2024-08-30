@@ -1,7 +1,7 @@
 <div class="col-md-6 order-md-2 col-sm-6 bg-body rounded shadow-sm">
 
   <% if(LaunchsData !== undefined){ %>
-    <% LaunchsData.forEach(launch => { %>
+    <% LaunchsData.forEach((launch, index) => { %>
       <div class="d-flex text-body-secondary pt-3" id="upcomingLaunchs">
         <image src="<%= launch.img %>" width="50px" height="50px" style="margin-top: 7px; border-radius: 10px;" />
         <div class="d-flex flex-column justify-content-between" style="margin-left: 20px;">
@@ -21,8 +21,11 @@
             <% } else { %>
               <span class="badge badge-light mr-2">Scheduled</span>
             <% } %>
-            <button type="button" class="btn btn-dark" id="readMoreBtn" style="padding: 0.1rem 0.15rem; height: 0.7rem; font-size: 10px; line-height: 0.4rem;" data-toggle="modal" data-target=".bd-card-modal-lg">Read more</button> 
+            <button type="button" class="btn btn-dark" id="readMoreBtn" style="padding: 0.1rem 0.15rem; height: 0.7rem; font-size: 10px; line-height: 0.4rem;" data-toggle="modal" data-target="#modalLaunch-<%= index %>">Read more</button> 
           </div>
+
+          <!-- MODAL ReadMore -->
+          <%- include('readMoreLaunch', { launch, index}) %>
 
           <div id="tagsLaunch"><span class="badge badge-light mr-2"><%= launch.headAgency %></span></div>
           <div id="descLaunch" style="max-height: 3em; overflow: auto; text-overflow: ellipsis; width: 100%;"><%= launch.description %></div>
