@@ -36,13 +36,14 @@ Substitua `sua_uri_deConexão_doMongoDB` pela URI de conexão do seu cluster Mon
 
 Features ainda planejadas ou em desenvolvimento:
 
-- [x] Modal de ReadMe para eventos e lançamentos.
-- [x] Lista de eventos/lançamentos na página 'Events' - Mesmo API já usado na home
-- [ ] Organizar ordens de requisição do API para fotos de Marte (3 rovers)
-- [ ] Organização página de fotos de Marte (marsPag)
-- [ ] Incorporar API de imagens do James Webb
-- [ ] Sistema de favoritos para os usuários favoritarem qualquer foto ou noticia/lançamento que achar interessante
-- [ ] Página 'Favorites' - Lista relacionado ao tipo de favorito e mostrando os favoritos do usuário (excluir, compartilhar, abrir informações)
+- [x] Modal de ReadMe para eventos e lançamentos;
+- [x] Lista de eventos/lançamentos na página 'Events' - Mesmo API já usado na home;
+- [ ] Organizar ordens de requisição do API para fotos de Marte (3 rovers);
+- [ ] Organização página de fotos de Marte (marsPag);
+- [x] Incorporar API de imagens do James Webb;
+- [ ] Página para as imagens do James Webb;
+- [ ] Sistema de favoritos para os usuários favoritarem qualquer foto ou noticia/lançamento que achar interessante;
+- [ ] Página 'Favorites' - Lista relacionado ao tipo de favorito e mostrando os favoritos do usuário (excluir, compartilhar, abrir informações).
 
 Fique à vontade para sugerir novas features ou contribuir com código para implementar essas!
 
