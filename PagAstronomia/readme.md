@@ -34,16 +34,15 @@ Substitua `sua_uri_deConexão_doMongoDB` pela URI de conexão do seu cluster Mon
 
 ## Features Planejadas
 
-Features planejadas ou em desenvolvimento:
+Features ainda planejadas ou em desenvolvimento:
 
+- [x] Modal de ReadMe para eventos e lançamentos.
+- [x] Lista de eventos/lançamentos na página 'Events' - Mesmo API já usado na home
+- [ ] Organizar ordens de requisição do API para fotos de Marte (3 rovers)
 - [ ] Organização página de fotos de Marte (marsPag)
-- [ ] Lista de eventos/lançamentos na página 'Events' - Mesmo API já usado na home
+- [ ] Incorporar API de imagens do James Webb
 - [ ] Sistema de favoritos para os usuários favoritarem qualquer foto ou noticia/lançamento que achar interessante
 - [ ] Página 'Favorites' - Lista relacionado ao tipo de favorito e mostrando os favoritos do usuário (excluir, compartilhar, abrir informações)
-- [ ] Página 'Simulations' - Adicionar hub de jogos para brincar com simulações (orbitSimulation, por exemplo)
-- [ ] Sistema de admin - Pode escrever novos posts
-- [ ] Página 'SpaceCraft' - Infos sobre as naves espaciais em lista
-- [ ] Página 'Weather' - Infos do API da NASA, fazer um tratamento de dados e pensar na melhor forma para mostrar as informações que o usuário quer saber.
 
 Fique à vontade para sugerir novas features ou contribuir com código para implementar essas!
 
