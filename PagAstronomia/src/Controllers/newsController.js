@@ -15,7 +15,7 @@ exports.index = async (requisicao, resposta) => {
 
 async function requireDataBase_events() {
     try {
-        const db_events = await Events.buscaObjeto(); // Ordena por data crescente
+        const db_events = await Events.buscaObjeto(); //ordena por data crescente
         const formated_db_events = events_API.formatEvent(db_events);
         return formated_db_events;
     } catch (error) {
@@ -25,7 +25,7 @@ async function requireDataBase_events() {
 
 async function requireDataBase_launch() {
     try {
-        const db_launchs = await Launchs.buscaObjeto(); // Ordena por data crescente
+        const db_launchs = await Launchs.buscaObjeto(); 
         const formated_db_launchs = launchs_API.formatLaunchs(db_launchs);
         return formated_db_launchs;
     } catch (error) {

@@ -2,8 +2,9 @@ const { createConnection } = require('mongoose');
 const apodAPI = require('./homeIncludes/apodAPIController');
 const eventsAPI = require('./homeIncludes/eventsAPIController');
 const launchsAPI = require('./homeIncludes/launchsAPIController');
+const jamesWebAPI = require('./homeIncludes/jamesWebbAPIController');
 
-const {Mars, MarsModel } = require('../Models/homeModel');
+const {Mars, MarsModel} = require('../Models/homeModel');
 
 
 exports.index = async (requisicao, resposta) =>{   
@@ -12,7 +13,8 @@ exports.index = async (requisicao, resposta) =>{
         const EventsData = await eventsAPI.api_upcomingEvents(); 
         const LaunchsData = await launchsAPI.api_upcomingLaunchs(); 
         const MarsPhotos = await Mars_apiRequest();
-        resposta.render('index.ejs', {apods, EventsData, LaunchsData, MarsPhotos});
+        const JamesWebbImages = await jamesWebAPI.api_JamesWebbImages();
+        resposta.render('index.ejs', {apods, EventsData, LaunchsData, MarsPhotos, JamesWebbImages});
     } catch(error){
         console.log(error),
         resposta.render('/includes/Errors/404.ejs');
@@ -55,3 +57,5 @@ async function requestAPI_MarsPhotos() {
     const homeHighlightsPhotos = dataMars_Results.slice(0, 6);
     return homeHighlightsPhotos;
 }
+
+

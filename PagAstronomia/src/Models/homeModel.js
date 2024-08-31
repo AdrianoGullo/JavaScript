@@ -77,4 +77,23 @@ Mars.buscaObjeto = async function() {
     return await MarsModel.find().sort({ date: -1 });
 };
 
-module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel, Mars, MarsModel};
+
+/// API do JamesWeb - Cache de imagens
+const JamesWebbSchema = new mongoose.Schema({
+    data: { type: mongoose.Schema.Types.Mixed, required: true},
+    createdAt: { type: Date, default: Date.now, expires: '1d' } // Configura o índice de expiração para 1 dia
+});
+
+const JamesWebbModel = mongoose.model('jamesWebb_api', JamesWebbSchema);
+
+function JamesWebb(body) {
+    this.body = body;
+    this.errors = [];
+    this.imagem = null;
+}
+
+JamesWebb.buscaObjeto = async function() {
+    return await JamesWebbModel.find().sort({ date: -1 });
+};
+
+module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel, Mars, MarsModel, JamesWebb, JamesWebbModel};
