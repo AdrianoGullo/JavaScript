@@ -74,7 +74,7 @@ function formatLaunchs(lancamentos) {
             padLocation: launch.data.pad?.location?.name || "N/A",
             padImage: launch.data.pad?.map_image || "default-map-image.jpg", // Imagem padrão para o mapa
 
-            program: launch.data.program[0]?.name || "No program",
+            program: launch.data.program[0]?.name || "No program specified",
             programDescription: launch.data.program[0]?.description || "N/A",
             programImage: launch.data.program[0]?.image_url || "default-program-image.jpg", // Imagem padrão para o programa
 

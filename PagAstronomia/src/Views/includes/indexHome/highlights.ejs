@@ -2,27 +2,80 @@
     <div class="col-lg-12 col-md-12 col-sm-12 d-flex flex-column flex-md-row align-items-center text-center">
       
       <!-- Bloco de 1/3 para a imagem principal -->
-      <div class="col-lg-4 col-md-4 col-sm-12 mb-4">
-        <img class="img-fluid" src="/Imagens/homeImgs/marsrover.png" alt="Generic placeholder image" width="240" height="240">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <img class="img-fluid" src="/Imagens/homeImgs/marsrover.png" alt="Generic placeholder image" width="240" height="auto">
         <h2>Explore Mars!</h2>
-        <p>Give a chance to the 'red planet' and come take a look in that incredible planet. You will see real photos taken from NASA API, come check and fav the best footage.
-            API's used: Mars Rover Photos, InSight: Mars Weather Service API and NASA Image and Video Library</p>
         <p>
-          <a class="btn btn-secondary" href="/mars/index" role="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16">
-              <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5z"></path>
-            </svg> View more photos »</a>
+          Give a chance to the 'red planet' and come take a look in that incredible planet. You will see real photos taken from NASA API, come check and fav the best footage.
+          API's used: Mars Rover Photos, InSight: Mars Weather Service API and NASA Image and Video Library
         </p>
       </div>
   
-      <!-- Bloco de 2/3 para as imagens pequenas -->
-      <div class="col-lg-8 col-md-8 col-sm-12 d-flex flex-wrap justify-content-center">
-        <% MarsPhotos.forEach(function(photo, index) { %>
-          <div class="col-lg-4 col-md-4 col-sm-6 p-1" style="object-fit: cover; border-radius: 10px;">
-            <img class="img-fluid custom-img" src="<%= photo.data.img_src %>" alt="Mars image <%= index + 1 %>" style="aspect-ratio: 1/1;">
+      <div class="col-lg-8 col-md-8 col-sm-8 bg-body rounded shadow-sm" style="height: 400px;">
+        <!-- Texto Informativo Centralizado -->
+        <div class="row" style=" margin-top: 2%;">
+          <div class="col-12 text-center">
+            <h3>NASA Mars Rovers</h3>
+            <p>Choose a rover and the martian sol to see unbelievable photos of the red planet.</p>
           </div>
-        <% }); %>
+        </div>
+      
+        <img class="img-fluid" src="/Imagens/homeImgs/rovers.png" alt="Generic placeholder image" width="240" height="auto">
+
+        <!-- Botões Selecionáveis -->
+        <div class="row justify-content-center my-3">
+          <div class="btn-group" role="group" aria-label="Opções" >
+            <button type="button" class="btn btn-outline-dark">Curiosity</button>
+            <button type="button" class="btn btn-outline-dark">Opportunity</button>
+            <button type="button" class="btn btn-outline-dark">Spirit</button>
+          </div>
+        </div>
+
+        <!-- Campos de Informação Numérica com Explicação -->
+        <div class="row justify-content-center">
+          <div class="col-md-6 mb-3" style="margin-top: 5%;">
+            <div class="input-group">
+              <input type="number" class="form-control" id="input1" placeholder="Mars Sun">
+              <div class="input-group-append">
+                <button class="btn btn-info btn-outline-dark" type="button" data-toggle="modal" data-target="#infoModal1">?</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-12">
+            <div class="col-12 justify-content-center">
+              <a class="btn btn-secondary" id="btnMars" role="button" href="/mars/index">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection" viewBox="0 0 16 16">
+                  <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1zm2-2a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6zm1.5.5A.5.5 0 0 1 1 13V6a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5z"></path>
+                </svg> View photos »
+              </a>
+            </div>
+          </div>
+        </div>
+        
       </div>
+      
+      <!-- Modal para Explicação 1 -->
+      <div class="modal fade" id="infoModal1" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="infoModalLabel1">How to choose a Martian Sol?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Esta informação representa a distância média da Terra até Marte, medida em milhões de quilômetros.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+           
     </div>
   </div>
   

@@ -36,7 +36,8 @@
                 </svg>
               </a>
             </button>
-            <button type="button" class="btn btn-outline-danger btn-sm" >
+            <!-- Botão de Favorito com chamada de função JavaScript -->
+            <button type="button" class="btn btn-outline-danger btn-sm" onclick='favoritePhoto("<%= apod.data.id %>", "<%= apod.data.title %>", "<%= apod.data.explanation %>", "<%= apod.data.date %>", "<%= apod.data.hdurl %>")'>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
               </svg>
@@ -50,29 +51,10 @@
           <p style="margin: 0; font-size: 1rem;"><%= apod.data.explanation %></p>
         </div>
       </div>
+      
     <% }); %>
   </div>
 
-  <!-- download confirmation -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Carousel Controls -->
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -84,22 +66,7 @@
     <span class="sr-only">Next</span>
   </a>
 
-  <script>
-    function handleDownloadClick(index, url) {
-    // Define o nome do arquivo com o título e extensão .jpg
-    const filename = `apod${index}.jpeg`;
 
-    // Cria um elemento <a> temporário para simular o download
-    var a = document.createElement('a');
-    a.href = url
-    a.download = url.split('/').pop()
-    a.target = '_blank'; // Abre o link em uma nova aba (opcional, mas ajuda a evitar problemas de download em alguns navegadores)
-    document.body.appendChild(a);
-    a.click(); // Simula o clique para iniciar o download
-    document.body.removeChild(a);
-
-    console.log(`Botão de download ${index} clicado. URL da imagem: ${url}.`);
-}
-  </script>
+  <%- include('../favorite.ejs'); %>
 
 </div>

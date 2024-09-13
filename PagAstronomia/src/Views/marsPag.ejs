@@ -7,81 +7,121 @@
         <video id="jamswebb" class="img-fluid" style="width: 100%; height: auto;" autoplay muted loop>
           <source src="/Videos/marsPage.mp4" type="video/mp4">
           Seu navegador não suporta a tag de vídeo.
-        </video>      </div>
+        </video>
+      </div>
     </section>
 
     <div class="card text-center" style="margin-right: 14%; margin-left: 14%; margin-bottom: 15%;">
       <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
-            <a class="nav-link" id="curiosityTab">Curiosity</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" id="opportunityTab">Opportunity</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="spiritTab">Spirit</a>
-          </li>
-        </ul>
+        <form class="form-inline ml-auto" method="GET" action="/mars/search">
+          <input class="form-control mr-2" type="text" name="sol" placeholder="Sol (dia marciano)">
+          <select class="form-control mr-2" name="rover">
+            <option value="curiosity">Curiosity</option>
+            <option value="opportunity" disabled>Opportunity</option>
+            <option value="spirit" disabled>Spirit</option>
+          </select>
+          <button class="btn btn-secondary" type="submit">Search</button>
+        </form>        
       </div>
-      
-      <div class="card-body" id="curiosityBody" style="display: none;">
+
+      <div class="card-body" id="curiosityBody">
         <div class="row">
-          <!-- Primeiro bloco ocupando 2/5 do espaço -->
-          <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column align-items-center">
-            <p class="card-text text-center">With supporting text below as a natural lead-in to additional content.</p>
-      
-            <form class="w-100">
-              <!-- Seu formulário aqui -->
-            </form>
-      
-            <div class="w-100 mt-auto">
-              <img src="/Imagens/PaginaMars/curiosity.jpg" class="img-fluid" alt="Curiosity Rover Image" style="width: 100%; object-fit: cover;">
-            </div>
-          </div>
-      
-          <!-- Carrossel Principal -->
-          <div class="col-lg-8 col-md-8 col-sm-12">
-            <div id="carouselExample" class="carousel slide">
-              <div class="carousel-inner">
-                <% if (dadosMars && Array.isArray(dadosMars.photos)) { %>
-                  <% dadosMars.photos.forEach(function(photo, index) { %>
-                    <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
-                      <img src="<%= photo.img_src %>" class="d-block w-100" alt="Curiosity Image <%= index %>" style="aspect-ratio: 1/1; max-height: 500px;">
+          <% if (dadosMars.photos && dadosMars.photos.length > 0) { %>
+            <% dadosMars.photos.forEach(function(photo, index) { %>
+              <div class="col-md-3">
+                <div class="card mb-4 box-shadow">
+                  <img class="img-fluid pointer" src="<%= photo.img_src %>" alt="Mars photo <%= index + 1 %>" style="aspect-ratio: 1/1;" data-toggle="modal" data-target="#imageMars<%= index + 1 %>">
+                  
+                  <!--MODAL DE VISUALIZAÇÃO-->
+                  <div class="modal fade bd-example-modal-lg" id="imageMars<%= index + 1 %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <span class="badge badge-light" id="exampleModalLabel">Mission: </span>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <img src="<%= photo.img_src %>" style="width: 100%; object-fit: cover;">
+                        </div>
+                      </div>
                     </div>
-                  <% }); %>
-                <% } else { %>
-                  <p>No photos available.</p>
-                <% } %>
+                  </div>
+
+                  <!--BADGES E BOTÕES-->
+                  <div style="margin-top: 2%;">
+                    <span class="badge badge-primary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera2" viewBox="0 0 16 16">
+                        <path d="M5 8c0-1.657 2.343-3 4-3V4a4 4 0 0 0-4 4"/>
+                        <path d="M12.318 3h2.015C15.253 3 16 3.746 16 4.667v6.666c0 .92-.746 1.667-1.667 1.667h-2.015A5.97 5.97 0 0 1 9 14a5.97 5.97 0 0 1-3.318-1H1.667C.747 13 0 12.254 0 11.333V4.667C0 3.747.746 3 1.667 3H2a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1h.682A5.97 5.97 0 0 1 9 2c1.227 0 2.367.368 3.318 1M2 4.5a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0M14 8A5 5 0 1 0 4 8a5 5 0 0 0 10 0"/>
+                      </svg> <%= photo.camera.name %>
+                    </span>
+                    <span class="badge badge-primary">
+                      ID: <%= photo.id %>
+                    </span>
+                  </div>
+                  <div>
+                    <span class="badge badge-secondary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-globe-americas" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
+                      </svg> <%= photo.earth_date %>
+                    </span>
+                    <span class="badge badge-secondary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-alt-high-fill" viewBox="0 0 16 16">
+                        <path d="M8 3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 3m8 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5m-13.5.5a.5.5 0 0 0 0-1h-2a.5.5 0 0 0 0 1zm11.157-6.157a.5.5 0 0 1 0 .707l-1.414 1.414a.5.5 0 1 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m-9.9 2.121a.5.5 0 0 0 .707-.707L3.05 5.343a.5.5 0 1 0-.707.707zM8 7a4 4 0 0 0-4 4 .5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5 4 4 0 0 0-4-4"/>
+                      </svg>  <%= photo.sol %>
+                    </span>
+                  </div>
+                  <div class="card-body">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#imageMars<%= index + 1 %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-binoculars-fill" viewBox="0 0 16 16">
+                        <path d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5z"/>
+                      </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                      </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+                    </svg></button>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <!-- Miniaturas -->
-            <div class="container mt-4">
-              <div class="d-flex flex-wrap overflow-auto" id="thumbnailContainer">
-                <% if (dadosMars && Array.isArray(dadosMars.photos)) { %>
-                  <% dadosMars.photos.forEach(function(photo, index) { %>
-                    <img src="<%= photo.img_src %>" class="img-thumbnail mx-1 thumbnail" data-bs-slide-to="<%= index %>" alt="Curiosity Thumbnail <%= index %>" style="width: 80px; height: 80px;">
-                  <% }); %>
-                <% } else { %>
-                  <p>No photos available.</p>
-                <% } %>
-              </div>
-            </div>
-          </div>
-
-
-      <div class="card-body" id="opportunityBody">
-        <h5 class="card-title">Opportunity Rover</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <% }); %>
+          <% } else { %>
+            <p>No photos available for the given date.</p>
+          <% } %>
+        </div>
       </div>
-      <div class="card-body" id="spiritBody" style="display: none;">
-        <h5 class="card-title">Spirit Rover</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+      <div class="pagination" style="align-items: center; justify-content: center; margin-bottom: 5px;">
+        <div class="btn-group">
+
+          <% if (page > 1) { %>
+            <a href="/mars/search?sol=<%= sol %>&rover=<%= rover %>&page=<%= page - 1 %>" type="button" class="btn btn-outline-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"></path>
+              </svg>
+            </a>
+          <% } %>
+          <button type="button" class="btn btn-outline-secondary">
+            <%= page %>
+          </button>
+          <a href="/mars/search?sol=<%= sol %>&rover=<%= rover %>&page=<%= page + 1 %>" type="button" class="btn btn-outline-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+            </svg>
+          </a>
+
+        </div>
       </div>
+
     </div>
-    
-    <script src="/scripts/marsPag.js"></script>
-
 </main>
+
 <%- include('includes/footer'); %>

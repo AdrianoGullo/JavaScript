@@ -1,5 +1,8 @@
 <div class="col-md-6 order-md-2 bg-body rounded shadow-sm">
-  
+  <div>
+    <img id='news' class="img-fluid" src="/Imagens/homeImgs/upcomingEvents.png" alt="Generic placeholder image" width="95%">
+  </div>
+  <hr class="featurette-divider">
   <% if(EventsData !== undefined){ %>
     <% EventsData.forEach((event, index) => { %>
       <div class="d-flex text-body-secondary pt-3" id="upcomingEvents1">
@@ -39,5 +42,4 @@
   <small class="badge badge-light" style="margin-left: 80%; margin-bottom: 3%; margin-top: 5px;">
     <a href="/news/index">View all events</a>
   </small>
-
 </div>

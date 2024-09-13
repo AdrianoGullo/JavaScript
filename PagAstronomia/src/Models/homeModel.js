@@ -81,7 +81,6 @@ Mars.buscaObjeto = async function() {
 /// API do JamesWeb - Cache de imagens
 const JamesWebbSchema = new mongoose.Schema({
     data: { type: mongoose.Schema.Types.Mixed, required: true},
-    createdAt: { type: Date, default: Date.now, expires: '1d' } // Configura o índice de expiração para 1 dia
 });
 
 const JamesWebbModel = mongoose.model('jamesWebb_api', JamesWebbSchema);
@@ -96,4 +95,33 @@ JamesWebb.buscaObjeto = async function() {
     return await JamesWebbModel.find().sort({ date: -1 });
 };
 
-module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel, Mars, MarsModel, JamesWebb, JamesWebbModel};
+
+// Esquema de Foto Global
+const photoSchema = new mongoose.Schema({
+    _id: String, // ID da foto
+    title: String,
+    url: String,
+    categoria: String, // apod, jameswebb, mars
+    curtidas: { type: Number, default: 0 }
+});
+  
+// Esquema de Favoritos do Usuário
+const userFavoriteSchema = new mongoose.Schema({
+    user_id: String, // ID do usuário
+    favoritos: [
+    {
+        foto_id: String, // ID da foto
+        categoria: String, // apod, jameswebb, mars
+        title: String,
+        description: String,
+        date: Date,
+        image_url: String
+    }
+  ]
+});
+    
+// Criar os modelos
+const Photo = mongoose.model('Photo', photoSchema);
+const UserFavorite = mongoose.model('UserFavorite', userFavoriteSchema);
+
+module.exports = { APOD, APODModel, Events, EventsModel, Launchs, LaunchsModel, Mars, MarsModel, JamesWebb, JamesWebbModel, Photo, UserFavorite};

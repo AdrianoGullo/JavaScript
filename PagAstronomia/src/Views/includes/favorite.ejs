@@ -1,0 +1,30 @@
+<script>
+    function favoritePhoto(categoria, title, description, date, image_url) {
+      const userId = 'id_do_usuario'; // Substitua pelo ID real do usuário, talvez extraído da sessão ou de um token
+  
+      fetch('/favoritos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          categoria: categoria,
+          title: title,
+          description: description,
+          date: date,
+          image_url: image_url
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Foto favoritada com sucesso!');
+        } else {
+          alert('Erro ao favoritar a foto.');
+        }
+      })
+      .catch(error => console.error('Erro:', error));
+    }
+</script>
+  

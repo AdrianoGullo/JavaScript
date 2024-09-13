@@ -83,7 +83,7 @@ function formatEvent(eventos) {
             padLocation: event.data.launches[0]?.pad?.location?.name || "N/A",
             padImage: event.data.launches[0]?.pad?.map_image || "default-map-image.jpg", // Imagem padrão para o mapa
 
-            program: event.data.program[0]?.name || "No program",
+            program: event.data.program[0]?.name || "No program specified",
             programDescription: event.data.program[0]?.description || "N/A",
             programImage: event.data.program[0]?.image_url || "default-program-image.jpg", // Imagem padrão para o programa
 

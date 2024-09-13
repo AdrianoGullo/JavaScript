@@ -1,5 +1,8 @@
 <div class="col-md-6 order-md-2 col-sm-6 bg-body rounded shadow-sm">
-
+  <div>
+    <img id='news' class="img-fluid" src="/Imagens/homeImgs/launches.png" alt="Generic placeholder image" width="95%">
+  </div>
+  <hr class="featurette-divider">
   <% if(LaunchsData !== undefined){ %>
     <% LaunchsData.forEach((launch, index) => { %>
       <div class="d-flex text-body-secondary pt-3" id="upcomingLaunchs">
@@ -38,5 +41,4 @@
     <small class="badge badge-light" style="margin-left: 75%; margin-bottom: 2%;">
       <a href="/news/index">View all launchs</a>
     </small>
-    
 </div>
