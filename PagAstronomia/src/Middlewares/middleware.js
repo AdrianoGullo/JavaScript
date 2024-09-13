@@ -28,3 +28,11 @@ exports.loginRequired = (requisicao, resposta, next) =>{
     }
     next();
 };
+
+exports.checkAdmin = (req, res, next) => {
+    if (req.user && req.user.isAdmin) {
+        next();
+    } else {
+        res.flash('errors', 'Acesso negado');
+    }
+};

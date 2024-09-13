@@ -7,7 +7,9 @@ const loginController = require('./src/Controllers/loginController.js');
 const favoritosController = require('./src/Controllers/favoritosController');
 const newsController = require('./src/Controllers/newsController');
 const marsController = require('./src/Controllers/marsController');
+const jamesWebbController = require('./src/Controllers/jamesWebbController');
 const favController = require('./src/Controllers/homeIncludes/favController');
+
 
 
 const loginRequired = require('./src/Middlewares/middleware.js')
@@ -67,5 +69,8 @@ route.post('/favoritos', async (req, res) => {
         res.status(500).json({ success: false, message: 'Erro ao favoritar a foto.' });
     }
 });
+
+//JamesWebb rotas
+route.get('/jameswebb', jamesWebbController.index);
 
 module.exports = route;
