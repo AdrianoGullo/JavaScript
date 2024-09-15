@@ -1,22 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>James Webb Photos</title>
-    <link rel="stylesheet" href="/path/to/your/styles.css">
-</head>
+<%- include('includes/head'); %>
+<%- include('includes/nav'); %>
+
 <body>
     <h1>Fotos do James Webb</h1>
-    <div class="photo-gallery">
-        <% photos.forEach(photo => { %>
-            <div class="photo-item">
-                <h2><%= photo.title %></h2>
-                <p><%= photo.description %></p>
-                <p>Date: <%= photo.date.toDateString() %></p>
-                <img src="<%= photo.image_url %>" alt="<%= photo.title %>" style="width: 300px; height: auto;">
+    <div>
+        <section class="py-5 container">
+
+            <div class="row py-lg-5">
+                <div class="text-align: left">
+                    <p class="lead text-body-secondary">
+                        Images and Information about James Webb Telescop observations until now.
+                    </p>
+                </div>
             </div>
-        <% }) %>
+            
+            <div class="info-block card text-center" style="background-color: #fdfcfc; border-radius: 10px;">
+
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="eventsTab" onclick="showContent('imagesJW', this)" style="margin-left: 30px;">Images</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="launchesTab" onclick="showContent('insightsJW', this)" style="margin-left: 10px;">Insights</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Aba das Imagens -->
+                <div id="imagesJW" class="card-body">
+                    <div class="row row-cols-1 row-cols-md-2 g-4"> <!-- Alterado para 2 colunas em telas médias -->
+                        <% if (photos !== undefined) { %>
+                            <% photos.forEach((photo, index) => { %>
+                                <div class="col d-flex justify-content-center">
+                                    <div class="card shadow-sm w-100" style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+                                        <!-- Título centralizado acima da imagem -->
+                                        <h5 class="card-title text-center mb-3"><%= photo.title %></h5>
+
+                                        <!-- Imagem -->
+                                        <div class="text-center" style="position: relative; width: 100%; max-width: 300px; height: auto; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 15px; margin: 0 auto;">
+                                            <img src="<%= photo.image_url %>" alt="Thumbnail" class="img" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit:fill">
+                                        </div>
+
+                                        <!-- Data e botão Read More -->
+                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                            <small class="text-muted"><%= new Date(photo.date).toLocaleDateString() %></small>
+                                            <button type="button" class="btn btn-dark btn-sm" id="readMoreBtn" data-toggle="modal" data-target="#modal-<%= index %>">Read more</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- MODAL ReadMore -->
+                            <% }); %>
+                        <% } else { %>
+                            <p>Nenhuma imagem disponível.</p>
+                        <% } %>
+                    </div>
+                </div>
+
+
+
+
+                <!--Aba dos Insights -->
+                <div id="insightsJW" class="card-body" style="display: none;">
+                    <div class="row row-cols-1 g-3">
+                        
+                    </div>
+                </div>
+
+            </div>
+            
+
+        </section>
     </div>
 </body>
 </html>
+
+<%= include('includes/footer') %>

@@ -1,17 +1,32 @@
 const mongoose = require('mongoose');
 
-const JWimage = new mongoose.Schema({
-    _id: String, // ID da foto
+const JWImage = new mongoose.Schema({
     title: String,
-    url: String,
-    categoria: { type: String, default: 'jameswebb' }, // Categoria padrão para James Webb
-    curtidas: { type: Number, default: 0 }
+    description: String,
+    date: Date,
+    image_url: [String]
 });
 
-JWimage.buscaObjeto = async function() {
-    return await JamesWebbModel.find().sort({ date: -1 });
+const JWInsights = new mongoose.Schema({
+    title: String,
+    description: [String],
+    date: Date,
+    type: String,
+    image_url: [String]
+});
+
+JWImage.buscaObjeto = async function() {
+    return await JWImage.find().sort({});
 };
 
-const JW_Photo = mongoose.model('JW_Photo', JWimage);
+JWInsights.buscaObjeto = async function() {
+    return await JWInsights.find().sort({});
+};
 
-module.exports = JW_Photo;
+const JW_Photo = mongoose.model('JamesWebb_Photo', JWImage);
+const JW_Insight = mongoose.model('JamesWebb_Insight', JWInsights);
+
+module.exports = {
+    JW_Photo,
+    JW_Insight
+}

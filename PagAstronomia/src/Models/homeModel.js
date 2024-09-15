@@ -98,9 +98,10 @@ JamesWebb.buscaObjeto = async function() {
 
 // Esquema de Foto Global
 const photoSchema = new mongoose.Schema({
-    _id: String, // ID da foto
     title: String,
-    url: String,
+    description: String,
+    date: Date,
+    image_url: String,
     categoria: String, // apod, jameswebb, mars
     curtidas: { type: Number, default: 0 }
 });
