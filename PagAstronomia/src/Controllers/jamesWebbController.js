@@ -3,6 +3,7 @@ const { JW_Photo, JW_Insight } = require('../Models/favoritoModel');
 const fs = require('fs').promises;
 const path = require('path');
 
+
 exports.index = async (requisicao, resposta) => {
     try {
         const photos = await readFile_json('../Views/includes/json/jameswebb_img.json');

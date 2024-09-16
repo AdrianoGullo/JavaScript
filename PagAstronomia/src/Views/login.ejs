@@ -11,27 +11,39 @@
 
             <%- include('includes/messages') %>
 
-            <div class="row">
+            <div class="row" style="align-items: center; justify-content: center;">
 
-                <div class="col-lg-6">
-                    <h4>Sign up</h4>
-                    <p>If you don't have an account yet, that's the time:</p>
-                    <form action="/login/register" method="post">
-                        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
-                        <div class="form-group">
-                          <label>Email</label>
-                          <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <div class="col-lg-6" >
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <img src="/Imagens/register.png" class="img-fluid" style="width: 100%;">
                         </div>
+                        <div class="modal-body">
+                          <p>If you don't have an account yet, that's the time:</p>
+                          <form action="/login/register" method="post">
+                              <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+                              <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                              </div>
 
-                        <label>Password</label>
-                          <input type="password" class="form-control" name="password" aria-describedby="emailHelp" placeholder="Enter password">
-                          <small id="emailHelp" class="form-text text-muted">Do not share your infos with anyone</small>
-                          <button type="submit" class="btn btn-outline-secondary" style="width: 40%; margin-top: 5px;">Create account</button>
+                              <label>Password</label>
+                                <input type="password" class="form-control" name="password" aria-describedby="emailHelp" placeholder="Enter password">
+                                <small id="emailHelp" class="form-text text-muted">Do not share your infos with anyone</small>
+                                <button type="submit" class="btn btn-outline-secondary" style="width: 40%; margin-top: 5px; margin-left: 60%;">Create account</button>
+                          </form>
                         </div>
-                      </form>
+                      </div>
+                    </div>
+                  </div>
 
-                      <div class="col-lg-6">
-                        <h4>Login</h4>
+                    
+
+                    <div class="col-lg-12">
                         <p>If you already have an account, log in below.</p>
                         <form action="/login/login" method="post">
                             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
@@ -46,11 +58,14 @@
                               <small id="emailHelp" class="form-text text-muted">Do not share your infos with anyone</small>
                               <button type="submit" class="btn btn-outline-secondary" style="width: 30%; margin-top: 5px;">Login</button>
                             </div>
-                            <div></div>
-                            
-                          </form>
+                        </form>
+                        <!-- Texto em itálico clicável para abrir o modal -->
+                        <a href="#" data-toggle="modal" data-target="#registerModal" style="font-style: italic; font-size: small; margin-left: 15px; color: rgb(153, 153, 153);">
+                          Create account
+                        </a>
                     </div>
                 </div>
+                
             </div>
 
         </div>
