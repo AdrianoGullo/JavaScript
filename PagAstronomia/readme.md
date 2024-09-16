@@ -41,7 +41,7 @@ Features ainda planejadas ou em desenvolvimento:
 - [x] Organizar ordens de requisição do API para fotos de Marte;
 - [x] Organização página de fotos de Marte (marsPag);
 - [x] Incorporar API de imagens do James Webb;
-- [ ] Página para as imagens do James Webb - Banco de dados manual;
+- [x] Página para as imagens do James Webb - Banco de dados manual;
 - [ ] Sistema de administrador
 - [ ] Adição de fotos JW pelo admin no banco de dados.
 - [ ] Sistema de favoritos para os usuários favoritarem qualquer foto que achar interessante;
